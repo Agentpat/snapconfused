@@ -1,0 +1,737 @@
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.confession-modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    background:
+        rgba(17, 17, 17, 0.42);
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    animation:
+        confessionOverlayIn 0.25s ease-out;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.confession-modal {
+    position: relative;
+
+    width: min(100%,
+            500px);
+
+    max-height:
+        calc(100vh - 48px);
+
+    overflow-y: auto;
+
+    padding: 38px;
+
+    border:
+        1px solid rgba(0, 0, 0, 0.06);
+
+    border-radius: 24px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.18);
+
+    animation:
+        confessionModalIn 0.4s cubic-bezier(0.22,
+            1,
+            0.36,
+            1);
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+.confession-modal-close {
+    position: absolute;
+
+    top: 17px;
+    right: 17px;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: #f5f5f5;
+
+    color: #222222;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.confession-modal-close svg {
+    width: 17px;
+    height: 17px;
+}
+
+.confession-modal-close:hover {
+    transform:
+        rotate(8deg);
+
+    background: #eeeeee;
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.confession-modal-eyebrow,
+.confession-success-eyebrow {
+    display: block;
+
+    color: #b39b00;
+
+    font-size: 10px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.confession-form-content h2,
+.confession-success h2 {
+    margin: 10px 0 0;
+
+    color: #111111;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 39px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+}
+
+.confession-modal-intro {
+    max-width: 400px;
+
+    margin: 13px 0 0;
+
+    color: #777777;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.confession-submit-form {
+    margin-top: 25px;
+}
+
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.confession-field {
+    position: relative;
+
+    margin-bottom: 17px;
+}
+
+.confession-field label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #222222;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.confession-field textarea,
+.confession-field input {
+    width: 100%;
+
+    border:
+        1px solid #e8e8e8;
+
+    outline: none;
+
+    background: #fafafa;
+
+    color: #111111;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.confession-field textarea {
+    min-height: 125px;
+
+    padding: 14px;
+
+    resize: vertical;
+
+    border-radius: 13px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.confession-field input {
+    height: 45px;
+
+    padding:
+        0 14px;
+
+    border-radius: 11px;
+
+    font-size: 12px;
+}
+
+.confession-field textarea:focus,
+.confession-field input:focus {
+    border-color: #ffdc00;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(255, 220, 0, 0.12);
+}
+
+.confession-field textarea::placeholder,
+.confession-field input::placeholder {
+    color: #b5b5b5;
+}
+
+.confession-field textarea:disabled,
+.confession-field input:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.55;
+}
+
+
+/* =========================================================
+   CHARACTER COUNT
+========================================================= */
+
+.confession-character-count {
+    position: absolute;
+
+    right: 12px;
+    bottom: 10px;
+
+    color: #aaa;
+
+    font-size: 9px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   ANONYMOUS
+========================================================= */
+
+.confession-anonymous {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: #555555;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+.confession-anonymous input {
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+.confession-checkbox {
+    width: 18px;
+    height: 18px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid #d7d7d7;
+
+    border-radius: 5px;
+
+    background: #ffffff;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.confession-checkbox span {
+    display: none;
+
+    color: #111111;
+
+    font-size: 12px;
+
+    font-weight: 900;
+}
+
+.confession-anonymous input:checked+.confession-checkbox {
+    border-color: #ffdc00;
+
+    background: #ffdc00;
+}
+
+.confession-anonymous input:checked+.confession-checkbox span {
+    display: block;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.confession-form-error {
+    margin-top: 13px;
+
+    padding:
+        10px 12px;
+
+    border-radius: 9px;
+
+    background: #fff4f4;
+
+    color: #c33;
+
+    font-size: 11px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.confession-submit-button {
+    width: 100%;
+
+    height: 48px;
+
+    margin-top: 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 11px;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s cubic-bezier(0.22,
+            1,
+            0.36,
+            1),
+        box-shadow 0.25s ease;
+}
+
+.confession-submit-button svg {
+    width: 17px;
+    height: 17px;
+}
+
+.confession-submit-button:hover {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.confession-submit-button:active {
+    transform:
+        translateY(0) scale(0.99);
+}
+
+.confession-submit-button:disabled {
+    opacity: 0.6;
+
+    cursor: wait;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.confession-success {
+    min-height: 360px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.confession-success-mark {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 50%;
+
+    background: #ffdc00;
+
+    color: #111111;
+
+    font-size: 23px;
+
+    font-weight: 900;
+}
+
+.confession-success h2 {
+    margin-top: 11px;
+
+    font-size: 36px;
+}
+
+.confession-success p {
+    max-width: 320px;
+
+    margin: 14px 0 0;
+
+    color: #777777;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+}
+
+.confession-success-button {
+    margin-top: 24px;
+
+    height: 43px;
+
+    padding:
+        0 20px;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes confessionOverlayIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes confessionModalIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(18px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0) scale(1);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+
+    .confession-modal-overlay {
+        padding: 14px;
+    }
+
+    .confession-modal {
+        padding: 30px 22px 24px;
+
+        border-radius: 20px;
+    }
+
+    .confession-form-content h2,
+    .confession-success h2 {
+        font-size: 32px;
+    }
+
+    .confession-modal-intro {
+        font-size: 12px;
+    }
+
+    .confession-success {
+        min-height: 330px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .confession-modal-overlay,
+    .confession-modal {
+        animation: none;
+    }
+
+    .confession-modal-close,
+    .confession-submit-button {
+        transition: none;
+    }
+}
+
+/* =========================================================
+   SUCCESS ACTIONS
+========================================================= */
+
+.confession-success-actions {
+    width: 100%;
+
+    margin-top: 24px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+.confession-success-actions .confession-success-button {
+    margin-top: 0;
+}
+
+
+/* PRIMARY SUCCESS BUTTON */
+
+.confession-success-button {
+    min-width: 230px;
+
+    height: 43px;
+
+    padding: 0 20px;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.confession-success-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+
+/* SECONDARY */
+
+.confession-success-button-secondary {
+    background: transparent;
+
+    color: #777777;
+}
+
+.confession-success-button-secondary:hover {
+    background: #f5f5f5;
+
+    color: #111111;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   ERROR RETRY
+========================================================= */
+
+.confession-error-retry {
+    margin-left: 8px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #9f2424;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    text-decoration: underline;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MOBILE SUCCESS
+========================================================= */
+
+@media (max-width: 560px) {
+
+    .confession-success-actions {
+        width: 100%;
+    }
+
+    .confession-success-button {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+}

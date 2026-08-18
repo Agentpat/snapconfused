@@ -1,0 +1,642 @@
+/* =========================================================
+   CONFIDENTIAL CLUB
+========================================================= */
+
+.confidential-club {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 190px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(180deg,
+            #fff3a8 0%,
+            #ffed82 100%);
+
+    border-top:
+        1px solid rgba(255, 255, 255, 0.85);
+}
+
+.confidential-club-inner {
+    position: relative;
+
+    width:
+        min(calc(100% - 80px),
+            1280px);
+
+    min-height: 205px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.confidential-content {
+    position: relative;
+
+    z-index: 5;
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding-top: 1px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.confidential-title {
+    position: relative;
+
+    margin: 0;
+
+    color: #111111;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(31px, 3vw, 42px);
+
+    line-height: 0.98;
+
+    font-weight: 800;
+
+    letter-spacing: -1.7px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   CONFIDENTIAL HAND-DRAWN CIRCLE
+========================================================= */
+
+.confidential-word {
+    position: relative;
+
+    display: inline-block;
+
+    z-index: 1;
+}
+
+.confidential-word::before {
+    content: "";
+
+    position: absolute;
+
+    z-index: -1;
+
+    left: -9px;
+    right: -9px;
+
+    top: -8px;
+    bottom: -6px;
+
+    border:
+        1.7px solid #111111;
+
+    border-radius: 50%;
+
+    transform:
+        rotate(-4deg) scaleX(1.08);
+
+    pointer-events: none;
+}
+
+.confidential-word::after {
+    content: "";
+
+    position: absolute;
+
+    z-index: -1;
+
+    left: -6px;
+    right: -12px;
+
+    top: -5px;
+    bottom: -9px;
+
+    border:
+        1px solid rgba(17, 17, 17, 0.65);
+
+    border-radius: 50%;
+
+    transform:
+        rotate(3deg) scaleX(1.04);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   SUBTITLE
+========================================================= */
+
+.confidential-subtitle {
+    margin: 10px 0 0;
+
+    color: #77705a;
+
+    font-size: 13px;
+
+    line-height: 1.3;
+
+    font-weight: 500;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   EMAIL FORM
+========================================================= */
+
+.confidential-form {
+    width: 540px;
+
+    max-width: 100%;
+
+    height: 51px;
+
+    margin-top: 14px;
+
+    padding: 4px;
+
+    display: flex;
+
+    align-items: center;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(0, 0, 0, 0.025);
+
+    border-radius: 999px;
+
+    box-shadow:
+        0 7px 20px rgba(0, 0, 0, 0.045);
+
+    transition:
+        box-shadow 0.25s ease;
+}
+
+.confidential-form:focus-within {
+    box-shadow:
+        0 9px 26px rgba(0, 0, 0, 0.07);
+}
+
+.confidential-form input {
+    min-width: 0;
+
+    flex: 1;
+
+    height: 100%;
+
+    padding:
+        0 20px;
+
+    border: 0;
+
+    outline: 0;
+
+    background: transparent;
+
+    color: #111111;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 11px;
+
+    line-height: 1;
+
+    font-weight: 500;
+}
+
+.confidential-form input::placeholder {
+    color: #b0b0b0;
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   JOIN BUTTON
+========================================================= */
+
+.confidential-form button {
+    flex-shrink: 0;
+
+    height: 43px;
+
+    min-width: 150px;
+
+    padding:
+        0 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background: #050505;
+
+    color: #ffffff;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.2s ease,
+        box-shadow 0.25s ease;
+}
+
+.confidential-form button svg {
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+
+    stroke-width: 1.8;
+}
+
+.confidential-form button:hover {
+    transform:
+        translateX(2px);
+
+    background: #181818;
+
+    box-shadow:
+        0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.confidential-form button:active {
+    transform:
+        translateX(1px) scale(0.98);
+}
+
+.confidential-form button:focus-visible {
+    outline:
+        2px solid #111111;
+
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   HANDWRITTEN NOTES
+========================================================= */
+
+.confidential-note {
+    position: absolute;
+
+    z-index: 2;
+
+    display: block;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    will-change: transform;
+}
+
+
+/* =========================================================
+   LEFT NOTE
+========================================================= */
+
+.confidential-note-left {
+    left: 0;
+
+    width: 180px;
+
+    transform:
+        translate3d(-3px, 0, 0);
+
+    animation:
+        confidentialLeftFloat 8s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   RIGHT NOTE
+========================================================= */
+
+.confidential-note-right {
+    right: 0;
+
+    width: 190px;
+
+    transform:
+        translate3d(3px, 0, 0);
+
+    animation:
+        confidentialRightFloat 9.5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   NOTE MOTION
+========================================================= */
+
+@keyframes confidentialLeftFloat {
+
+    0%,
+    100% {
+        transform:
+            translate3d(-3px, 0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translate3d(2px, -4px, 0) rotate(-0.7deg);
+    }
+}
+
+@keyframes confidentialRightFloat {
+
+    0%,
+    100% {
+        transform:
+            translate3d(3px, 0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translate3d(-2px, -5px, 0) rotate(0.7deg);
+    }
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .confidential-club-inner {
+        width:
+            min(calc(100% - 50px),
+                1000px);
+    }
+
+    .confidential-note-left {
+        left: -25px;
+
+        width: 155px;
+    }
+
+    .confidential-note-right {
+        right: -25px;
+
+        width: 165px;
+    }
+
+    .confidential-form {
+        width: 500px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .confidential-club {
+        min-height: 220px;
+    }
+
+    .confidential-club-inner {
+        min-height: 220px;
+    }
+
+    .confidential-note {
+        opacity: 0.82;
+    }
+
+    .confidential-note-left {
+        left: -35px;
+
+        width: 130px;
+    }
+
+    .confidential-note-right {
+        right: -35px;
+
+        width: 140px;
+    }
+
+    .confidential-title {
+        font-size: 32px;
+    }
+
+    .confidential-form {
+        width: 480px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 620px) {
+
+    .confidential-club {
+        min-height: 270px;
+    }
+
+    .confidential-club-inner {
+        width:
+            min(calc(100% - 32px),
+                500px);
+
+        min-height: 270px;
+
+        align-items: flex-start;
+
+        padding-top: 45px;
+    }
+
+    .confidential-note {
+        opacity: 0.72;
+    }
+
+    .confidential-note-left {
+        left: -25px;
+
+        top: 12px;
+
+        width: 110px;
+    }
+
+    .confidential-note-right {
+        right: -25px;
+
+        bottom: 8px;
+
+        width: 120px;
+    }
+
+    .confidential-title {
+        font-size: 30px;
+
+        letter-spacing: -1.1px;
+    }
+
+    .confidential-subtitle {
+        margin-top: 9px;
+
+        font-size: 12px;
+    }
+
+    .confidential-form {
+        width: 100%;
+
+        height: 50px;
+
+        margin-top: 17px;
+    }
+
+    .confidential-form input {
+        padding:
+            0 14px;
+
+        font-size: 10px;
+    }
+
+    .confidential-form button {
+        min-width: 130px;
+
+        height: 42px;
+
+        padding:
+            0 14px;
+
+        font-size: 11px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .confidential-club {
+        min-height: 300px;
+    }
+
+    .confidential-club-inner {
+        min-height: 300px;
+
+        padding-top: 50px;
+    }
+
+    .confidential-note-left {
+        left: -30px;
+
+        top: 13px;
+
+        width: 100px;
+    }
+
+    .confidential-note-right {
+        right: -28px;
+
+        bottom: 12px;
+
+        width: 110px;
+    }
+
+    .confidential-title {
+        font-size: 27px;
+    }
+
+    .confidential-form {
+        height: auto;
+
+        padding: 5px;
+
+        flex-direction: column;
+
+        border-radius: 22px;
+
+        background:
+            rgba(255, 255, 255, 0.95);
+    }
+
+    .confidential-form input {
+        width: 100%;
+
+        height: 42px;
+    }
+
+    .confidential-form button {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .confidential-note {
+        animation: none;
+    }
+
+    .confidential-form button {
+        transition: none;
+    }
+}

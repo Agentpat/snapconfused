@@ -1,0 +1,806 @@
+/* =========================================================
+   CONFESSION SECTION
+========================================================= */
+
+.confession-section {
+    position: relative;
+
+    width: 100%;
+
+    padding: 27px 0 34px;
+
+    background: #ffffff;
+
+    overflow: hidden;
+}
+
+.confession-inner {
+    position: relative;
+
+    width: min(calc(100% - 100px),
+            1280px);
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.confession-heading {
+    position: relative;
+
+    z-index: 2;
+
+    text-align: center;
+}
+
+.confession-heading h2 {
+    margin: 0;
+
+    color: #111111;
+
+    font-family: "Playfair Display", serif;
+
+    font-size:
+        clamp(40px, 4vw, 49px);
+
+    line-height: 0.98;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+}
+
+.confession-heading p {
+    margin: 13px 0 0;
+
+    color: #777777;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   CAROUSEL
+========================================================= */
+
+.confession-carousel {
+    position: relative;
+
+    width: 100%;
+
+    margin-top: 25px;
+}
+
+.confession-track {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 17px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.confession-card {
+    position: relative;
+
+    height: 164px;
+
+    overflow: hidden;
+
+    border: 1px solid #ededed;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(145deg,
+            #ffffff 0%,
+            #fcfcfc 100%);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.035);
+
+    isolation: isolate;
+
+    transition:
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.35s ease;
+}
+
+.confession-card:hover {
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 17px 38px rgba(0, 0, 0, 0.065);
+}
+
+
+/* =========================================================
+   SUBTLE CARD FLOAT
+========================================================= */
+
+/*
+    Very restrained movement.
+
+    The Hero is the dramatic motion.
+    These cards only feel slightly alive.
+*/
+
+.confession-card:nth-child(1) {
+    animation:
+        confessionFloatOne 7.5s ease-in-out infinite;
+}
+
+.confession-card:nth-child(2) {
+    animation:
+        confessionFloatTwo 8.5s ease-in-out infinite;
+}
+
+.confession-card:nth-child(3) {
+    animation:
+        confessionFloatThree 7.9s ease-in-out infinite;
+}
+
+.confession-card:nth-child(4) {
+    animation:
+        confessionFloatFour 9s ease-in-out infinite;
+}
+
+@keyframes confessionFloatOne {
+
+    0%,
+    100% {
+        transform:
+            translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform:
+            translate3d(0, -2px, 0);
+    }
+}
+
+@keyframes confessionFloatTwo {
+
+    0%,
+    100% {
+        transform:
+            translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform:
+            translate3d(0, -3px, 0);
+    }
+}
+
+@keyframes confessionFloatThree {
+
+    0%,
+    100% {
+        transform:
+            translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform:
+            translate3d(0, -2px, 0);
+    }
+}
+
+@keyframes confessionFloatFour {
+
+    0%,
+    100% {
+        transform:
+            translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform:
+            translate3d(0, -3px, 0);
+    }
+}
+
+
+/* =========================================================
+   QUOTE MARK
+========================================================= */
+
+.confession-quote-mark {
+    position: absolute;
+
+    z-index: 3;
+
+    top: 12px;
+    left: 16px;
+
+    color: #ffdc00;
+
+    font-family: Georgia, serif;
+
+    font-size: 56px;
+
+    line-height: 0.65;
+
+    font-weight: 900;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.confession-content {
+    position: relative;
+
+    z-index: 4;
+
+    width: 69%;
+
+    padding:
+        41px 0 0 18px;
+}
+
+.confession-quote {
+    margin: 0;
+
+    color: #111111;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 16px;
+
+    line-height: 1.16;
+
+    letter-spacing: -0.45px;
+
+    font-weight: 800;
+}
+
+.confession-author {
+    display: block;
+
+    margin-top: 18px;
+
+    color: #747474;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1.2;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   PERSON IMAGES
+========================================================= */
+
+.confession-person {
+    position: absolute;
+
+    z-index: 2;
+
+    right: 0;
+
+    bottom: -1px;
+
+    display: block;
+
+    pointer-events: none;
+
+    object-fit: contain;
+
+    object-position: bottom right;
+
+    user-select: none;
+
+    filter:
+        drop-shadow(0 5px 9px rgba(0, 0, 0, 0.045));
+
+    transition:
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.confession-card:hover .confession-person {
+    transform:
+        translate3d(-2px, -2px, 0);
+}
+
+
+/* =========================================================
+   UNCLE ADE
+========================================================= */
+
+.confession-person.uncle-ade {
+    width: 157px;
+
+    height: 177px;
+
+    right: -3px;
+
+    bottom: -7px;
+}
+
+
+/* =========================================================
+   AUNTY BOLA
+========================================================= */
+
+.confession-person.aunty-bola {
+    width: 162px;
+
+    height: 181px;
+
+    right: -7px;
+
+    bottom: -7px;
+}
+
+
+/* =========================================================
+   DAD
+========================================================= */
+
+.confession-person.dad {
+    width: 162px;
+
+    height: 181px;
+
+    right: -7px;
+
+    bottom: -8px;
+}
+
+
+/* =========================================================
+   TEXT-ONLY CARD
+========================================================= */
+
+.confession-card-text-only .confession-content {
+    width: 78%;
+
+    padding-right: 15px;
+}
+
+.confession-card-text-only .confession-quote {
+    max-width: 225px;
+}
+
+
+/* =========================================================
+   NEXT BUTTON
+========================================================= */
+
+.confession-next {
+    position: absolute;
+
+    z-index: 20;
+
+    top: 50%;
+    right: -27px;
+
+    width: 56px;
+    height: 56px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    color: #111111;
+
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.09);
+
+    cursor: pointer;
+
+    transform:
+        translateY(-50%);
+
+    transition:
+        transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.25s ease;
+}
+
+.confession-next svg {
+    width: 23px;
+    height: 23px;
+
+    stroke-width: 1.8;
+}
+
+.confession-next:hover {
+    transform:
+        translateY(-50%) translateX(3px);
+
+    box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.13);
+}
+
+.confession-next:active {
+    transform:
+        translateY(-50%) translateX(1px) scale(0.96);
+}
+
+.confession-next:focus-visible {
+    outline:
+        2px solid #111111;
+
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   DOTS
+========================================================= */
+
+.confession-dots {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 18px;
+}
+
+.confession-dot {
+    width: 7px;
+    height: 7px;
+
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: #dedede;
+
+    cursor: pointer;
+
+    transition:
+        width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.confession-dot:hover {
+    transform:
+        scale(1.2);
+}
+
+.confession-dot-active {
+    width: 21px;
+
+    border-radius: 999px;
+
+    background: #ffdc00;
+}
+
+.confession-dot-active:hover {
+    transform: none;
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .confession-inner {
+        width:
+            min(calc(100% - 70px),
+                1100px);
+    }
+
+    .confession-track {
+        gap: 14px;
+    }
+
+    .confession-card {
+        height: 170px;
+    }
+
+    .confession-content {
+        width: 68%;
+
+        padding-left: 17px;
+    }
+
+    .confession-quote {
+        font-size: 15px;
+    }
+
+    .confession-person.uncle-ade,
+    .confession-person.aunty-bola,
+    .confession-person.dad {
+        width: 137px;
+
+        height: 166px;
+    }
+
+    .confession-next {
+        right: -22px;
+
+        width: 52px;
+        height: 52px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .confession-section {
+        padding-top: 30px;
+    }
+
+    .confession-track {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        row-gap: 14px;
+    }
+
+    .confession-card {
+        height: 185px;
+    }
+
+    .confession-card:nth-child(n) {
+        animation: none;
+    }
+
+    .confession-next {
+        right: -19px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+
+    .confession-section {
+        padding:
+            28px 0 30px;
+    }
+
+    .confession-inner {
+        width:
+            min(calc(100% - 32px),
+                500px);
+    }
+
+    .confession-heading h2 {
+        font-size: 38px;
+
+        letter-spacing: -1.5px;
+    }
+
+    .confession-heading p {
+        margin-top: 11px;
+
+        font-size: 13px;
+    }
+
+    .confession-carousel {
+        margin-top: 22px;
+    }
+
+    .confession-track {
+        display: block;
+
+        width: 100%;
+
+        overflow: hidden;
+    }
+
+    .confession-card {
+        display: none;
+
+        width: 100%;
+
+        height: 195px;
+
+        border-radius: 17px;
+
+        animation: none;
+    }
+
+    .confession-card-active {
+        display: block;
+
+        animation:
+            confessionMobileIn 0.45s cubic-bezier(0.22,
+                1,
+                0.36,
+                1);
+    }
+
+    @keyframes confessionMobileIn {
+
+        from {
+            opacity: 0;
+
+            transform:
+                translate3d(18px, 0, 0) scale(0.985);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                translate3d(0, 0, 0) scale(1);
+        }
+    }
+
+    .confession-content {
+        width: 65%;
+
+        padding:
+            43px 0 0 20px;
+    }
+
+    .confession-quote {
+        font-size: 18px;
+
+        line-height: 1.15;
+    }
+
+    .confession-author {
+        margin-top: 17px;
+
+        font-size: 12px;
+    }
+
+    .confession-quote-mark {
+        top: 12px;
+        left: 18px;
+
+        font-size: 57px;
+    }
+
+    .confession-person.uncle-ade,
+    .confession-person.aunty-bola,
+    .confession-person.dad {
+        width: 155px;
+
+        height: 190px;
+    }
+
+    .confession-card-text-only .confession-content {
+        width: 82%;
+
+        padding-right: 20px;
+    }
+
+    .confession-card-text-only .confession-quote {
+        max-width: none;
+    }
+
+    .confession-next {
+        right: -8px;
+
+        width: 49px;
+        height: 49px;
+    }
+
+    .confession-next svg {
+        width: 21px;
+        height: 21px;
+    }
+
+    .confession-dots {
+        margin-top: 17px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .confession-inner {
+        width:
+            calc(100% - 24px);
+    }
+
+    .confession-heading h2 {
+        font-size: 34px;
+    }
+
+    .confession-card {
+        height: 180px;
+    }
+
+    .confession-content {
+        width: 67%;
+
+        padding-left: 18px;
+    }
+
+    .confession-quote {
+        font-size: 16px;
+    }
+
+    .confession-person.uncle-ade,
+    .confession-person.aunty-bola,
+    .confession-person.dad {
+        width: 137px;
+
+        height: 178px;
+    }
+
+    .confession-next {
+        width: 45px;
+        height: 45px;
+
+        right: -5px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .confession-card {
+        animation: none !important;
+
+        transition: none;
+    }
+
+    .confession-card:hover {
+        transform: none;
+    }
+
+    .confession-person {
+        transition: none;
+    }
+
+    .confession-next,
+    .confession-dot {
+        transition: none;
+    }
+}

@@ -1,0 +1,918 @@
+/* =========================================================
+   PAGE
+========================================================= */
+
+.hall-page {
+    width: 100%;
+    min-height: 100vh;
+
+    background: #ffffff;
+    color: #111111;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hall-hero {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 82px 0 88px;
+
+    background:
+        linear-gradient(180deg,
+            #ffffff 0%,
+            #fffdf0 100%);
+}
+
+.hall-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    left: -220px;
+    top: -160px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 220, 0, 0.12);
+
+    filter: blur(35px);
+}
+
+.hall-hero-inner {
+    position: relative;
+    z-index: 2;
+
+    width:
+        min(calc(100% - 48px),
+            850px);
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+.hall-trophy {
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 17px;
+
+    background: #ffdc00;
+
+    transform: rotate(-5deg);
+
+    box-shadow:
+        0 10px 25px rgba(255, 220, 0, 0.22);
+}
+
+.hall-trophy svg {
+    width: 27px;
+    height: 27px;
+}
+
+.hall-eyebrow {
+    display: inline-flex;
+
+    padding: 7px 13px;
+
+    border-radius: 999px;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.hall-hero h1 {
+    margin: 22px 0 0;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(52px, 7vw, 78px);
+
+    line-height: 0.94;
+
+    font-weight: 800;
+
+    letter-spacing: -3.5px;
+}
+
+.hall-hero h1 span {
+    position: relative;
+    z-index: 1;
+}
+
+.hall-hero h1 span::after {
+    content: "";
+
+    position: absolute;
+
+    z-index: -1;
+
+    left: -6px;
+    right: -6px;
+
+    bottom: 3px;
+
+    height: 8px;
+
+    background: #ffdc00;
+
+    transform: rotate(-1deg);
+}
+
+.hall-hero p {
+    width:
+        min(100%,
+            500px);
+
+    margin: 22px auto 0;
+
+    color: #777777;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FEED
+========================================================= */
+
+.hall-feed {
+    padding: 72px 0 88px;
+
+    background: #ffffff;
+}
+
+.hall-feed-inner {
+    width:
+        min(calc(100% - 80px),
+            1180px);
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.hall-heading {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 40px;
+
+    margin-bottom: 34px;
+}
+
+.hall-heading span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #b39b00;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.hall-heading h2 {
+    margin: 0;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 44px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -1.8px;
+}
+
+.hall-heading p {
+    margin: 0;
+
+    color: #888888;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.hall-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.hall-card {
+    position: relative;
+
+    min-height: 285px;
+
+    padding: 24px;
+
+    overflow: hidden;
+
+    border:
+        1px solid #ececec;
+
+    border-radius: 21px;
+
+    background:
+        linear-gradient(145deg,
+            #ffffff 0%,
+            #fafafa 100%);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.04);
+
+    transition:
+        transform 0.35s cubic-bezier(0.22,
+            1,
+            0.36,
+            1),
+        box-shadow 0.35s ease;
+}
+
+.hall-card:hover {
+    transform:
+        translateY(-6px) rotate(0deg);
+
+    box-shadow:
+        0 20px 42px rgba(0, 0, 0, 0.08);
+}
+
+.hall-card-2 {
+    transform: translateY(13px) rotate(1deg);
+}
+
+.hall-card-3 {
+    transform: translateY(-3px) rotate(-1deg);
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.hall-card-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.hall-card-top span {
+    color: #b7b7b7;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.hall-card-top svg {
+    width: 20px;
+    height: 20px;
+
+    color: #ffdc00;
+}
+
+
+/* =========================================================
+   QUOTE
+========================================================= */
+
+.hall-quote-mark {
+    margin-top: 25px;
+
+    color: #ffdc00;
+
+    font-family: Georgia, serif;
+
+    font-size: 67px;
+
+    line-height: 0.55;
+
+    font-weight: 900;
+}
+
+.hall-quote {
+    margin: 20px 0 0;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 20px;
+
+    line-height: 1.2;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+
+/* =========================================================
+   AUTHOR
+========================================================= */
+
+.hall-author {
+    position: absolute;
+
+    left: 24px;
+    right: 24px;
+    bottom: 23px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: #777777;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+.hall-avatar {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffdc00;
+
+    color: #111111;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   STATES
+========================================================= */
+
+.hall-state {
+    min-height: 300px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.hall-state-icon {
+    margin-bottom: 12px;
+
+    font-size: 38px;
+}
+
+.hall-state h3 {
+    margin: 0;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 25px;
+
+    font-weight: 800;
+}
+
+.hall-state p {
+    margin: 9px 0 0;
+
+    color: #888888;
+
+    font-size: 12px;
+}
+
+.hall-state button {
+    margin-top: 18px;
+
+    height: 42px;
+
+    padding: 0 18px;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.hall-loader {
+    width: 28px;
+    height: 28px;
+
+    margin-bottom: 14px;
+
+    border:
+        3px solid #eeeeee;
+
+    border-top-color: #ffdc00;
+
+    border-radius: 50%;
+
+    animation:
+        hallLoader 0.8s linear infinite;
+}
+
+@keyframes hallLoader {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+/* =========================================================
+   HALL CTA
+========================================================= */
+
+.hall-cta {
+    width: 100%;
+
+    padding: 56px 0;
+
+    background: #ffdc00;
+}
+
+.hall-cta-inner {
+    width:
+        min(calc(100% - 80px),
+            1180px);
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+}
+
+
+/* =========================================================
+   CTA COPY
+========================================================= */
+
+.hall-cta-inner>div {
+    min-width: 0;
+}
+
+.hall-cta-inner>div>span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: rgba(17, 17, 17, 0.48);
+
+    font-size: 9px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.hall-cta-inner h2 {
+    margin: 0;
+
+    color: #111111;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 40px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -1.6px;
+}
+
+
+/* =========================================================
+   CTA BUTTON
+========================================================= */
+
+.hall-cta-button {
+    flex: 0 0 auto;
+
+    width: 175px;
+
+    min-width: 175px;
+
+    height: 48px;
+
+    padding: 0 20px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 11px;
+
+    box-sizing: border-box;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s cubic-bezier(0.22,
+            1,
+            0.36,
+            1),
+        box-shadow 0.3s ease;
+}
+
+
+/* =========================================================
+   BUTTON TEXT
+   IMPORTANT:
+   This overrides the generic CTA span styling.
+========================================================= */
+
+.hall-cta-button span {
+    display: inline-block;
+
+    width: auto;
+
+    margin: 0;
+
+    padding: 0;
+
+    color: #ffffff !important;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    letter-spacing: 0;
+
+    white-space: nowrap;
+
+    opacity: 1;
+
+    visibility: visible;
+
+    flex: 0 0 auto;
+}
+
+
+/* =========================================================
+   BUTTON ICON
+========================================================= */
+
+.hall-cta-button svg {
+    display: block;
+
+    width: 17px;
+
+    height: 17px;
+
+    flex: 0 0 17px;
+
+    color: #ffffff;
+
+    stroke: currentColor;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.hall-cta-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.hall-cta-button:active {
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .hall-cta-inner {
+        width:
+            min(calc(100% - 50px),
+                760px);
+    }
+
+    .hall-cta-inner h2 {
+        font-size: 37px;
+    }
+
+    .hall-cta-button {
+        width: 170px;
+
+        min-width: 170px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .hall-cta {
+        padding: 45px 0;
+    }
+
+    .hall-cta-inner {
+        width:
+            calc(100% - 32px);
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 23px;
+    }
+
+    .hall-cta-inner h2 {
+        font-size: 34px;
+    }
+
+    .hall-cta-button {
+        width: 100%;
+
+        min-width: 0;
+
+        height: 48px;
+    }
+
+    .hall-cta-button span {
+        display: inline-block;
+
+        color: #ffffff !important;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hall-cta-button {
+        transition: none;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .hall-feed-inner,
+    .hall-cta-inner {
+        width:
+            min(calc(100% - 50px),
+                760px);
+    }
+
+    .hall-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .hall-card-2,
+    .hall-card-3 {
+        transform: none;
+    }
+
+    .hall-card:hover {
+        transform: translateY(-5px);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .hall-hero {
+        padding: 60px 0 65px;
+    }
+
+    .hall-hero-inner {
+        width:
+            calc(100% - 32px);
+    }
+
+    .hall-hero h1 {
+        font-size: 47px;
+
+        letter-spacing: -2.5px;
+    }
+
+    .hall-hero p {
+        font-size: 13px;
+    }
+
+    .hall-feed {
+        padding: 50px 0 60px;
+    }
+
+    .hall-feed-inner,
+    .hall-cta-inner {
+        width:
+            calc(100% - 32px);
+    }
+
+    .hall-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .hall-heading h2 {
+        font-size: 36px;
+    }
+
+    .hall-grid {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+    .hall-card,
+    .hall-card-2,
+    .hall-card-3 {
+        min-height: 250px;
+
+        transform: none;
+    }
+
+    .hall-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .hall-cta {
+        padding: 45px 0;
+    }
+
+    .hall-cta-inner {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 23px;
+    }
+
+    .hall-cta-inner h2 {
+        font-size: 34px;
+    }
+
+    .hall-cta-button {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hall-card,
+    .hall-cta-button {
+        transition: none;
+    }
+
+    .hall-loader {
+        animation: none;
+    }
+}

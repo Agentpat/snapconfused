@@ -1,0 +1,269 @@
+.stats-section {
+    width: 100%;
+    padding: 16px 0 23px;
+    background: #ffffff;
+}
+
+.stats-container {
+    width: min(100% - 100px, 1280px);
+    min-height: 92px;
+
+    margin: 0 auto;
+
+    padding: 0 34px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+
+    background: #f8f8f8;
+
+    border: 1px solid #f1f1f1;
+    border-radius: 31px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.025);
+}
+
+
+/* =========================================================
+   STAT ITEM
+========================================================= */
+
+.stat-item {
+    position: relative;
+
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 0 25px;
+}
+
+.stat-item:first-child {
+    padding-left: 0;
+}
+
+.stat-item:last-child {
+    padding-right: 0;
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.stat-icon {
+    width: 47px;
+    height: 47px;
+
+    flex: 0 0 47px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffdc00;
+
+    border: 1px solid rgba(0, 0, 0, 0.05);
+
+    font-size: 23px;
+
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.stat-content {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-content strong {
+    color: #111111;
+
+    font-size: 22px;
+    line-height: 1.05;
+
+    font-weight: 800;
+
+    letter-spacing: -0.7px;
+}
+
+.stat-content span {
+    margin-top: 5px;
+
+    color: #777777;
+
+    font-size: 11px;
+    line-height: 1.2;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.stat-divider {
+    position: absolute;
+
+    right: 0;
+    top: 50%;
+
+    width: 1px;
+    height: 44px;
+
+    transform: translateY(-50%);
+
+    background: #e2e2e2;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+    .stats-container {
+        width: min(100% - 70px, 1100px);
+
+        padding: 0 24px;
+    }
+
+    .stat-item {
+        padding: 0 15px;
+
+        gap: 10px;
+    }
+
+    .stat-icon {
+        width: 43px;
+        height: 43px;
+
+        flex-basis: 43px;
+
+        font-size: 20px;
+    }
+
+    .stat-content strong {
+        font-size: 19px;
+    }
+
+    .stat-content span {
+        font-size: 10px;
+    }
+}
+
+
+@media (max-width: 760px) {
+    .stats-section {
+        padding: 12px 0 20px;
+    }
+
+    .stats-container {
+        width: min(100% - 32px, 600px);
+
+        padding: 18px;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 22px 0;
+
+        border-radius: 25px;
+    }
+
+    .stat-item {
+        padding: 0 15px;
+    }
+
+    .stat-item:nth-child(2) {
+        padding-right: 0;
+    }
+
+    .stat-item:nth-child(3) {
+        padding-left: 0;
+    }
+
+    .stat-item:nth-child(2) .stat-divider {
+        display: none;
+    }
+
+    .stat-item:nth-child(3) .stat-divider {
+        display: none;
+    }
+
+    .stat-item:nth-child(1)::after,
+    .stat-item:nth-child(2)::after {
+        content: "";
+
+        position: absolute;
+
+        left: 15px;
+        right: 0;
+
+        bottom: -11px;
+
+        height: 1px;
+
+        background: #e2e2e2;
+    }
+
+    .stat-item:nth-child(2)::after {
+        left: 0;
+    }
+
+    .stat-item:nth-child(3)::after {
+        display: none;
+    }
+}
+
+
+@media (max-width: 470px) {
+    .stats-container {
+        padding: 16px 12px;
+
+        gap: 18px 0;
+    }
+
+    .stat-item {
+        gap: 8px;
+        padding: 0 7px;
+    }
+
+    .stat-item:nth-child(3) {
+        padding-left: 7px;
+    }
+
+    .stat-icon {
+        width: 39px;
+        height: 39px;
+
+        flex-basis: 39px;
+
+        font-size: 18px;
+    }
+
+    .stat-content strong {
+        font-size: 17px;
+    }
+
+    .stat-content span {
+        font-size: 9px;
+        white-space: normal;
+    }
+}

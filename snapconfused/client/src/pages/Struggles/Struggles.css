@@ -1,0 +1,1677 @@
+/* =========================================================
+   PAGE
+========================================================= */
+
+.struggles-page {
+    width: 100%;
+
+    min-height: 100vh;
+
+    background: #ffffff;
+
+    color: #111111;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.struggles-hero {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 500px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    background:
+        linear-gradient(180deg,
+            #ffffff 0%,
+            #fffef7 100%);
+}
+
+.struggles-hero-inner {
+    position: relative;
+
+    z-index: 3;
+
+    width:
+        min(calc(100% - 80px),
+            1100px);
+
+    margin: 0 auto;
+
+    padding: 80px 0 90px;
+}
+
+.struggles-eyebrow {
+    display: inline-flex;
+
+    padding: 7px 13px;
+
+    border-radius: 999px;
+
+    background: #ffdc00;
+
+    color: #111111;
+
+    font-size: 9px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.struggles-hero h1 {
+    margin: 22px 0 0;
+
+    max-width: 700px;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(54px, 7vw, 82px);
+
+    line-height: 0.92;
+
+    font-weight: 800;
+
+    letter-spacing: -4px;
+}
+
+.struggles-hero h1 span {
+    position: relative;
+
+    display: inline-block;
+
+    z-index: 1;
+}
+
+.struggles-hero h1 span::after {
+    content: "";
+
+    position: absolute;
+
+    left: -7px;
+    right: -7px;
+
+    bottom: 5px;
+
+    height: 9px;
+
+    z-index: -1;
+
+    background: #ffdc00;
+
+    transform:
+        rotate(-1.5deg);
+}
+
+.struggles-hero p {
+    width: min(100%, 490px);
+
+    margin: 25px 0 0;
+
+    color: #777777;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   SCROLL HINT
+========================================================= */
+
+.struggles-scroll-hint {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 28px;
+
+    color: #777777;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+.struggles-scroll-hint svg {
+    width: 15px;
+    height: 15px;
+
+    transform:
+        rotate(90deg);
+}
+
+
+/* =========================================================
+   HERO DECORATION
+========================================================= */
+
+.struggles-hero-circle {
+    position: absolute;
+
+    width: 390px;
+    height: 390px;
+
+    right: 9%;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    border:
+        1px solid rgba(17, 17, 17, 0.08);
+
+    border-radius: 50%;
+}
+
+.struggles-hero-circle::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 42px;
+
+    border:
+        1px dashed rgba(17, 17, 17, 0.1);
+
+    border-radius: 50%;
+}
+
+.struggles-hero-circle::after {
+    content: "???";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%) rotate(-8deg);
+
+    color: #ffdc00;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 88px;
+
+    font-weight: 800;
+
+    letter-spacing: -5px;
+}
+
+
+/* =========================================================
+   LIST SECTION
+========================================================= */
+
+.struggles-list-section {
+    width: 100%;
+
+    padding: 85px 0 95px;
+
+    background: #ffffff;
+}
+
+.struggles-list-inner {
+    width:
+        min(calc(100% - 80px),
+            1180px);
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.struggles-section-heading {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+    margin-bottom: 40px;
+}
+
+.struggles-section-heading>div>span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #b39b00;
+
+    font-size: 9px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.struggles-section-heading h2 {
+    margin: 0;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 46px;
+
+    line-height: 0.95;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+}
+
+.struggles-section-heading>p {
+    width: 260px;
+
+    margin: 0 0 3px;
+
+    color: #858585;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   LIST
+========================================================= */
+
+.struggles-list {
+    width: 100%;
+
+    border-top:
+        1px solid #e8e8e8;
+}
+
+
+/* =========================================================
+   ITEM
+========================================================= */
+
+.struggle-item {
+    border-bottom:
+        1px solid #e8e8e8;
+
+    transition:
+        background 0.3s ease;
+}
+
+.struggle-item-active {
+    background:
+        #fffdf0;
+}
+
+
+/* =========================================================
+   TRIGGER
+========================================================= */
+
+.struggle-trigger {
+    width: 100%;
+
+    min-height: 106px;
+
+    padding: 18px 20px;
+
+    display: grid;
+
+    grid-template-columns:
+        45px 50px minmax(0, 1fr) 42px;
+
+    align-items: center;
+
+    gap: 18px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #111111;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.struggle-number {
+    color: #b4b4b4;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.struggle-icon {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffdc00;
+
+    color: #111111;
+
+    transition:
+        transform 0.35s cubic-bezier(0.22,
+            1,
+            0.36,
+            1);
+}
+
+.struggle-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.struggle-item-active .struggle-icon {
+    transform:
+        rotate(-8deg) scale(1.06);
+}
+
+
+/* =========================================================
+   QUESTION
+========================================================= */
+
+.struggle-question {
+    min-width: 0;
+}
+
+.struggle-question h3 {
+    margin: 0;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 22px;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+.struggle-question span {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #858585;
+
+    font-size: 11px;
+
+    line-height: 1.4;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.struggle-arrow {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid #e4e4e4;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    transition:
+        transform 0.35s cubic-bezier(0.22,
+            1,
+            0.36,
+            1),
+        background 0.25s ease;
+}
+
+.struggle-arrow svg {
+    width: 17px;
+    height: 17px;
+
+    transition:
+        transform 0.35s cubic-bezier(0.22,
+            1,
+            0.36,
+            1);
+}
+
+.struggle-item-active .struggle-arrow {
+    background: #111111;
+
+    color: #ffffff;
+}
+
+.struggle-item-active .struggle-arrow svg {
+    transform:
+        rotate(180deg);
+}
+
+
+/* =========================================================
+   ANSWER
+========================================================= */
+
+.struggle-answer {
+    display: grid;
+
+    grid-template-rows: 0fr;
+
+    transition:
+        grid-template-rows 0.45s cubic-bezier(0.22,
+            1,
+            0.36,
+            1);
+}
+
+.struggle-answer-open {
+    grid-template-rows: 1fr;
+}
+
+.struggle-answer-inner {
+    min-height: 0;
+
+    overflow: hidden;
+}
+
+.struggle-answer-inner p {
+    width: min(100%, 690px);
+
+    margin: 0;
+
+    padding:
+        0 85px 0 140px;
+
+    color: #666666;
+
+    font-size: 13px;
+
+    line-height: 1.75;
+
+    opacity: 0;
+
+    transform:
+        translateY(-7px);
+
+    transition:
+        opacity 0.25s ease 0s,
+        transform 0.35s ease 0s;
+}
+
+.struggle-answer-open .struggle-answer-inner p {
+    padding-bottom: 27px;
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+    transition:
+        opacity 0.35s ease 0.12s,
+        transform 0.4s ease 0.12s;
+}
+
+
+/* =========================================================
+   CONFUSED SECTION
+========================================================= */
+
+.struggles-confused {
+    width: 100%;
+
+    padding: 78px 0;
+
+    background:
+        #f8f8f8;
+}
+
+.struggles-confused-inner {
+    width:
+        min(calc(100% - 80px),
+            1180px);
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 60px;
+}
+
+.struggles-confused-copy>span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #999999;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.struggles-confused-copy h2 {
+    margin: 0;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 49px;
+
+    line-height: 0.95;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+}
+
+.struggles-confused-copy h2 em {
+    color: #777777;
+
+    font-weight: 600;
+}
+
+.struggles-confused-copy p {
+    width: min(100%, 410px);
+
+    margin: 17px 0 0;
+
+    color: #858585;
+
+    font-size: 12px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   CONFUSED CARD
+========================================================= */
+
+.struggles-confused-card {
+    width: 360px;
+
+    min-height: 155px;
+
+    padding: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 19px;
+
+    border:
+        1px solid #e8e8e8;
+
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.05);
+
+    transform:
+        rotate(2deg);
+
+    transition:
+        transform 0.35s cubic-bezier(0.22,
+            1,
+            0.36,
+            1);
+}
+
+.struggles-confused-card:hover {
+    transform:
+        rotate(0deg) translateY(-4px);
+}
+
+.struggles-card-face {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 15px;
+
+    background: #ffdc00;
+
+    font-size: 28px;
+}
+
+.struggles-confused-card strong {
+    display: block;
+
+    color: #111111;
+
+    font-size: 11px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+}
+
+.struggles-confused-card span {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #888888;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   BOTTOM CTA
+========================================================= */
+
+.struggles-bottom-cta {
+    width: 100%;
+
+    padding: 56px 0;
+
+    background: #ffdc00;
+}
+
+.struggles-bottom-inner {
+    width:
+        min(calc(100% - 80px),
+            1180px);
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+}
+
+.struggles-bottom-inner>div>span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color:
+        rgba(17, 17, 17, 0.48);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.struggles-bottom-inner h2 {
+    margin: 0;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 41px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -1.7px;
+}
+
+.struggles-cta-button {
+    min-width: 170px;
+
+    height: 48px;
+
+    padding: 0 20px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 11px;
+
+    border-radius: 999px;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.3s cubic-bezier(0.22,
+            1,
+            0.36,
+            1),
+        box-shadow 0.3s ease;
+}
+
+.struggles-cta-button:hover {
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.struggles-cta-button svg {
+    width: 17px;
+    height: 17px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .struggles-hero-circle {
+        right: -100px;
+
+        opacity: 0.7;
+    }
+
+    .struggles-section-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .struggles-section-heading>p {
+        width: 100%;
+    }
+
+    .struggles-confused-inner {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .struggles-confused-card {
+        width: min(100%, 430px);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .struggles-hero {
+        min-height: auto;
+    }
+
+    .struggles-hero-inner {
+        width:
+            calc(100% - 32px);
+
+        padding: 60px 0 70px;
+    }
+
+    .struggles-hero h1 {
+        font-size:
+            clamp(47px,
+                13vw,
+                66px);
+
+        letter-spacing: -2.8px;
+    }
+
+    .struggles-hero p {
+        font-size: 13px;
+    }
+
+    .struggles-hero-circle {
+        width: 250px;
+        height: 250px;
+
+        right: -130px;
+        top: 55px;
+
+        transform: none;
+
+        opacity: 0.35;
+    }
+
+    .struggles-hero-circle::after {
+        font-size: 58px;
+    }
+
+
+    .struggles-list-section {
+        padding: 55px 0 65px;
+    }
+
+    .struggles-list-inner {
+        width:
+            calc(100% - 32px);
+    }
+
+    .struggles-section-heading h2 {
+        font-size: 38px;
+    }
+
+
+    .struggle-trigger {
+        min-height: 88px;
+
+        padding:
+            14px 4px;
+
+        grid-template-columns:
+            27px 42px minmax(0, 1fr) 36px;
+
+        gap: 11px;
+    }
+
+    .struggle-number {
+        font-size: 9px;
+    }
+
+    .struggle-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .struggle-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .struggle-question h3 {
+        font-size: 17px;
+
+        letter-spacing: -0.3px;
+    }
+
+    .struggle-question span {
+        margin-top: 4px;
+
+        font-size: 10px;
+    }
+
+    .struggle-arrow {
+        width: 32px;
+        height: 32px;
+    }
+
+    .struggle-answer-inner p {
+        padding:
+            0 20px 0 80px;
+
+        font-size: 12px;
+    }
+
+    .struggle-answer-open .struggle-answer-inner p {
+        padding-bottom: 22px;
+    }
+
+
+    .struggles-confused {
+        padding: 58px 0;
+    }
+
+    .struggles-confused-inner {
+        width:
+            calc(100% - 32px);
+    }
+
+    .struggles-confused-copy h2 {
+        font-size: 42px;
+    }
+
+    .struggles-confused-card {
+        width: 100%;
+
+        min-height: 130px;
+
+        padding: 20px;
+
+        transform:
+            rotate(1.5deg);
+    }
+
+
+    .struggles-bottom-cta {
+        padding: 45px 0;
+    }
+
+    .struggles-bottom-inner {
+        width:
+            calc(100% - 32px);
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 24px;
+    }
+
+    .struggles-bottom-inner h2 {
+        font-size: 34px;
+    }
+
+    .struggles-cta-button {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .struggles-hero h1 {
+        font-size: 44px;
+
+        letter-spacing: -2px;
+    }
+
+    .struggle-trigger {
+        grid-template-columns:
+            22px 37px minmax(0, 1fr) 32px;
+
+        gap: 8px;
+    }
+
+    .struggle-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .struggle-question h3 {
+        font-size: 15px;
+    }
+
+    .struggle-question span {
+        font-size: 9px;
+    }
+
+    .struggle-answer-inner p {
+        padding-left: 67px;
+    }
+
+    .struggles-confused-copy h2 {
+        font-size: 37px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .struggle-icon,
+    .struggle-arrow,
+    .struggle-answer,
+    .struggle-answer-inner p,
+    .struggles-confused-card,
+    .struggles-cta-button {
+        transition: none;
+    }
+}
+
+/* =========================================================
+   COMMUNITY STRUGGLES
+========================================================= */
+
+.community-struggles {
+    position: relative;
+
+    width: 100%;
+
+    padding: 90px 0 85px;
+
+    overflow: hidden;
+
+    background: #111111;
+
+    color: #ffffff;
+}
+
+.community-struggles-inner {
+    width:
+        min(calc(100% - 80px), 1180px);
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.community-heading {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 50px;
+
+    margin-bottom: 45px;
+}
+
+.community-heading>div>span {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #ffdc00;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.6px;
+}
+
+.community-heading h2 {
+    margin: 0;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 49px;
+
+    line-height: 0.95;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+}
+
+.community-heading>p {
+    width: 275px;
+
+    margin: 0 0 3px;
+
+    color: #a3a3a3;
+
+    font-size: 12px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.community-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.community-card {
+    position: relative;
+
+    min-height: 230px;
+
+    padding: 23px;
+
+    overflow: hidden;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.055);
+
+    transition:
+        transform 0.35s cubic-bezier(0.22,
+            1,
+            0.36,
+            1),
+        background 0.3s ease;
+}
+
+.community-card:hover {
+    transform:
+        translateY(-6px);
+
+    background:
+        rgba(255, 255, 255, 0.085);
+}
+
+
+/* Slight personality variation */
+
+.community-card-2 {
+    transform: rotate(-1deg);
+}
+
+.community-card-2:hover {
+    transform:
+        rotate(0deg) translateY(-6px);
+}
+
+.community-card-3 {
+    transform: rotate(1deg);
+}
+
+.community-card-3:hover {
+    transform:
+        rotate(0deg) translateY(-6px);
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.community-card-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.community-card-top span:first-child {
+    color: #8e8e8e;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+}
+
+.community-card-top span:last-child {
+    color: #555555;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   QUOTE
+========================================================= */
+
+.community-quote-mark {
+    margin-top: 17px;
+
+    color: #ffdc00;
+
+    font-family: Georgia, serif;
+
+    font-size: 48px;
+
+    line-height: 0.55;
+
+    font-weight: 900;
+}
+
+.community-quote {
+    margin: 12px 0 0;
+
+    max-width: 90%;
+
+    color: #ffffff;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 20px;
+
+    line-height: 1.12;
+
+    font-weight: 700;
+
+    letter-spacing: -0.4px;
+}
+
+
+/* =========================================================
+   AUTHOR
+========================================================= */
+
+.community-author {
+    position: absolute;
+
+    left: 23px;
+    right: 23px;
+
+    bottom: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.community-avatar {
+    width: 31px;
+    height: 31px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #ffdc00;
+
+    color: #111111;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+.community-author strong {
+    display: block;
+
+    color: #eeeeee;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.community-author span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #777777;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   STATES
+========================================================= */
+
+.community-state {
+    min-height: 220px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    border:
+        1px dashed rgba(255, 255, 255, 0.1);
+
+    border-radius: 18px;
+}
+
+.community-state-icon {
+    margin-bottom: 14px;
+
+    font-size: 30px;
+}
+
+.community-state p {
+    margin: 0;
+
+    color: #888888;
+
+    font-size: 11px;
+}
+
+.community-state h3 {
+    margin: 0 0 8px;
+
+    color: #ffffff;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 21px;
+}
+
+.community-state button {
+    margin-top: 17px;
+
+    height: 40px;
+
+    padding: 0 17px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background: #ffdc00;
+
+    color: #111111;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.community-state button svg {
+    width: 14px;
+    height: 14px;
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.community-loader {
+    width: 28px;
+    height: 28px;
+
+    margin-bottom: 13px;
+
+    border:
+        2px solid rgba(255, 255, 255, 0.12);
+
+    border-top-color: #ffdc00;
+
+    border-radius: 50%;
+
+    animation:
+        community-spin 0.8s linear infinite;
+}
+
+@keyframes community-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   BOTTOM COMMUNITY CTA
+========================================================= */
+
+.community-bottom {
+    margin-top: 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.community-bottom p {
+    margin: 0;
+
+    color: #888888;
+
+    font-size: 11px;
+}
+
+.community-share-button {
+    height: 43px;
+
+    padding: 0 18px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    border-radius: 999px;
+
+    background: #ffdc00;
+
+    color: #111111;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.community-share-button:hover {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(255, 220, 0, 0.16);
+}
+
+.community-share-button svg {
+    width: 15px;
+    height: 15px;
+}
+
+
+/* =========================================================
+   COMMUNITY RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .community-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 17px;
+    }
+
+    .community-heading>p {
+        width: 100%;
+    }
+
+    .community-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .community-struggles {
+        padding: 65px 0 60px;
+    }
+
+    .community-struggles-inner {
+        width:
+            calc(100% - 32px);
+    }
+
+    .community-heading {
+        margin-bottom: 30px;
+    }
+
+    .community-heading h2 {
+        font-size: 39px;
+
+        letter-spacing: -1.5px;
+    }
+
+    .community-grid {
+        grid-template-columns: 1fr;
+
+        gap: 13px;
+    }
+
+    .community-card {
+        min-height: 215px;
+    }
+
+    .community-bottom {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .community-share-button {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+    .community-heading h2 {
+        font-size: 35px;
+    }
+
+    .community-card {
+        min-height: 205px;
+
+        padding: 20px;
+    }
+
+    .community-quote {
+        font-size: 18px;
+    }
+
+}

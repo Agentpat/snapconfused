@@ -1,0 +1,1185 @@
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 500px;
+
+    overflow: hidden;
+
+    background: #ffffff;
+}
+
+.hero-inner {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(100% - 100px, 1360px);
+
+    min-height: 500px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: 0.92fr 1.08fr;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   LEFT CONTENT
+========================================================= */
+
+.hero-content {
+    position: relative;
+
+    z-index: 5;
+
+    padding-top: 0;
+}
+
+.hero-title {
+    position: relative;
+
+    max-width: 590px;
+
+    margin: 0;
+
+    color: #101010;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(48px, 4.45vw, 66px);
+
+    line-height: 0.97;
+
+    font-weight: 800;
+
+    letter-spacing: -2.8px;
+}
+
+
+/* =========================================================
+   YELLOW HIGHLIGHT
+========================================================= */
+
+.hero-highlight {
+    position: relative;
+
+    display: inline-block;
+
+    z-index: 1;
+}
+
+.hero-highlight::before {
+    content: "";
+
+    position: absolute;
+
+    z-index: -1;
+
+    left: -7px;
+    right: -8px;
+
+    bottom: 4px;
+
+    height: 18px;
+
+    background: #ffdc00;
+
+    border-radius: 4px;
+
+    transform: rotate(-1.5deg);
+}
+
+.hero-highlight-snap::after {
+    content: "";
+
+    position: absolute;
+
+    left: -3px;
+    right: -9px;
+
+    bottom: -5px;
+
+    height: 3px;
+
+    background: #ffdc00;
+
+    border-radius: 999px;
+
+    transform: rotate(-1deg);
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.hero-description {
+    margin-top: 25px;
+
+    color: #666666;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.hero-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+.hero-primary-button,
+.hero-secondary-button {
+    height: 46px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.hero-primary-button {
+    min-width: 200px;
+
+    padding: 0 19px;
+
+    gap: 17px;
+
+    background: #ffdc00;
+
+    color: #111111;
+}
+
+.hero-primary-button svg {
+    width: 17px;
+    height: 17px;
+}
+
+.hero-secondary-button {
+    min-width: 171px;
+
+    padding: 0 18px;
+
+    gap: 9px;
+
+    background: #f7f7f7;
+
+    color: #222222;
+
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.035);
+}
+
+.hero-secondary-button svg {
+    width: 16px;
+    height: 16px;
+}
+
+.hero-primary-button:hover,
+.hero-secondary-button:hover {
+    transform: translateY(-2px);
+}
+
+.hero-primary-button:hover {
+    box-shadow:
+        0 9px 23px rgba(255, 220, 0, 0.25);
+}
+
+.hero-secondary-button:hover {
+    box-shadow:
+        0 9px 23px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================================
+   SOCIAL PROOF
+========================================================= */
+
+.hero-proof {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 23px;
+}
+
+.hero-proof>span {
+    color: #858585;
+
+    font-size: 10px;
+
+    line-height: 1.2;
+
+    font-weight: 500;
+}
+
+.hero-avatars {
+    display: flex;
+
+    align-items: center;
+}
+
+.hero-avatar {
+    width: 28px;
+    height: 28px;
+
+    margin-left: -6px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #ffffff;
+
+    border-radius: 50%;
+
+    color: #ffffff;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 2px 7px rgba(0, 0, 0, 0.07);
+}
+
+.hero-avatar:first-child {
+    margin-left: 0;
+}
+
+.avatar-one {
+    background: #6d4c41;
+}
+
+.avatar-two {
+    background: #9e9e9e;
+}
+
+.avatar-three {
+    background: #795548;
+}
+
+.avatar-four {
+    background: #424242;
+}
+
+
+/* =========================================================
+   RIGHT VISUAL
+========================================================= */
+
+.hero-visual {
+    position: relative;
+
+    width: 100%;
+
+    height: 500px;
+}
+
+
+/* =========================================================
+   MAIN GHOST
+========================================================= */
+/* =========================================================
+   IMMERSIVE FLOATING GHOST
+========================================================= */
+
+.hero-ghost {
+    position: absolute;
+
+    z-index: 3;
+
+    width: 505px;
+
+    max-width: none;
+
+    left: 50%;
+    top: 50%;
+
+    object-fit: contain;
+
+    transform-origin: 50% 52%;
+
+    filter:
+        drop-shadow(0 22px 28px rgba(0, 0, 0, 0.07));
+
+    /*
+        Keeps the movement extremely smooth and
+        prevents rendering jitter during the drag.
+    */
+    will-change: transform;
+
+    backface-visibility: hidden;
+
+    -webkit-backface-visibility: hidden;
+
+    animation:
+        ghostImmersiveFloat 8.5s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+
+/* =========================================================
+   DRAMATIC IMMERSIVE MOTION
+========================================================= */
+
+@keyframes ghostImmersiveFloat {
+
+    /*
+        START
+
+        Slightly leaning left.
+        The ghost begins almost still.
+    */
+    0% {
+        transform:
+            translate3d(-50%, -50%, 0) translate3d(0, 0, 0) rotate(-2deg) scale(1);
+    }
+
+
+    /*
+        SLOW ACCELERATION
+
+        The ghost begins drifting left while
+        slowly rising.
+
+        Nothing abrupt happens here.
+    */
+    12% {
+        transform:
+            translate3d(-50%, -50%, 0) translate3d(-8px, -13px, 0) rotate(-2.5deg) scale(1.005);
+    }
+
+
+    /*
+        DEEP DRIFT
+
+        Now the ghost has momentum.
+        It moves further left and upward.
+    */
+    25% {
+        transform:
+            translate3d(-50%, -50%, 0) translate3d(-18px, -31px, 0) rotate(-3.5deg) scale(1.012);
+    }
+
+
+    /*
+        WEIGHTLESS MOMENT
+
+        The ghost reaches its high point,
+        but continues drifting horizontally.
+
+        This is what makes it feel like it
+        is being dragged through space rather
+        than bouncing.
+    */
+    40% {
+        transform:
+            translate3d(-50%, -50%, 0) translate3d(-10px, -43px, 0) rotate(-1deg) scale(1.018);
+    }
+
+
+    /*
+        CROSSOVER
+
+        The ghost smoothly changes direction.
+
+        It is still high in the air while
+        beginning its journey toward the right.
+    */
+    55% {
+        transform:
+            translate3d(-50%, -50%, 0) translate3d(10px, -42px, 0) rotate(2.5deg) scale(1.018);
+    }
+
+
+    /*
+        RIGHTWARD DRAG
+
+        This is the dramatic part.
+
+        The ghost is now moving to the
+        opposite side while slowly falling.
+    */
+    70% {
+        transform:
+            translate3d(-50%, -50%, 0) translate3d(20px, -29px, 0) rotate(4deg) scale(1.012);
+    }
+
+
+    /*
+        LONG SETTLE
+
+        Direction continues naturally.
+        The ghost doesn't snap back.
+    */
+    84% {
+        transform:
+            translate3d(-50%, -50%, 0) translate3d(11px, -12px, 0) rotate(2deg) scale(1.005);
+    }
+
+
+    /*
+        SOFT OVERSHOOT
+
+        Instead of immediately stopping,
+        it slightly passes the center.
+    */
+    94% {
+        transform:
+            translate3d(-50%, -50%, 0) translate3d(3px, -3px, 0) rotate(-0.5deg) scale(1.001);
+    }
+
+
+    /*
+        RETURN
+
+        Back to the original position.
+
+        The loop then starts again without
+        a visible jump.
+    */
+    100% {
+        transform:
+            translate3d(-50%, -50%, 0) translate3d(0, 0, 0) rotate(-2deg) scale(1);
+    }
+}
+
+
+/* =========================================================
+   BACKGROUND FLOATING SNAPCHAT
+========================================================= */
+
+.hero-floating-snap {
+    position: absolute;
+
+    z-index: 1;
+
+    width: 76px;
+
+    opacity: 0.34;
+
+    filter: blur(2px);
+
+    pointer-events: none;
+}
+
+.hero-floating-snap-left {
+    left: 45%;
+
+    top: 48%;
+
+    transform:
+        rotate(-15deg);
+}
+
+.hero-floating-snap-right {
+    right: 1%;
+
+    top: 41%;
+
+    width: 92px;
+
+    opacity: 0.29;
+
+    transform:
+        rotate(9deg);
+}
+
+.hero-floating-snap-bottom {
+    right: 8%;
+
+    bottom: -4%;
+
+    width: 98px;
+
+    opacity: 0.25;
+
+    transform:
+        rotate(-14deg);
+}
+
+
+/* =========================================================
+   MESSAGE CARDS
+========================================================= */
+
+/* =========================================================
+   FLOATING MESSAGE CARDS
+========================================================= */
+
+.hero-message {
+    position: absolute;
+
+    z-index: 5;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 15px 17px;
+
+    background: rgba(255, 255, 255, 0.86);
+
+    border: 1px solid rgba(0, 0, 0, 0.025);
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 10px 28px rgba(0, 0, 0, 0.05);
+
+    backdrop-filter: blur(9px);
+
+    color: #181818;
+
+    transform-origin: center center;
+
+    will-change: transform;
+
+    backface-visibility: hidden;
+
+    -webkit-backface-visibility: hidden;
+}
+
+.hero-message strong {
+    font-size: 11px;
+
+    line-height: 1.35;
+
+    font-weight: 600;
+}
+
+.hero-message span,
+.hero-message small {
+    margin-top: 7px;
+
+    color: #aaaaaa;
+
+    font-size: 8px;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   TOP MESSAGE
+========================================================= */
+
+.hero-message-top {
+    width: 195px;
+
+    left: 8%;
+    top: 9%;
+
+    transform:
+        rotate(-5deg);
+
+    animation:
+        messageTopFloat 10s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+
+/* =========================================================
+   STREAK MESSAGE
+========================================================= */
+
+.hero-message-streak {
+    width: 155px;
+
+    right: 3%;
+    top: 14%;
+
+    transform:
+        rotate(-2deg);
+
+    animation:
+        messageStreakFloat 11.5s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+.hero-message-streak span {
+    margin-top: 6px;
+
+    font-size: 11px;
+}
+
+.hero-message-streak small {
+    margin-top: 6px;
+}
+
+
+/* =========================================================
+   CAMERA MESSAGE
+========================================================= */
+
+.hero-message-camera {
+    width: 177px;
+
+    left: 0;
+    bottom: 8%;
+
+    transform:
+        rotate(-4deg);
+
+    animation:
+        messageCameraFloat 9.5s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+
+/* =========================================================
+   DOG MESSAGE
+========================================================= */
+
+.hero-message-dog {
+    width: 177px;
+
+    right: 5%;
+    bottom: 7%;
+
+    transform:
+        rotate(4deg);
+
+    animation:
+        messageDogFloat 12s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+
+/* =========================================================
+   TOP MESSAGE MOTION
+========================================================= */
+
+/*
+    The top card subtly follows the ghost's upward movement,
+    then drifts slightly in the opposite direction.
+
+    Large movement = bad.
+    Tiny spatial movement = immersive.
+*/
+
+@keyframes messageTopFloat {
+
+    0% {
+        transform:
+            translate3d(0, 0, 0) rotate(-5deg);
+    }
+
+    18% {
+        transform:
+            translate3d(-5px, -5px, 0) rotate(-5.5deg);
+    }
+
+    38% {
+        transform:
+            translate3d(-10px, -11px, 0) rotate(-4deg);
+    }
+
+    55% {
+        transform:
+            translate3d(-4px, -15px, 0) rotate(-3deg);
+    }
+
+    72% {
+        transform:
+            translate3d(7px, -9px, 0) rotate(-4deg);
+    }
+
+    88% {
+        transform:
+            translate3d(5px, -3px, 0) rotate(-5deg);
+    }
+
+    100% {
+        transform:
+            translate3d(0, 0, 0) rotate(-5deg);
+    }
+}
+
+
+/* =========================================================
+   STREAK MESSAGE MOTION
+========================================================= */
+
+/*
+    Slower and more independent.
+
+    This one barely moves vertically but has
+    a wider horizontal drift.
+*/
+
+@keyframes messageStreakFloat {
+
+    0% {
+        transform:
+            translate3d(0, 0, 0) rotate(-2deg);
+    }
+
+    20% {
+        transform:
+            translate3d(6px, -4px, 0) rotate(-1deg);
+    }
+
+    42% {
+        transform:
+            translate3d(12px, -10px, 0) rotate(0.5deg);
+    }
+
+    58% {
+        transform:
+            translate3d(8px, -14px, 0) rotate(1.5deg);
+    }
+
+    77% {
+        transform:
+            translate3d(-4px, -8px, 0) rotate(0deg);
+    }
+
+    91% {
+        transform:
+            translate3d(-5px, -3px, 0) rotate(-1deg);
+    }
+
+    100% {
+        transform:
+            translate3d(0, 0, 0) rotate(-2deg);
+    }
+}
+
+
+/* =========================================================
+   CAMERA MESSAGE MOTION
+========================================================= */
+
+/*
+    This card has a stronger vertical relationship
+    with the ghost.
+
+    When the ghost rises, this card gently rises too.
+*/
+
+@keyframes messageCameraFloat {
+
+    0% {
+        transform:
+            translate3d(0, 0, 0) rotate(-4deg);
+    }
+
+    16% {
+        transform:
+            translate3d(-3px, -7px, 0) rotate(-4.5deg);
+    }
+
+    34% {
+        transform:
+            translate3d(-7px, -15px, 0) rotate(-3deg);
+    }
+
+    50% {
+        transform:
+            translate3d(0, -21px, 0) rotate(-2deg);
+    }
+
+    67% {
+        transform:
+            translate3d(8px, -15px, 0) rotate(-2.5deg);
+    }
+
+    84% {
+        transform:
+            translate3d(5px, -6px, 0) rotate(-3.5deg);
+    }
+
+    100% {
+        transform:
+            translate3d(0, 0, 0) rotate(-4deg);
+    }
+}
+
+
+/* =========================================================
+   DOG MESSAGE MOTION
+========================================================= */
+
+/*
+    The dog card deliberately has the slowest motion.
+
+    This creates depth:
+
+        ghost       → medium movement
+        camera      → medium/strong
+        top card    → subtle
+        streak      → slow
+        dog card    → very slow
+*/
+
+@keyframes messageDogFloat {
+
+    0% {
+        transform:
+            translate3d(0, 0, 0) rotate(4deg);
+    }
+
+    20% {
+        transform:
+            translate3d(4px, -4px, 0) rotate(4.5deg);
+    }
+
+    40% {
+        transform:
+            translate3d(9px, -9px, 0) rotate(5deg);
+    }
+
+    56% {
+        transform:
+            translate3d(6px, -14px, 0) rotate(3.5deg);
+    }
+
+    73% {
+        transform:
+            translate3d(-4px, -10px, 0) rotate(2.5deg);
+    }
+
+    89% {
+        transform:
+            translate3d(-5px, -3px, 0) rotate(3.5deg);
+    }
+
+    100% {
+        transform:
+            translate3d(0, 0, 0) rotate(4deg);
+    }
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .hero-inner {
+        width:
+            min(100% - 70px, 1200px);
+    }
+
+    .hero-title {
+        font-size:
+            clamp(46px, 4.8vw, 63px);
+    }
+
+    .hero-ghost {
+        width: 475px;
+    }
+
+    .hero-message-top {
+        left: 4%;
+    }
+
+    .hero-message-camera {
+        left: -3%;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .hero-inner {
+        grid-template-columns:
+            0.9fr 1.1fr;
+    }
+
+    .hero-title {
+        font-size:
+            clamp(43px, 5.4vw, 58px);
+
+        letter-spacing:
+            -2.3px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+    }
+
+    .hero-ghost {
+        width: 430px;
+    }
+
+    .hero-message {
+        transform:
+            scale(0.9);
+    }
+
+    .hero-message-top {
+        left: 0;
+    }
+
+    .hero-message-camera {
+        left: -7%;
+    }
+
+    .hero-message-dog {
+        right: -5%;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .hero {
+        min-height: auto;
+    }
+
+    .hero-inner {
+        width:
+            min(100% - 32px, 600px);
+
+        min-height: auto;
+
+        display: flex;
+
+        flex-direction: column;
+    }
+
+    .hero-content {
+        width: 100%;
+
+        padding-top: 38px;
+
+        text-align: center;
+    }
+
+    .hero-title {
+        max-width: 580px;
+
+        margin: 0 auto;
+
+        font-size:
+            clamp(44px, 11vw, 62px);
+
+        line-height:
+            0.97;
+    }
+
+    .hero-description {
+        margin-top: 22px;
+    }
+
+    .desktop-break {
+        display: none;
+    }
+
+    .hero-actions {
+        justify-content: center;
+
+        flex-wrap: wrap;
+    }
+
+    .hero-proof {
+        justify-content: center;
+    }
+
+    .hero-visual {
+        width: 100%;
+
+        height: 440px;
+
+        margin-top: 8px;
+    }
+
+    .hero-ghost {
+        width: 445px;
+
+        top: 51%;
+    }
+
+    .hero-message-top {
+        left: 1%;
+
+        top: 3%;
+    }
+
+    .hero-message-streak {
+        right: 0;
+
+        top: 7%;
+    }
+
+    .hero-message-camera {
+        left: 0;
+
+        bottom: 8%;
+    }
+
+    .hero-message-dog {
+        right: 0;
+
+        bottom: 7%;
+    }
+
+    .hero-floating-snap-left {
+        left: 4%;
+
+        top: 43%;
+    }
+
+    .hero-floating-snap-right {
+        right: -2%;
+
+        top: 41%;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+    .hero-content {
+        padding-top: 31px;
+    }
+
+    .hero-title {
+        font-size:
+            clamp(40px, 12vw, 56px);
+
+        letter-spacing:
+            -2.3px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+    }
+
+    .hero-actions {
+        gap: 9px;
+    }
+
+    .hero-primary-button,
+    .hero-secondary-button {
+        width: 100%;
+
+        max-width: 280px;
+    }
+
+    .hero-visual {
+        height: 390px;
+    }
+
+    .hero-ghost {
+        width: 365px;
+    }
+
+    .hero-message {
+        padding: 12px 14px;
+
+        border-radius: 13px;
+    }
+
+    .hero-message strong {
+        font-size: 9px;
+    }
+
+    .hero-message span,
+    .hero-message small {
+        font-size: 7px;
+    }
+
+    .hero-message-top {
+        width: 140px;
+
+        left: 0;
+    }
+
+    .hero-message-streak {
+        width: 120px;
+
+        right: 0;
+    }
+
+    .hero-message-camera {
+        width: 140px;
+    }
+
+    .hero-message-dog {
+        width: 140px;
+
+        right: 0;
+    }
+
+    .hero-floating-snap {
+        width: 58px;
+    }
+
+    .hero-floating-snap-right {
+        width: 68px;
+    }
+
+    .hero-floating-snap-bottom {
+        width: 73px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-ghost {
+        animation: none;
+
+        transform:
+            translate3d(-50%, -50%, 0) rotate(0deg);
+    }
+
+    .hero-primary-button,
+    .hero-secondary-button {
+        transition: none;
+    }
+}
