@@ -67,6 +67,34 @@
 
 
 /* =========================================================
+   TITLE CHOREOGRAPHY
+========================================================= */
+
+.hero-title-line {
+    display: block;
+
+    opacity: 0;
+
+    transform: translate3d(0, 26px, 0);
+
+    animation:
+        heroTitleReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-title-line-one {
+    animation-delay: 0.08s;
+}
+
+.hero-title-line-two {
+    animation-delay: 0.18s;
+}
+
+.hero-title-line-three {
+    animation-delay: 0.29s;
+}
+
+
+/* =========================================================
    YELLOW HIGHLIGHT
 ========================================================= */
 
@@ -133,6 +161,20 @@
     line-height: 1.55;
 
     font-weight: 500;
+}
+
+
+/* =========================================================
+   DESCRIPTION ENTRANCE
+========================================================= */
+
+.hero-entrance-description {
+    opacity: 0;
+
+    transform: translate3d(0, 18px, 0);
+
+    animation:
+        heroFadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.48s forwards;
 }
 
 
@@ -228,6 +270,20 @@
 
 
 /* =========================================================
+   ACTION ENTRANCE
+========================================================= */
+
+.hero-entrance-actions {
+    opacity: 0;
+
+    transform: translate3d(0, 18px, 0);
+
+    animation:
+        heroFadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.64s forwards;
+}
+
+
+/* =========================================================
    SOCIAL PROOF
 ========================================================= */
 
@@ -304,6 +360,20 @@
 
 
 /* =========================================================
+   PROOF ENTRANCE
+========================================================= */
+
+.hero-entrance-proof {
+    opacity: 0;
+
+    transform: translate3d(0, 16px, 0);
+
+    animation:
+        heroFadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.82s forwards;
+}
+
+
+/* =========================================================
    RIGHT VISUAL
 ========================================================= */
 
@@ -318,9 +388,6 @@
 
 /* =========================================================
    MAIN GHOST
-========================================================= */
-/* =========================================================
-   IMMERSIVE FLOATING GHOST
 ========================================================= */
 
 .hero-ghost {
@@ -342,10 +409,6 @@
     filter:
         drop-shadow(0 22px 28px rgba(0, 0, 0, 0.07));
 
-    /*
-        Keeps the movement extremely smooth and
-        prevents rendering jitter during the drag.
-    */
     will-change: transform;
 
     backface-visibility: hidden;
@@ -358,125 +421,74 @@
 
 
 /* =========================================================
+   GHOST ENTRANCE WRAPPER
+========================================================= */
+
+.hero-ghost-entrance {
+    position: absolute;
+
+    z-index: 3;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transform:
+        translate3d(0, 30px, 0) scale(0.985);
+
+    animation:
+        heroGhostEntrance 1s cubic-bezier(0.22, 1, 0.36, 1) 0.22s forwards;
+}
+
+
+/* =========================================================
    DRAMATIC IMMERSIVE MOTION
 ========================================================= */
 
 @keyframes ghostImmersiveFloat {
 
-    /*
-        START
-
-        Slightly leaning left.
-        The ghost begins almost still.
-    */
     0% {
         transform:
             translate3d(-50%, -50%, 0) translate3d(0, 0, 0) rotate(-2deg) scale(1);
     }
 
-
-    /*
-        SLOW ACCELERATION
-
-        The ghost begins drifting left while
-        slowly rising.
-
-        Nothing abrupt happens here.
-    */
     12% {
         transform:
             translate3d(-50%, -50%, 0) translate3d(-8px, -13px, 0) rotate(-2.5deg) scale(1.005);
     }
 
-
-    /*
-        DEEP DRIFT
-
-        Now the ghost has momentum.
-        It moves further left and upward.
-    */
     25% {
         transform:
             translate3d(-50%, -50%, 0) translate3d(-18px, -31px, 0) rotate(-3.5deg) scale(1.012);
     }
 
-
-    /*
-        WEIGHTLESS MOMENT
-
-        The ghost reaches its high point,
-        but continues drifting horizontally.
-
-        This is what makes it feel like it
-        is being dragged through space rather
-        than bouncing.
-    */
     40% {
         transform:
             translate3d(-50%, -50%, 0) translate3d(-10px, -43px, 0) rotate(-1deg) scale(1.018);
     }
 
-
-    /*
-        CROSSOVER
-
-        The ghost smoothly changes direction.
-
-        It is still high in the air while
-        beginning its journey toward the right.
-    */
     55% {
         transform:
             translate3d(-50%, -50%, 0) translate3d(10px, -42px, 0) rotate(2.5deg) scale(1.018);
     }
 
-
-    /*
-        RIGHTWARD DRAG
-
-        This is the dramatic part.
-
-        The ghost is now moving to the
-        opposite side while slowly falling.
-    */
     70% {
         transform:
             translate3d(-50%, -50%, 0) translate3d(20px, -29px, 0) rotate(4deg) scale(1.012);
     }
 
-
-    /*
-        LONG SETTLE
-
-        Direction continues naturally.
-        The ghost doesn't snap back.
-    */
     84% {
         transform:
             translate3d(-50%, -50%, 0) translate3d(11px, -12px, 0) rotate(2deg) scale(1.005);
     }
 
-
-    /*
-        SOFT OVERSHOOT
-
-        Instead of immediately stopping,
-        it slightly passes the center.
-    */
     94% {
         transform:
             translate3d(-50%, -50%, 0) translate3d(3px, -3px, 0) rotate(-0.5deg) scale(1.001);
     }
 
-
-    /*
-        RETURN
-
-        Back to the original position.
-
-        The loop then starts again without
-        a visible jump.
-    */
     100% {
         transform:
             translate3d(-50%, -50%, 0) translate3d(0, 0, 0) rotate(-2deg) scale(1);
@@ -539,15 +551,157 @@
 
 
 /* =========================================================
-   MESSAGE CARDS
+   DECORATIVE ENTRANCE
 ========================================================= */
+
+.hero-entrance-snap {
+    position: absolute;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    animation:
+        heroSnapReveal 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-entrance-snap-left {
+    inset: 0;
+
+    animation-delay: 0.05s;
+}
+
+.hero-entrance-snap-right {
+    inset: 0;
+
+    animation-delay: 0.16s;
+}
+
+.hero-entrance-snap-bottom {
+    inset: 0;
+
+    animation-delay: 0.27s;
+}
+
+
+/* =========================================================
+   MESSAGE POSITION WRAPPERS
+========================================================= */
+
+/*
+    IMPORTANT:
+
+    The wrapper owns the positioning.
+
+    The actual message keeps its original
+    transform and its original floating
+    animation.
+
+    This prevents entrance animations from
+    overwriting the existing UI.
+*/
+
+.hero-message-position {
+    position: absolute;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   TOP MESSAGE POSITION
+========================================================= */
+
+.hero-message-position-top {
+    width: 195px;
+
+    left: 8%;
+    top: 9%;
+}
+
+
+/* =========================================================
+   STREAK MESSAGE POSITION
+========================================================= */
+
+.hero-message-position-streak {
+    width: 155px;
+
+    right: 3%;
+    top: 14%;
+}
+
+
+/* =========================================================
+   CAMERA MESSAGE POSITION
+========================================================= */
+
+.hero-message-position-camera {
+    width: 177px;
+
+    left: 0;
+    bottom: 8%;
+}
+
+
+/* =========================================================
+   DOG MESSAGE POSITION
+========================================================= */
+
+.hero-message-position-dog {
+    width: 177px;
+
+    right: 5%;
+    bottom: 7%;
+}
+
+
+/* =========================================================
+   MESSAGE ENTRANCE
+========================================================= */
+
+.hero-message-entrance {
+    opacity: 0;
+
+    transform:
+        translate3d(0, 24px, 0) scale(0.97);
+
+    animation:
+        heroMessageEntrance 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+
+/* =========================================================
+   MESSAGE STAGGER
+========================================================= */
+
+.hero-message-position-top .hero-message-entrance {
+    animation-delay: 0.62s;
+}
+
+.hero-message-position-streak .hero-message-entrance {
+    animation-delay: 0.76s;
+}
+
+.hero-message-position-camera .hero-message-entrance {
+    animation-delay: 0.90s;
+}
+
+.hero-message-position-dog .hero-message-entrance {
+    animation-delay: 1.04s;
+}
+
 
 /* =========================================================
    FLOATING MESSAGE CARDS
 ========================================================= */
 
 .hero-message {
-    position: absolute;
+    position: relative;
 
     z-index: 5;
 
@@ -605,9 +759,6 @@
 .hero-message-top {
     width: 195px;
 
-    left: 8%;
-    top: 9%;
-
     transform:
         rotate(-5deg);
 
@@ -622,9 +773,6 @@
 
 .hero-message-streak {
     width: 155px;
-
-    right: 3%;
-    top: 14%;
 
     transform:
         rotate(-2deg);
@@ -651,9 +799,6 @@
 .hero-message-camera {
     width: 177px;
 
-    left: 0;
-    bottom: 8%;
-
     transform:
         rotate(-4deg);
 
@@ -669,9 +814,6 @@
 .hero-message-dog {
     width: 177px;
 
-    right: 5%;
-    bottom: 7%;
-
     transform:
         rotate(4deg);
 
@@ -681,16 +823,8 @@
 
 
 /* =========================================================
-   TOP MESSAGE MOTION
+   MESSAGE MOTION
 ========================================================= */
-
-/*
-    The top card subtly follows the ghost's upward movement,
-    then drifts slightly in the opposite direction.
-
-    Large movement = bad.
-    Tiny spatial movement = immersive.
-*/
 
 @keyframes messageTopFloat {
 
@@ -731,17 +865,6 @@
 }
 
 
-/* =========================================================
-   STREAK MESSAGE MOTION
-========================================================= */
-
-/*
-    Slower and more independent.
-
-    This one barely moves vertically but has
-    a wider horizontal drift.
-*/
-
 @keyframes messageStreakFloat {
 
     0% {
@@ -781,17 +904,6 @@
 }
 
 
-/* =========================================================
-   CAMERA MESSAGE MOTION
-========================================================= */
-
-/*
-    This card has a stronger vertical relationship
-    with the ghost.
-
-    When the ghost rises, this card gently rises too.
-*/
-
 @keyframes messageCameraFloat {
 
     0% {
@@ -830,22 +942,6 @@
     }
 }
 
-
-/* =========================================================
-   DOG MESSAGE MOTION
-========================================================= */
-
-/*
-    The dog card deliberately has the slowest motion.
-
-    This creates depth:
-
-        ghost       → medium movement
-        camera      → medium/strong
-        top card    → subtle
-        streak      → slow
-        dog card    → very slow
-*/
 
 @keyframes messageDogFloat {
 
@@ -887,6 +983,100 @@
 
 
 /* =========================================================
+   ENTRANCE KEYFRAMES
+========================================================= */
+
+@keyframes heroTitleReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translate3d(0, 26px, 0);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate3d(0, 0, 0);
+    }
+}
+
+
+@keyframes heroFadeUp {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translate3d(0, 18px, 0);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate3d(0, 0, 0);
+    }
+}
+
+
+@keyframes heroMessageEntrance {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translate3d(0, 24px, 0) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate3d(0, 0, 0) scale(1);
+    }
+}
+
+
+@keyframes heroGhostEntrance {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translate3d(0, 30px, 0) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate3d(0, 0, 0) scale(1);
+    }
+}
+
+
+@keyframes heroSnapReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translate3d(0, 22px, 0) scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate3d(0, 0, 0) scale(1);
+    }
+}
+
+
+/* =========================================================
    LARGE TABLET
 ========================================================= */
 
@@ -906,11 +1096,11 @@
         width: 475px;
     }
 
-    .hero-message-top {
+    .hero-message-position-top {
         left: 4%;
     }
 
-    .hero-message-camera {
+    .hero-message-position-camera {
         left: -3%;
     }
 }
@@ -943,20 +1133,15 @@
         width: 430px;
     }
 
-    .hero-message {
-        transform:
-            scale(0.9);
-    }
-
-    .hero-message-top {
+    .hero-message-position-top {
         left: 0;
     }
 
-    .hero-message-camera {
+    .hero-message-position-camera {
         left: -7%;
     }
 
-    .hero-message-dog {
+    .hero-message-position-dog {
         right: -5%;
     }
 }
@@ -1035,25 +1220,25 @@
         top: 51%;
     }
 
-    .hero-message-top {
+    .hero-message-position-top {
         left: 1%;
 
         top: 3%;
     }
 
-    .hero-message-streak {
+    .hero-message-position-streak {
         right: 0;
 
         top: 7%;
     }
 
-    .hero-message-camera {
+    .hero-message-position-camera {
         left: 0;
 
         bottom: 8%;
     }
 
-    .hero-message-dog {
+    .hero-message-position-dog {
         right: 0;
 
         bottom: 7%;
@@ -1129,23 +1314,23 @@
         font-size: 7px;
     }
 
-    .hero-message-top {
+    .hero-message-position-top {
         width: 140px;
 
         left: 0;
     }
 
-    .hero-message-streak {
+    .hero-message-position-streak {
         width: 120px;
 
         right: 0;
     }
 
-    .hero-message-camera {
+    .hero-message-position-camera {
         width: 140px;
     }
 
-    .hero-message-dog {
+    .hero-message-position-dog {
         width: 140px;
 
         right: 0;
@@ -1171,11 +1356,26 @@
 
 @media (prefers-reduced-motion: reduce) {
 
+    .hero-title-line,
+    .hero-entrance,
+    .hero-message-entrance,
+    .hero-ghost-entrance {
+        animation: none !important;
+
+        opacity: 1;
+
+        transform: none;
+    }
+
     .hero-ghost {
         animation: none;
 
         transform:
             translate3d(-50%, -50%, 0) rotate(0deg);
+    }
+
+    .hero-message {
+        animation: none;
     }
 
     .hero-primary-button,
