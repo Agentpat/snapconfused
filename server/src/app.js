@@ -8,20 +8,36 @@ import subscriberRoutes from "./routes/subscriberRoutes.js";
 const app = express();
 
 // =========================================================
-// ENVIRONMENT
+// CORS
 // =========================================================
 
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
-
-// =========================================================
-// MIDDLEWARE
-// =========================================================
+const allowedOrigins = ["http://localhost:5173", process.env.CLIENT_URL].filter(
+  Boolean,
+);
 
 app.use(
   cors({
-    origin: CLIENT_URL,
+    origin: (origin, callback) => {
+      // Allow requests without an Origin header.
+      // Useful for direct API/server requests.
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked origin: ${origin}`));
+    },
+
+    credentials: true,
   }),
 );
+
+// =========================================================
+// BODY PARSING
+// =========================================================
 
 app.use(express.json());
 
@@ -82,7 +98,16 @@ app.use((req, res) => {
 // =========================================================
 
 app.use((error, req, res, next) => {
-  console.error(error);
+  console.error("API Error:", error);
+
+  // Handle CORS errors cleanly.
+  if (error.message?.startsWith("CORS blocked origin:")) {
+    return res.status(403).json({
+      success: false,
+
+      message: "Request blocked by CORS policy.",
+    });
+  }
 
   res.status(error.statusCode || 500).json({
     success: false,
