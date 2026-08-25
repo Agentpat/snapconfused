@@ -9,20 +9,21 @@ export const createConfession = async (req, res, next) => {
   try {
     const { content, author, isAnonymous } = req.body;
 
-    // -------------------------------------------------------
+    // -----------------------------------------------------
     // BASIC VALIDATION
-    // -------------------------------------------------------
+    // -----------------------------------------------------
 
     if (!content || !content.trim()) {
       return res.status(400).json({
         success: false,
+
         message: "Please tell us your Snapchat struggle.",
       });
     }
 
-    // -------------------------------------------------------
+    // -----------------------------------------------------
     // DETERMINE AUTHOR
-    // -------------------------------------------------------
+    // -----------------------------------------------------
 
     const anonymous = isAnonymous === undefined ? true : Boolean(isAnonymous);
 
@@ -30,9 +31,9 @@ export const createConfession = async (req, res, next) => {
       ? "Anonymous"
       : author?.trim() || "Anonymous";
 
-    // -------------------------------------------------------
+    // -----------------------------------------------------
     // CREATE CONFESSION
-    // -------------------------------------------------------
+    // -----------------------------------------------------
 
     const confession = await Confession.create({
       content: content.trim(),
@@ -42,9 +43,9 @@ export const createConfession = async (req, res, next) => {
       isAnonymous: anonymous,
     });
 
-    // -------------------------------------------------------
+    // -----------------------------------------------------
     // RESPONSE
-    // -------------------------------------------------------
+    // -----------------------------------------------------
 
     return res.status(201).json({
       success: true,
@@ -60,22 +61,89 @@ export const createConfession = async (req, res, next) => {
 
 // =========================================================
 // GET ALL CONFESSIONS
-// GET /api/confessions
+// GET /api/confessions?page=1&limit=12
 //
-// Used by the admin side.
-// Returns pending, approved and featured records.
+// Paginated endpoint.
+//
+// Returns:
+// - pending
+// - approved
+// - rejected
+// - featured
+//
+// Used by the confessions page and admin side.
 // =========================================================
 
 export const getConfessions = async (req, res, next) => {
   try {
-    const confessions = await Confession.find().sort({
-      createdAt: -1,
-    });
+    // -----------------------------------------------------
+    // PAGE
+    // -----------------------------------------------------
+
+    const page = Math.max(Number.parseInt(req.query.page, 10) || 1, 1);
+
+    // -----------------------------------------------------
+    // LIMIT
+    //
+    // Default: 12
+    // Maximum: 24
+    // -----------------------------------------------------
+
+    const limit = Math.min(
+      Math.max(Number.parseInt(req.query.limit, 10) || 12, 1),
+      24,
+    );
+
+    // -----------------------------------------------------
+    // SKIP
+    // -----------------------------------------------------
+
+    const skip = (page - 1) * limit;
+
+    // -----------------------------------------------------
+    // TOTAL COUNT
+    // -----------------------------------------------------
+
+    const total = await Confession.countDocuments();
+
+    // -----------------------------------------------------
+    // TOTAL PAGES
+    // -----------------------------------------------------
+
+    const totalPages = Math.ceil(total / limit);
+
+    // -----------------------------------------------------
+    // CONFESSIONS
+    // -----------------------------------------------------
+
+    const confessions = await Confession.find()
+      .sort({
+        createdAt: -1,
+      })
+      .skip(skip)
+      .limit(limit)
+      .lean();
+
+    // -----------------------------------------------------
+    // RESPONSE
+    // -----------------------------------------------------
 
     return res.status(200).json({
       success: true,
 
       count: confessions.length,
+
+      total,
+
+      page,
+
+      limit,
+
+      totalPages,
+
+      hasNextPage: page < totalPages,
+
+      hasPreviousPage: page > 1,
 
       confessions,
     });
@@ -89,8 +157,11 @@ export const getConfessions = async (req, res, next) => {
 // GET /api/confessions/approved
 //
 // Public endpoint.
+//
 // Returns approved confessions whether or not
 // they have been featured.
+//
+// Limited to 12 records.
 // =========================================================
 
 export const getApprovedConfessions = async (req, res, next) => {
@@ -121,7 +192,9 @@ export const getApprovedConfessions = async (req, res, next) => {
 // GET /api/confessions/featured
 //
 // Public endpoint.
+//
 // Only approved + featured confessions appear here.
+//
 // Used by:
 // - Homepage confession carousel
 // - Hall of Shame
@@ -167,6 +240,7 @@ export const approveConfession = async (req, res, next) => {
 
       {
         returnDocument: "after",
+
         runValidators: true,
       },
     );
@@ -211,9 +285,9 @@ export const featureConfession = async (req, res, next) => {
       });
     }
 
-    // -------------------------------------------------------
+    // -----------------------------------------------------
     // ONLY APPROVED CONFESSIONS CAN BE FEATURED
-    // -------------------------------------------------------
+    // -----------------------------------------------------
 
     if (confession.status !== "approved") {
       return res.status(400).json({
