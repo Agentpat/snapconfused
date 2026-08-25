@@ -1,0 +1,924 @@
+/* =========================================================
+   CONFESSION SHARE
+   Compact SnapConfused Social Card
+========================================================= */
+
+.confession-share-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1000;
+
+    padding: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(17, 17, 17, 0.58);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    overflow-y: auto;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.confession-share-modal {
+    width: min(100%, 420px);
+
+    padding: 16px;
+
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.24);
+
+    animation:
+        confessionShareEnter 0.38s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+@keyframes confessionShareEnter {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(18px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0) scale(1);
+    }
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.confession-share-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    margin-bottom: 12px;
+}
+
+
+.confession-share-header span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #999999;
+
+    font-size: 7px;
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: 1.4px;
+}
+
+
+.confession-share-header h2 {
+    margin: 0;
+
+    color: #111111;
+
+    font-size: 21px;
+
+    line-height: 1;
+
+    font-weight: 850;
+
+    letter-spacing: -0.8px;
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+.confession-share-close {
+    width: 32px;
+    height: 32px;
+
+    flex: 0 0 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #f5f5f5;
+
+    color: #111111;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.confession-share-close:hover {
+    background: #ffdc00;
+
+    transform: rotate(8deg);
+}
+
+
+.confession-share-close svg {
+    width: 15px;
+    height: 15px;
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+.confession-share-preview {
+    width: 100%;
+
+    min-height: 0;
+
+    padding: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f3f1;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   ACTUAL SHARE CARD
+   250 × 312.5
+   NEVER BIGGER THAN 320px HIGH
+========================================================= */
+
+.confession-share-card {
+    position: relative;
+
+    width: 250px;
+
+    height: 312px;
+
+    max-width: 100%;
+    max-height: 320px;
+
+    flex: 0 0 auto;
+
+    overflow: hidden;
+
+    padding:
+        17px 17px 13px;
+
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    background:
+        radial-gradient(circle at 0% 0%,
+            rgba(255, 220, 0, 0.20),
+            transparent 30%),
+        radial-gradient(circle at 100% 100%,
+            rgba(255, 126, 157, 0.10),
+            transparent 29%),
+        #fffdf5;
+
+    color: #111111;
+
+    border:
+        1px solid rgba(17, 17, 17, 0.06);
+
+    border-radius: 12px;
+
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   TEXTURE
+========================================================= */
+
+.confession-share-card::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -1;
+
+    opacity: 0.16;
+
+    background-image:
+        radial-gradient(rgba(17, 17, 17, 0.16) 0.4px,
+            transparent 0.4px);
+
+    background-size: 5px 5px;
+
+    pointer-events: none;
+}
+
+
+.confession-share-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 105px;
+    height: 105px;
+
+    right: -50px;
+    top: -50px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 220, 0, 0.15);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.share-card-logo {
+    position: relative;
+
+    z-index: 5;
+
+    width: 25px;
+    height: 25px;
+
+    object-fit: contain;
+
+    border-radius: 6px;
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.share-card-number {
+    position: absolute;
+
+    top: 20px;
+    right: 17px;
+
+    z-index: 5;
+
+    color:
+        rgba(17, 17, 17, 0.32);
+
+    font-size: 6px;
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: 0.8px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.share-card-content {
+    position: relative;
+
+    z-index: 5;
+
+    width: 78%;
+
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.share-card-label {
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 16px;
+
+    margin-bottom: 9px;
+
+    padding:
+        0 7px;
+
+    border-radius: 999px;
+
+    background: #ffdc00;
+
+    color: #111111;
+
+    font-size: 5.5px;
+
+    line-height: 1;
+
+    font-weight: 950;
+
+    letter-spacing: 0.8px;
+}
+
+
+/* =========================================================
+   CONFESSION TEXT
+========================================================= */
+
+.share-card-quote {
+    margin: 0;
+
+    color: #111111;
+
+    font-size: 21px;
+
+    line-height: 1.06;
+
+    font-weight: 850;
+
+    letter-spacing: -0.9px;
+
+    overflow-wrap: anywhere;
+
+    text-wrap: balance;
+}
+
+
+/* =========================================================
+   AUTHOR
+========================================================= */
+
+.share-card-author {
+    margin-top: 11px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    color: #666666;
+
+    font-size: 6px;
+
+    line-height: 1;
+
+    font-weight: 700;
+}
+
+
+.share-card-author-line {
+    width: 13px;
+    height: 1px;
+
+    flex-shrink: 0;
+
+    background: #111111;
+}
+
+
+/* =========================================================
+   GHOST
+========================================================= */
+
+.share-card-ghost {
+    position: absolute;
+
+    z-index: 4;
+
+    right: -5px;
+    bottom: 35px;
+
+    width: 38%;
+
+    max-width: 105px;
+
+    object-fit: contain;
+
+    transform: rotate(5deg);
+
+    filter:
+        drop-shadow(0 8px 9px rgba(17, 17, 17, 0.08));
+
+    animation:
+        shareGhostFloat 4s ease-in-out infinite;
+}
+
+
+@keyframes shareGhostFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0) rotate(5deg);
+    }
+
+    50% {
+        transform:
+            translateY(-4px) rotate(2deg);
+    }
+}
+
+
+/* =========================================================
+   DOODLES
+========================================================= */
+
+.share-card-doodle {
+    position: absolute;
+
+    z-index: 3;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    opacity: 0.9;
+}
+
+
+.share-card-doodle-one {
+    top: 61px;
+    right: -9px;
+
+    width: 47px;
+
+    transform: rotate(12deg);
+
+    animation:
+        shareDoodleOne 5s ease-in-out infinite;
+}
+
+
+.share-card-doodle-two {
+    left: -10px;
+    bottom: 67px;
+
+    width: 45px;
+
+    transform: rotate(-13deg);
+
+    animation:
+        shareDoodleTwo 6s ease-in-out infinite;
+}
+
+
+@keyframes shareDoodleOne {
+
+    0%,
+    100% {
+        transform:
+            translateY(0) rotate(12deg);
+    }
+
+    50% {
+        transform:
+            translateY(-4px) rotate(17deg);
+    }
+}
+
+
+@keyframes shareDoodleTwo {
+
+    0%,
+    100% {
+        transform:
+            translateY(0) rotate(-13deg);
+    }
+
+    50% {
+        transform:
+            translateY(4px) rotate(-8deg);
+    }
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.share-card-footer {
+    position: relative;
+
+    z-index: 6;
+
+    margin-top: auto;
+
+    padding-top: 8px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 7px;
+
+    border-top:
+        1px solid rgba(17, 17, 17, 0.08);
+}
+
+
+.share-card-footer strong {
+    color: #111111;
+
+    font-size: 5px;
+
+    line-height: 1;
+
+    font-weight: 950;
+
+    letter-spacing: 0.7px;
+}
+
+
+.share-card-footer span {
+    color: #888888;
+
+    font-size: 5px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.confession-share-error {
+    margin:
+        7px 2px 0;
+
+    color: #d53b3b;
+
+    font-size: 8px;
+
+    line-height: 1.4;
+
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.confession-share-actions {
+    display: grid;
+
+    grid-template-columns:
+        1.4fr 1fr;
+
+    gap: 7px;
+
+    margin-top: 10px;
+}
+
+
+.confession-share-actions button {
+    min-height: 39px;
+
+    padding:
+        0 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    border: 0;
+
+    border-radius: 11px;
+
+    font-family: inherit;
+
+    font-size: 8px;
+
+    line-height: 1;
+
+    font-weight: 850;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.confession-share-actions button:hover {
+    transform: translateY(-2px);
+}
+
+
+.confession-share-actions button:active {
+    transform: translateY(0);
+}
+
+
+.confession-share-actions button:disabled {
+    opacity: 0.55;
+
+    cursor: wait;
+
+    transform: none;
+}
+
+
+.confession-share-actions svg {
+    width: 14px;
+    height: 14px;
+
+    flex-shrink: 0;
+
+    stroke-width: 1.9;
+}
+
+
+/* =========================================================
+   PRIMARY
+========================================================= */
+
+.share-action-primary {
+    background: #ffdc00;
+
+    color: #111111;
+
+    box-shadow:
+        0 6px 14px rgba(255, 220, 0, 0.16);
+}
+
+
+.share-action-primary:hover {
+    box-shadow:
+        0 8px 18px rgba(255, 220, 0, 0.23);
+}
+
+
+/* =========================================================
+   DOWNLOAD
+========================================================= */
+
+.share-action-secondary {
+    background: #111111;
+
+    color: #ffffff;
+}
+
+
+.share-action-secondary:hover {
+    background: #222222;
+}
+
+
+/* =========================================================
+   COPY LINK
+========================================================= */
+
+.share-action-link {
+    grid-column: 1 / -1;
+
+    min-height: 34px !important;
+
+    background: #f5f5f5;
+
+    color: #222222;
+}
+
+
+.share-action-link:hover {
+    background: #eeeeee;
+}
+
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+.share-spinner {
+    width: 11px;
+    height: 11px;
+
+    border:
+        2px solid rgba(17, 17, 17, 0.18);
+
+    border-top-color: #111111;
+
+    border-radius: 50%;
+
+    animation:
+        shareSpin 0.7s linear infinite;
+}
+
+
+@keyframes shareSpin {
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.confession-share-note {
+    margin:
+        7px 2px 0;
+
+    color: #999999;
+
+    font-size: 7px;
+
+    line-height: 1.4;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .confession-share-overlay {
+        padding: 12px;
+
+        align-items: center;
+    }
+
+
+    .confession-share-modal {
+        width: min(100%, 350px);
+
+        padding: 14px;
+
+        border-radius: 20px;
+    }
+
+
+    .confession-share-header {
+        margin-bottom: 10px;
+    }
+
+
+    .confession-share-header h2 {
+        font-size: 19px;
+    }
+
+
+    .confession-share-close {
+        width: 30px;
+        height: 30px;
+
+        flex-basis: 30px;
+    }
+
+
+    .confession-share-preview {
+        padding: 6px;
+
+        border-radius: 13px;
+    }
+
+
+    .confession-share-card {
+        width: 250px;
+
+        height: 312px;
+
+        max-height: 312px;
+    }
+
+
+    .share-card-quote {
+        font-size: 20px;
+    }
+
+
+    .confession-share-actions {
+        margin-top: 9px;
+    }
+
+
+    .confession-share-actions button {
+        min-height: 38px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 350px) {
+
+    .confession-share-modal {
+        width: min(100%, 320px);
+
+        padding: 12px;
+    }
+
+
+    .confession-share-card {
+        width: 230px;
+
+        height: 287px;
+
+        max-height: 287px;
+    }
+
+
+    .share-card-quote {
+        font-size: 18px;
+
+        letter-spacing: -0.7px;
+    }
+
+
+    .share-card-ghost {
+        width: 36%;
+
+        bottom: 32px;
+    }
+
+
+    .share-card-doodle-one {
+        width: 42px;
+    }
+
+
+    .share-card-doodle-two {
+        width: 40px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .confession-share-modal,
+    .share-card-ghost,
+    .share-card-doodle-one,
+    .share-card-doodle-two,
+    .share-spinner {
+        animation: none !important;
+    }
+
+            
+
+    .confession-share-actions button,
+    .confession-share-close {
+        transition: none !important;
+    }
+}

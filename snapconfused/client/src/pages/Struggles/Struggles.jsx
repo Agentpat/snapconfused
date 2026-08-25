@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
     HiArrowRight,
@@ -7,141 +7,88 @@ import {
     HiOutlineFire,
     HiOutlineChatBubbleLeftEllipsis,
     HiOutlineEye,
-    HiArrowPath,
 } from "react-icons/hi2";
 
 import "./Struggles.css";
 
+import ConfessionCarousel from "../../components/ConfessionCarousel/ConfessionCarousel";
 
-const API_URL =
-    import.meta.env.VITE_API_URL;
 
+/* =========================================================
+   EDUCATIONAL STRUGGLES
+========================================================= */
 
 const struggles = [
     {
         id: 1,
         number: "01",
         icon: HiOutlineChatBubbleLeftEllipsis,
-        question: "Why did the message disappear?",
-        short: "Because Snapchat apparently hates receipts.",
+
+        question:
+            "Why did the message disappear?",
+
+        short:
+            "Because Snapchat apparently hates receipts.",
+
         answer:
             "Snaps and chats can disappear after they've been viewed, depending on the conversation settings. So if you were looking for that message five minutes later... you're probably not going to find it.",
     },
+
     {
         id: 2,
         number: "02",
         icon: HiOutlineFire,
-        question: "What is a streak?",
-        short: "Two people repeatedly sending each other Snaps.",
+
+        question:
+            "What is a streak?",
+
+        short:
+            "Two people repeatedly sending each other Snaps.",
+
         answer:
             "A Snapstreak happens when you and another person send Snaps back and forth regularly. The 🔥 means you're officially maintaining one. The number tells you how long you've kept it going.",
     },
+
     {
         id: 3,
         number: "03",
         icon: HiOutlineEye,
-        question: "What is a Story?",
-        short: "A collection of Snaps people can watch.",
+
+        question:
+            "What is a Story?",
+
+        short:
+            "A collection of Snaps people can watch.",
+
         answer:
             "A Story is where Snaps can be shared for other people to view. Unlike a private Snap sent directly to one person, a Story is designed to be watched by the people you've chosen to share it with.",
     },
+
     {
         id: 4,
         number: "04",
         icon: HiOutlineCamera,
-        question: "Why did I open the camera?",
-        short: "Because Snapchat really wants you to take a picture.",
+
+        question:
+            "Why did I open the camera?",
+
+        short:
+            "Because Snapchat really wants you to take a picture.",
+
         answer:
             "The Snapchat camera is basically the front door of the app. Open Snapchat and you're immediately looking at a camera. Yes, that means accidental selfies are practically part of the experience.",
     },
 ];
 
 
+/* =========================================================
+   COMPONENT
+========================================================= */
+
 const Struggles = () => {
 
     const [activeId, setActiveId] =
         useState(null);
-
-    const [confessions, setConfessions] =
-        useState([]);
-
-    const [loadingConfessions, setLoadingConfessions] =
-        useState(true);
-
-    const [confessionError, setConfessionError] =
-        useState("");
-
-
-    /* =========================================================
-       FETCH APPROVED COMMUNITY CONFESSIONS
-    ========================================================= */
-
-    const fetchApprovedConfessions = async () => {
-
-        try {
-
-            setLoadingConfessions(true);
-
-            setConfessionError("");
-
-
-            const response = await fetch(
-                `${API_URL}/confessions/approved`
-            );
-
-
-            let data = {};
-
-            try {
-                data = await response.json();
-            } catch {
-                data = {};
-            }
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    data.message ||
-                    "Unable to load community struggles."
-                );
-
-            }
-
-
-            setConfessions(
-                Array.isArray(data.confessions)
-                    ? data.confessions
-                    : []
-            );
-
-        } catch (error) {
-
-            console.error(
-                "Failed to load approved confessions:",
-                error
-            );
-
-
-            setConfessionError(
-                error.message ||
-                "Something went wrong."
-            );
-
-        } finally {
-
-            setLoadingConfessions(false);
-
-        }
-
-    };
-
-
-    useEffect(() => {
-
-        fetchApprovedConfessions();
-
-    }, []);
 
 
     /* =========================================================
@@ -150,78 +97,11 @@ const Struggles = () => {
 
     const toggleStruggle = (id) => {
 
-        setActiveId((current) =>
-            current === id
-                ? null
-                : id
-        );
-
-    };
-
-
-    /* =========================================================
-       HELPERS
-    ========================================================= */
-
-    const getAuthor = (confession) => {
-
-        if (confession.isAnonymous) {
-            return "Anonymous";
-        }
-
-        return (
-            confession.author?.trim() ||
-            "Anonymous"
-        );
-
-    };
-
-
-    const getInitial = (confession) => {
-
-        const author =
-            getAuthor(confession);
-
-        if (author === "Anonymous") {
-            return "?";
-        }
-
-        return (
-            author
-                .charAt(0)
-                .toUpperCase() ||
-            "?"
-        );
-
-    };
-
-
-    const getDate = (confession) => {
-
-        if (!confession.createdAt) {
-            return "";
-        }
-
-        const date =
-            new Date(
-                confession.createdAt
-            );
-
-        if (
-            Number.isNaN(
-                date.getTime()
-            )
-        ) {
-            return "";
-        }
-
-        return date.toLocaleDateString(
-            undefined,
-            {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-            }
+        setActiveId(
+            (current) =>
+                current === id
+                    ? null
+                    : id
         );
 
     };
@@ -272,7 +152,9 @@ const Struggles = () => {
                             Scroll to understand
                         </span>
 
-                        <HiArrowRight />
+                        <HiArrowRight
+                            aria-hidden="true"
+                        />
 
                     </div>
 
@@ -295,6 +177,10 @@ const Struggles = () => {
 
                 <div className="struggles-list-inner">
 
+
+                    {/* =================================================
+                        SECTION HEADING
+                    ================================================= */}
 
                     <div className="struggles-section-heading">
 
@@ -325,6 +211,10 @@ const Struggles = () => {
                     </div>
 
 
+                    {/* =================================================
+                        ACCORDION
+                    ================================================= */}
+
                     <div className="struggles-list">
 
                         {struggles.map(
@@ -341,7 +231,9 @@ const Struggles = () => {
                                 return (
 
                                     <article
-                                        key={struggle.id}
+                                        key={
+                                            struggle.id
+                                        }
                                         className={`
                                             struggle-item
                                             ${isActive
@@ -362,16 +254,25 @@ const Struggles = () => {
                                             aria-expanded={
                                                 isActive
                                             }
+                                            aria-controls={`
+                                                struggle-answer-${struggle.id}
+                                            `}
                                         >
 
-                                            <div className="struggle-number">
+                                            <div
+                                                className="struggle-number"
+                                                aria-hidden="true"
+                                            >
                                                 {
                                                     struggle.number
                                                 }
                                             </div>
 
 
-                                            <div className="struggle-icon">
+                                            <div
+                                                className="struggle-icon"
+                                                aria-hidden="true"
+                                            >
 
                                                 <Icon />
 
@@ -395,7 +296,10 @@ const Struggles = () => {
                                             </div>
 
 
-                                            <div className="struggle-arrow">
+                                            <div
+                                                className="struggle-arrow"
+                                                aria-hidden="true"
+                                            >
 
                                                 <HiChevronDown />
 
@@ -405,6 +309,9 @@ const Struggles = () => {
 
 
                                         <div
+                                            id={`
+                                                struggle-answer-${struggle.id}
+                                            `}
                                             className={`
                                                 struggle-answer
                                                 ${isActive
@@ -441,268 +348,14 @@ const Struggles = () => {
 
 
             {/* =================================================
-                REAL COMMUNITY STRUGGLES
+                LIVE COMMUNITY CONFESSIONS
             ================================================= */}
 
-            <section className="community-struggles">
-
-                <div className="community-struggles-inner">
-
-
-                    <div className="community-heading">
-
-                        <div>
-
-                            <span>
-                                REAL PEOPLE. REAL CONFUSION.
-                            </span>
-
-                            <h2>
-                                You're definitely
-                                <br />
-                                not the only one.
-                            </h2>
-
-                        </div>
-
-
-                        <p>
-
-                            These are real confessions
-                            from people who finally
-                            admitted they were confused.
-
-                        </p>
-
-                    </div>
-
-
-                    {/* LOADING */}
-
-                    {loadingConfessions && (
-
-                        <div className="community-state">
-
-                            <div className="community-loader" />
-
-                            <p>
-                                Gathering the confusion...
-                            </p>
-
-                        </div>
-
-                    )}
-
-
-                    {/* ERROR */}
-
-                    {!loadingConfessions &&
-                        confessionError && (
-
-                            <div className="community-state">
-
-                                <div className="community-state-icon">
-                                    😵‍💫
-                                </div>
-
-                                <h3>
-                                    The confusion machine
-                                    is taking a break.
-                                </h3>
-
-                                <button
-                                    type="button"
-                                    onClick={
-                                        fetchApprovedConfessions
-                                    }
-                                >
-
-                                    <HiArrowPath />
-
-                                    Try again
-
-                                </button>
-
-                            </div>
-
-                        )}
-
-
-                    {/* EMPTY */}
-
-                    {!loadingConfessions &&
-                        !confessionError &&
-                        confessions.length === 0 && (
-
-                            <div className="community-state">
-
-                                <div className="community-state-icon">
-                                    👻
-                                </div>
-
-                                <h3>
-                                    Nobody has confessed yet.
-                                </h3>
-
-                                <p>
-                                    Be the first person to
-                                    admit you're confused.
-                                </p>
-
-                            </div>
-
-                        )}
-
-
-                    {/* LIVE CONFESSIONS */}
-
-                    {!loadingConfessions &&
-                        !confessionError &&
-                        confessions.length > 0 && (
-
-                            <div className="community-grid">
-
-                                {confessions.map(
-                                    (
-                                        confession,
-                                        index
-                                    ) => (
-
-                                        <article
-                                            key={
-                                                confession._id ||
-                                                index
-                                            }
-                                            className={`
-                                                community-card
-                                                community-card-${(index % 3) + 1
-                                                }
-                                            `}
-                                        >
-
-                                            <div className="community-card-top">
-
-                                                <span>
-                                                    REAL CONFESSION
-                                                </span>
-
-                                                <span>
-                                                    #
-                                                    {String(
-                                                        index + 1
-                                                    ).padStart(
-                                                        2,
-                                                        "0"
-                                                    )}
-                                                </span>
-
-                                            </div>
-
-
-                                            <div
-                                                className="community-quote-mark"
-                                                aria-hidden="true"
-                                            >
-                                                “
-                                            </div>
-
-
-                                            <p className="community-quote">
-
-                                                {
-                                                    confession.content
-                                                }
-
-                                            </p>
-
-
-                                            <div className="community-author">
-
-                                                <div className="community-avatar">
-
-                                                    {
-                                                        getInitial(
-                                                            confession
-                                                        )
-                                                    }
-
-                                                </div>
-
-
-                                                <div>
-
-                                                    <strong>
-
-                                                        {
-                                                            getAuthor(
-                                                                confession
-                                                            )
-                                                        }
-
-                                                    </strong>
-
-
-                                                    {getDate(
-                                                        confession
-                                                    ) && (
-
-                                                            <span>
-
-                                                                {
-                                                                    getDate(
-                                                                        confession
-                                                                    )
-                                                                }
-
-                                                            </span>
-
-                                                        )}
-
-                                                </div>
-
-                                            </div>
-
-                                        </article>
-
-                                    )
-                                )}
-
-                            </div>
-
-                        )}
-
-
-                    {/* COMMUNITY CTA */}
-
-                    <div className="community-bottom">
-
-                        <p>
-                            Got your own Snapchat struggle?
-                        </p>
-
-
-                        <a
-                            href="/confessions"
-                            className="community-share-button"
-                        >
-
-                            <span>
-                                Share yours
-                            </span>
-
-                            <HiArrowRight />
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </section>
+            <ConfessionCarousel />
 
 
             {/* =================================================
-                CONFUSED CARD
+                CONFUSED SECTION
             ================================================= */}
 
             <section className="struggles-confused">
@@ -715,6 +368,7 @@ const Struggles = () => {
                             STILL LOST?
                         </span>
 
+
                         <h2>
 
                             It's okay.
@@ -725,6 +379,7 @@ const Struggles = () => {
                             </em>
 
                         </h2>
+
 
                         <p>
 
@@ -737,11 +392,18 @@ const Struggles = () => {
                     </div>
 
 
-                    <div className="struggles-confused-card">
+                    <div
+                        className="struggles-confused-card"
+                        aria-label="Confused Snapchat message"
+                    >
 
-                        <div className="struggles-card-face">
+                        <div
+                            className="struggles-card-face"
+                            aria-hidden="true"
+                        >
                             😵‍💫
                         </div>
+
 
                         <div>
 
@@ -792,7 +454,9 @@ const Struggles = () => {
                             Share the pain
                         </span>
 
-                        <HiArrowRight />
+                        <HiArrowRight
+                            aria-hidden="true"
+                        />
 
                     </a>
 

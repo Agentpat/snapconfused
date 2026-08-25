@@ -1065,3 +1065,326 @@
         animation: none;
     }
 }
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.confessions-pagination {
+    width: 100%;
+
+    margin-top: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   PAGE BUTTON
+========================================================= */
+
+.confessions-page-button {
+    min-width: 92px;
+    height: 38px;
+
+    padding:
+        0 13px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    border:
+        1px solid rgba(17, 17, 17, 0.10);
+
+    border-radius: 999px;
+
+    background: #ffffff;
+
+    color: #111111;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.confessions-page-button:hover:not(:disabled) {
+    background: #ffdc00;
+
+    border-color: #ffdc00;
+
+    transform:
+        translateY(-2px);
+}
+
+
+.confessions-page-button:active:not(:disabled) {
+    transform:
+        translateY(0);
+}
+
+
+.confessions-page-button:disabled {
+    opacity: 0.35;
+
+    cursor: not-allowed;
+}
+
+
+.confessions-page-button svg {
+    width: 13px;
+    height: 13px;
+}
+
+
+/* =========================================================
+   PAGE INDICATOR
+========================================================= */
+
+.confessions-page-indicator {
+    min-width: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    color: #999999;
+
+    font-size: 8px;
+
+    line-height: 1;
+
+    font-weight: 700;
+}
+
+
+.confessions-page-indicator strong {
+    min-width: 24px;
+    height: 24px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    font-size: 8px;
+
+    font-weight: 850;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .confessions-pagination {
+        margin-top: 24px;
+
+        gap: 9px;
+    }
+
+
+    .confessions-page-button {
+        min-width: 82px;
+
+        height: 36px;
+
+        font-size: 8px;
+    }
+
+
+    .confessions-page-indicator {
+        min-width: 74px;
+
+        font-size: 7px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .confessions-page-button {
+        min-width: 72px;
+
+        padding:
+            0 10px;
+    }
+
+
+    .confessions-page-indicator {
+        min-width: 66px;
+    }
+
+}
+
+/* =========================================================
+   SHARE BUTTON ON CONFESSION CARD
+========================================================= */
+
+.confession-feed-share {
+    position: absolute;
+
+    right: 18px;
+    bottom: 18px;
+
+    height: 32px;
+
+    padding: 0 11px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    border:
+        1px solid rgba(17,
+            17,
+            17,
+            0.09);
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,
+            255,
+            255,
+            0.88);
+
+    color: #111111;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    opacity: 0.82;
+
+    backdrop-filter: blur(8px);
+
+    transition:
+        transform 0.25s cubic-bezier(0.22,
+            1,
+            0.36,
+            1),
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.confession-feed-share svg {
+    width: 14px;
+    height: 14px;
+
+    flex-shrink: 0;
+}
+
+
+.confession-feed-share:hover {
+    opacity: 1;
+
+    background: #ffdc00;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(0,
+            0,
+            0,
+            0.1);
+}
+
+
+.confession-feed-share:active {
+    transform:
+        translateY(0) scale(0.96);
+}
+
+
+.confession-feed-share:focus-visible {
+    outline:
+        2px solid #111111;
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   GIVE CARD CONTENT ROOM FOR SHARE BUTTON
+========================================================= */
+
+.confession-feed-card-content {
+    padding-bottom: 42px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .confession-feed-share {
+        right: 14px;
+        bottom: 14px;
+
+        height: 30px;
+
+        padding: 0 10px;
+
+        font-size: 8px;
+    }
+
+
+    .confession-feed-share svg {
+        width: 13px;
+        height: 13px;
+    }
+
+
+    .confession-feed-card-content {
+        padding-bottom: 40px;
+    }
+
+}

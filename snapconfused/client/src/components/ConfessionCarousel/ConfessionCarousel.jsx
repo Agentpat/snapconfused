@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
+    HiChevronLeft,
     HiChevronRight,
     HiArrowPath,
 } from "react-icons/hi2";
@@ -11,7 +12,15 @@ import "./ConfessionCarousel.css";
 const API_URL =
     import.meta.env.VITE_API_URL;
 
+
+const AUTO_PLAY_DELAY = 4500;
+
+
 const ConfessionCarousel = () => {
+
+    // =========================================================
+    // STATE
+    // =========================================================
 
     const [confessions, setConfessions] =
         useState([]);
@@ -25,10 +34,20 @@ const ConfessionCarousel = () => {
     const [error, setError] =
         useState("");
 
+    const [isPaused, setIsPaused] =
+        useState(false);
 
-    /* =========================================================
-       FETCH FEATURED CONFESSIONS
-    ========================================================= */
+    const [direction, setDirection] =
+        useState("next");
+
+
+    const autoPlayRef =
+        useRef(null);
+
+
+    // =========================================================
+    // FETCH FEATURED CONFESSIONS
+    // =========================================================
 
     const fetchFeaturedConfessions = async () => {
 
@@ -58,35 +77,12 @@ const ConfessionCarousel = () => {
             }
 
 
-            const fetchedConfessions =
-                data.confessions || [];
-
-
             setConfessions(
-                fetchedConfessions
+                data.confessions || []
             );
 
 
-            /*
-                If the previous active index is
-                larger than the new list, reset it.
-            */
-
-            setActiveIndex((current) => {
-
-                if (
-                    fetchedConfessions.length === 0
-                ) {
-                    return 0;
-                }
-
-
-                return Math.min(
-                    current,
-                    fetchedConfessions.length - 1
-                );
-
-            });
+            setActiveIndex(0);
 
         } catch (error) {
 
@@ -110,9 +106,9 @@ const ConfessionCarousel = () => {
     };
 
 
-    /* =========================================================
-       INITIAL LOAD
-    ========================================================= */
+    // =========================================================
+    // INITIAL LOAD
+    // =========================================================
 
     useEffect(() => {
 
@@ -121,40 +117,365 @@ const ConfessionCarousel = () => {
     }, []);
 
 
-    /* =========================================================
-       NEXT SLIDE
-    ========================================================= */
+    // =========================================================
+    // NEXT
+    // =========================================================
 
-    const nextSlide = () => {
+    const handleNext = () => {
 
-        if (confessions.length === 0) {
+        if (
+            confessions.length <= 1
+        ) {
             return;
         }
 
 
-        setActiveIndex((current) =>
-            current === confessions.length - 1
-                ? 0
-                : current + 1
+        setDirection("next");
+
+
+        setActiveIndex(
+            (currentIndex) =>
+                (
+                    currentIndex + 1
+                ) %
+                confessions.length
         );
 
     };
 
 
-    /* =========================================================
-       SELECT SLIDE
-    ========================================================= */
+    // =========================================================
+    // PREVIOUS
+    // =========================================================
 
-    const selectSlide = (index) => {
+    const handlePrevious = () => {
 
-        setActiveIndex(index);
+        if (
+            confessions.length <= 1
+        ) {
+            return;
+        }
+
+
+        setDirection("previous");
+
+
+        setActiveIndex(
+            (currentIndex) =>
+                (
+                    currentIndex -
+                    1 +
+                    confessions.length
+                ) %
+                confessions.length
+        );
 
     };
 
 
-    /* =========================================================
-       EMPTY STATE
-    ========================================================= */
+    // =========================================================
+    // AUTO PLAY
+    // =========================================================
+
+    useEffect(() => {
+
+        if (
+            loading ||
+            error ||
+            confessions.length <= 1 ||
+            isPaused
+        ) {
+            return;
+        }
+
+
+        autoPlayRef.current =
+            setInterval(() => {
+
+                handleNext();
+
+            }, AUTO_PLAY_DELAY);
+
+
+        return () => {
+
+            clearInterval(
+                autoPlayRef.current
+            );
+
+        };
+
+    }, [
+        loading,
+        error,
+        confessions.length,
+        isPaused,
+    ]);
+
+
+    // =========================================================
+    // KEYBOARD NAVIGATION
+    // =========================================================
+
+    useEffect(() => {
+
+        const handleKeyDown = (event) => {
+
+            if (
+                event.key === "ArrowRight"
+            ) {
+
+                handleNext();
+
+            }
+
+
+            if (
+                event.key === "ArrowLeft"
+            ) {
+
+                handlePrevious();
+
+            }
+
+        };
+
+
+        window.addEventListener(
+            "keydown",
+            handleKeyDown
+        );
+
+
+        return () => {
+
+            window.removeEventListener(
+                "keydown",
+                handleKeyDown
+            );
+
+        };
+
+    }, [
+        confessions.length,
+    ]);
+
+
+    // =========================================================
+    // TOUCH SWIPE
+    // =========================================================
+
+    const touchStartRef =
+        useRef(null);
+
+
+    const touchEndRef =
+        useRef(null);
+
+
+    const handleTouchStart = (
+        event
+    ) => {
+
+        touchStartRef.current =
+            event.touches[0].clientX;
+
+    };
+
+
+    const handleTouchMove = (
+        event
+    ) => {
+
+        touchEndRef.current =
+            event.touches[0].clientX;
+
+    };
+
+
+    const handleTouchEnd = () => {
+
+        if (
+            touchStartRef.current === null ||
+            touchEndRef.current === null
+        ) {
+            return;
+        }
+
+
+        const distance =
+            touchStartRef.current -
+            touchEndRef.current;
+
+
+        const minimumSwipe =
+            45;
+
+
+        if (
+            Math.abs(distance) >=
+            minimumSwipe
+        ) {
+
+            if (distance > 0) {
+
+                handleNext();
+
+            } else {
+
+                handlePrevious();
+
+            }
+
+        }
+
+
+        touchStartRef.current =
+            null;
+
+        touchEndRef.current =
+            null;
+
+    };
+
+
+    // =========================================================
+    // GET CARD
+    //
+    // Creates an infinite carousel:
+    //
+    // previous | active | next
+    //
+    // =========================================================
+
+    const getConfession = (
+        offset
+    ) => {
+
+        if (
+            confessions.length === 0
+        ) {
+            return null;
+        }
+
+
+        const index =
+            (
+                activeIndex +
+                offset +
+                confessions.length
+            ) %
+            confessions.length;
+
+
+        return {
+            confession:
+                confessions[index],
+
+            index,
+        };
+
+    };
+
+
+    const previousCard =
+        getConfession(-1);
+
+
+    const currentCard =
+        getConfession(0);
+
+
+    const nextCard =
+        getConfession(1);
+
+
+    // =========================================================
+    // CARD RENDERER
+    // =========================================================
+
+    const renderCard = (
+        item,
+        position
+    ) => {
+
+        if (!item) {
+            return null;
+        }
+
+
+        const {
+            confession,
+            index,
+        } = item;
+
+
+        return (
+
+            <article
+                key={`
+                    ${confession._id || index}
+                    -
+                    ${activeIndex}
+                    -
+                    ${position}
+                `}
+                className={`
+                    confession-card
+                    confession-card-${position}
+                    confession-card-${direction}
+                `}
+            >
+
+                {/* =============================================
+                    DECORATIVE QUOTE
+                ============================================= */}
+
+                <span
+                    className="confession-quote-mark"
+                    aria-hidden="true"
+                >
+                    “
+                </span>
+
+
+                {/* =============================================
+                    CONTENT
+                ============================================= */}
+
+                <div className="confession-content">
+
+                    <p className="confession-quote">
+
+                        {confession.content}
+
+                    </p>
+
+
+                    <span className="confession-author">
+
+                        {confession.isAnonymous
+                            ? "Anonymous"
+                            : (
+                                confession.author ||
+                                "Anonymous"
+                            )
+                        }
+
+                    </span>
+
+                </div>
+
+            </article>
+
+        );
+
+    };
+
+
+    // =========================================================
+    // EMPTY STATE
+    // =========================================================
 
     if (
         !loading &&
@@ -163,6 +484,7 @@ const ConfessionCarousel = () => {
     ) {
 
         return (
+
             <section
                 className="confession-section"
                 id="confessions"
@@ -189,9 +511,11 @@ const ConfessionCarousel = () => {
                             👻
                         </span>
 
+
                         <p>
                             Nobody has confessed yet.
                         </p>
+
 
                         <span>
                             Be the first one to admit
@@ -203,14 +527,15 @@ const ConfessionCarousel = () => {
                 </div>
 
             </section>
+
         );
 
     }
 
 
-    /* =========================================================
-       ERROR STATE
-    ========================================================= */
+    // =========================================================
+    // ERROR STATE
+    // =========================================================
 
     if (
         !loading &&
@@ -218,6 +543,7 @@ const ConfessionCarousel = () => {
     ) {
 
         return (
+
             <section
                 className="confession-section"
                 id="confessions"
@@ -244,10 +570,12 @@ const ConfessionCarousel = () => {
                             😵‍💫
                         </span>
 
+
                         <p>
                             The confusion machine
                             is taking a break.
                         </p>
+
 
                         <button
                             type="button"
@@ -256,7 +584,9 @@ const ConfessionCarousel = () => {
                             }
                         >
 
-                            <HiArrowPath />
+                            <HiArrowPath
+                                aria-hidden="true"
+                            />
 
                             Try again
 
@@ -267,23 +597,33 @@ const ConfessionCarousel = () => {
                 </div>
 
             </section>
+
         );
 
     }
 
+
+    // =========================================================
+    // RENDER
+    // =========================================================
 
     return (
 
         <section
             className="confession-section"
             id="confessions"
+            onMouseEnter={() =>
+                setIsPaused(true)
+            }
+            onMouseLeave={() =>
+                setIsPaused(false)
+            }
         >
 
             <div className="confession-inner">
 
-
                 {/* =================================================
-                    SECTION HEADING
+                    HEADING
                 ================================================= */}
 
                 <div className="confession-heading">
@@ -300,18 +640,14 @@ const ConfessionCarousel = () => {
 
 
                 {/* =================================================
-                    LOADING
+                    CAROUSEL
                 ================================================= */}
 
                 {loading ? (
 
                     <div className="confession-loading">
 
-                        <div className="confession-loading-card">
-                            <span />
-                            <span />
-                            <span />
-                        </div>
+                        <div className="confession-loading-card" />
 
                         <p>
                             Gathering the confusion...
@@ -321,165 +657,89 @@ const ConfessionCarousel = () => {
 
                 ) : (
 
-                    <>
-                        {/* =================================================
-                            CAROUSEL
-                        ================================================= */}
+                    <div
+                        className="confession-carousel"
+                        onTouchStart={
+                            handleTouchStart
+                        }
+                        onTouchMove={
+                            handleTouchMove
+                        }
+                        onTouchEnd={
+                            handleTouchEnd
+                        }
+                    >
 
-                        <div className="confession-carousel">
+                        {/* =========================================
+                            PREVIOUS BUTTON
+                        ========================================= */}
 
-                            <div className="confession-track">
+                        <button
+                            type="button"
+                            className="confession-nav confession-nav-previous"
+                            onClick={
+                                handlePrevious
+                            }
+                            aria-label="Previous confession"
+                        >
 
-                                {confessions.map(
-                                    (
-                                        confession,
-                                        index
-                                    ) => (
+                            <HiChevronLeft
+                                aria-hidden="true"
+                            />
 
-                                        <article
-                                            key={
-                                                confession._id ||
-                                                confession.id ||
-                                                index
-                                            }
-                                            className={`
-                                                confession-card
-                                                ${activeIndex === index
-                                                    ? "confession-card-active"
-                                                    : ""
-                                                }
-                                                confession-card-text-only
-                                            `}
-                                        >
-
-
-                                            {/* QUOTE MARK */}
-
-                                            <span
-                                                className="confession-quote-mark"
-                                                aria-hidden="true"
-                                            >
-                                                “
-                                            </span>
+                        </button>
 
 
-                                            {/* CONTENT */}
+                        {/* =========================================
+                            CARDS
+                        ========================================= */}
 
-                                            <div className="confession-content">
+                        <div
+                            className={`
+                                confession-track
+                                confession-track-${direction}
+                            `}
+                            key={activeIndex}
+                        >
 
-                                                <p className="confession-quote">
+                            {renderCard(
+                                previousCard,
+                                "previous"
+                            )}
 
-                                                    “
-                                                    {
-                                                        confession.content
-                                                    }
-                                                    ”
+                            {renderCard(
+                                currentCard,
+                                "active"
+                            )}
 
-                                                </p>
-
-
-                                                <span className="confession-author">
-
-                                                    {
-                                                        confession.isAnonymous
-                                                            ? "Anonymous"
-                                                            : confession.author ||
-                                                            "Anonymous"
-                                                    }
-
-                                                </span>
-
-                                            </div>
-
-                                        </article>
-
-                                    )
-                                )}
-
-                            </div>
-
-
-                            {/* =================================================
-                                NEXT BUTTON
-                            ================================================= */}
-
-                            {confessions.length > 1 && (
-
-                                <button
-                                    type="button"
-                                    className="confession-next"
-                                    onClick={
-                                        nextSlide
-                                    }
-                                    aria-label="Show next confession"
-                                >
-
-                                    <HiChevronRight
-                                        aria-hidden="true"
-                                    />
-
-                                </button>
-
+                            {renderCard(
+                                nextCard,
+                                "next"
                             )}
 
                         </div>
 
 
-                        {/* =================================================
-                            CAROUSEL INDICATORS
-                        ================================================= */}
+                        {/* =========================================
+                            NEXT BUTTON
+                        ========================================= */}
 
-                        {confessions.length > 1 && (
+                        <button
+                            type="button"
+                            className="confession-nav confession-nav-next"
+                            onClick={
+                                handleNext
+                            }
+                            aria-label="Next confession"
+                        >
 
-                            <div
-                                className="confession-dots"
-                                aria-label="Confession carousel navigation"
-                            >
+                            <HiChevronRight
+                                aria-hidden="true"
+                            />
 
-                                {confessions.map(
-                                    (
-                                        confession,
-                                        index
-                                    ) => (
+                        </button>
 
-                                        <button
-                                            key={
-                                                confession._id ||
-                                                confession.id ||
-                                                index
-                                            }
-                                            type="button"
-                                            className={`
-                                                confession-dot
-                                                ${activeIndex === index
-                                                    ? "confession-dot-active"
-                                                    : ""
-                                                }
-                                            `}
-                                            onClick={() =>
-                                                selectSlide(
-                                                    index
-                                                )
-                                            }
-                                            aria-label={
-                                                `Show confession ${index + 1
-                                                }`
-                                            }
-                                            aria-current={
-                                                activeIndex === index
-                                                    ? "true"
-                                                    : undefined
-                                            }
-                                        />
-
-                                    )
-                                )}
-
-                            </div>
-
-                        )}
-
-                    </>
+                    </div>
 
                 )}
 

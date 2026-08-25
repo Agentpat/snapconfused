@@ -1,13 +1,17 @@
 /* =========================================================
-   PAGE
+   HALL OF SHAME
 ========================================================= */
 
 .hall-page {
     width: 100%;
+
     min-height: 100vh;
 
     background: #ffffff;
+
     color: #111111;
+
+    overflow: hidden;
 }
 
 
@@ -18,114 +22,146 @@
 .hall-hero {
     position: relative;
 
-    overflow: hidden;
+    width: 100%;
 
-    padding: 82px 0 88px;
+    padding:
+        82px 40px 86px;
 
     background:
-        linear-gradient(180deg,
-            #ffffff 0%,
-            #fffdf0 100%);
+        radial-gradient(circle at 14% 35%,
+            rgba(255, 220, 0, 0.18),
+            transparent 28%),
+        radial-gradient(circle at 88% 15%,
+            rgba(255, 220, 0, 0.12),
+            transparent 25%),
+        #fffdf5;
+
+    border-bottom:
+        1px solid rgba(17, 17, 17, 0.06);
 }
+
 
 .hall-hero::before {
     content: "";
 
     position: absolute;
 
-    width: 420px;
-    height: 420px;
+    width: 180px;
+    height: 180px;
 
-    left: -220px;
-    top: -160px;
+    top: -90px;
+    right: 8%;
 
     border-radius: 50%;
 
     background:
         rgba(255, 220, 0, 0.12);
 
-    filter: blur(35px);
+    pointer-events: none;
 }
+
 
 .hall-hero-inner {
     position: relative;
+
     z-index: 2;
 
-    width:
-        min(calc(100% - 48px),
-            850px);
+    width: min(100%, 1180px);
 
     margin: 0 auto;
 
     text-align: center;
 }
 
+
+/* =========================================================
+   TROPHY
+========================================================= */
+
 .hall-trophy {
     width: 58px;
     height: 58px;
 
-    margin: 0 auto 18px;
+    margin:
+        0 auto 20px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
-    border-radius: 17px;
+    border-radius: 18px;
 
     background: #ffdc00;
 
-    transform: rotate(-5deg);
+    color: #111111;
 
     box-shadow:
-        0 10px 25px rgba(255, 220, 0, 0.22);
+        0 12px 30px rgba(255, 220, 0, 0.22);
+
+    transform: rotate(-4deg);
 }
+
 
 .hall-trophy svg {
-    width: 27px;
-    height: 27px;
+    width: 28px;
+    height: 28px;
+
+    stroke-width: 1.8;
 }
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
 
 .hall-eyebrow {
-    display: inline-flex;
+    display: block;
 
-    padding: 7px 13px;
+    margin-bottom: 14px;
 
-    border-radius: 999px;
+    color: #777777;
 
-    background: #111111;
+    font-size: 10px;
 
-    color: #ffffff;
+    line-height: 1;
 
-    font-size: 9px;
+    font-weight: 900;
 
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
+    letter-spacing: 1.8px;
 }
 
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
 .hall-hero h1 {
-    margin: 22px 0 0;
+    margin: 0;
 
-    font-family:
-        "Playfair Display",
-        Georgia,
-        serif;
+    color: #111111;
 
-    font-size:
-        clamp(52px, 7vw, 78px);
+    font-size: clamp(46px,
+            7vw,
+            88px);
 
     line-height: 0.94;
 
     font-weight: 800;
 
-    letter-spacing: -3.5px;
+    letter-spacing: -4px;
 }
 
+
 .hall-hero h1 span {
+    color: #111111;
+
     position: relative;
+
+    display: inline-block;
+
     z-index: 1;
 }
+
 
 .hall-hero h1 span::after {
     content: "";
@@ -134,30 +170,36 @@
 
     z-index: -1;
 
-    left: -6px;
-    right: -6px;
+    left: -7px;
+    right: -7px;
 
-    bottom: 3px;
+    bottom: 4px;
 
-    height: 8px;
+    height: 18px;
+
+    border-radius: 999px;
 
     background: #ffdc00;
 
-    transform: rotate(-1deg);
+    transform:
+        rotate(-1deg);
 }
 
+
 .hall-hero p {
-    width:
-        min(100%,
-            500px);
+    width: min(100%,
+            510px);
 
-    margin: 22px auto 0;
+    margin:
+        24px auto 0;
 
-    color: #777777;
+    color: #666666;
 
-    font-size: 14px;
+    font-size: 15px;
 
-    line-height: 1.6;
+    line-height: 1.7;
+
+    font-weight: 500;
 }
 
 
@@ -166,65 +208,70 @@
 ========================================================= */
 
 .hall-feed {
-    padding: 72px 0 88px;
+    width: 100%;
+
+    padding:
+        84px 40px 100px;
 
     background: #ffffff;
 }
 
+
 .hall-feed-inner {
-    width:
-        min(calc(100% - 80px),
-            1180px);
+    width: min(100%, 1180px);
 
     margin: 0 auto;
 }
 
 
 /* =========================================================
-   HEADING
+   FEED HEADING
 ========================================================= */
 
 .hall-heading {
     display: flex;
-
     align-items: flex-end;
     justify-content: space-between;
 
     gap: 40px;
 
-    margin-bottom: 34px;
+    margin-bottom: 42px;
 }
 
-.hall-heading span {
+
+.hall-heading>div>span {
     display: block;
 
     margin-bottom: 8px;
 
-    color: #b39b00;
+    color: #888888;
 
-    font-size: 9px;
+    font-size: 10px;
 
-    font-weight: 800;
+    line-height: 1;
+
+    font-weight: 900;
 
     letter-spacing: 1.5px;
 }
 
+
 .hall-heading h2 {
     margin: 0;
 
-    font-family:
-        "Playfair Display",
-        Georgia,
-        serif;
+    color: #111111;
 
-    font-size: 44px;
+    font-size: clamp(30px,
+            4vw,
+            45px);
 
     line-height: 1;
 
     font-weight: 800;
 
-    letter-spacing: -1.8px;
+    letter-spacing: -2px;
 }
+
 
 .hall-heading p {
     margin: 0;
@@ -232,6 +279,12 @@
     color: #888888;
 
     font-size: 12px;
+
+    line-height: 1.6;
+
+    font-weight: 600;
+
+    text-align: right;
 }
 
 
@@ -245,58 +298,67 @@
     grid-template-columns:
         repeat(3, minmax(0, 1fr));
 
-    gap: 18px;
+    gap: 20px;
+
+    align-items: stretch;
 }
 
 
 /* =========================================================
-   CARD
+   CARDS
 ========================================================= */
 
 .hall-card {
     position: relative;
 
-    min-height: 285px;
+    min-height: 315px;
 
-    padding: 24px;
+    padding: 26px;
+
+    display: flex;
+    flex-direction: column;
 
     overflow: hidden;
 
+    border-radius: 24px;
+
     border:
-        1px solid #ececec;
-
-    border-radius: 21px;
-
-    background:
-        linear-gradient(145deg,
-            #ffffff 0%,
-            #fafafa 100%);
+        1px solid rgba(17, 17, 17, 0.07);
 
     box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.04);
+        0 12px 35px rgba(17, 17, 17, 0.04);
 
     transition:
-        transform 0.35s cubic-bezier(0.22,
-            1,
-            0.36,
-            1),
-        box-shadow 0.35s ease;
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
+
 
 .hall-card:hover {
     transform:
-        translateY(-6px) rotate(0deg);
+        translateY(-5px);
 
     box-shadow:
-        0 20px 42px rgba(0, 0, 0, 0.08);
+        0 20px 45px rgba(17, 17, 17, 0.08);
 }
+
+
+/* =========================================================
+   CARD VARIATIONS
+========================================================= */
+
+.hall-card-1 {
+    background: #fffdf5;
+}
+
 
 .hall-card-2 {
-    transform: translateY(13px) rotate(1deg);
+    background: #f7faff;
 }
 
+
 .hall-card-3 {
-    transform: translateY(-3px) rotate(-1deg);
+    background: #fff5f7;
 }
 
 
@@ -305,28 +367,75 @@
 ========================================================= */
 
 .hall-card-top {
+    position: relative;
+
+    z-index: 2;
+
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 }
 
+
 .hall-card-top span {
-    color: #b7b7b7;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    font-size: 10px;
+    min-width: 38px;
+    height: 26px;
 
-    font-weight: 800;
+    padding: 0 9px;
 
-    letter-spacing: 1px;
+    border-radius: 999px;
+
+    background:
+        rgba(17, 17, 17, 0.06);
+
+    color: #666666;
+
+    font-size: 9px;
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: 0.8px;
 }
+
 
 .hall-card-top svg {
     width: 20px;
     height: 20px;
 
-    color: #ffdc00;
+    color: #111111;
+
+    stroke-width: 1.7;
+}
+
+
+/* =========================================================
+   QUOTE MARK
+========================================================= */
+
+.hall-quote-mark {
+    position: absolute;
+
+    top: 56px;
+    right: 23px;
+
+    color:
+        rgba(255, 220, 0, 0.45);
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 90px;
+
+    line-height: 0.7;
+
+    pointer-events: none;
 }
 
 
@@ -334,35 +443,25 @@
    QUOTE
 ========================================================= */
 
-.hall-quote-mark {
-    margin-top: 25px;
-
-    color: #ffdc00;
-
-    font-family: Georgia, serif;
-
-    font-size: 67px;
-
-    line-height: 0.55;
-
-    font-weight: 900;
-}
-
 .hall-quote {
-    margin: 20px 0 0;
+    position: relative;
 
-    font-family:
-        "Playfair Display",
-        Georgia,
-        serif;
+    z-index: 2;
 
-    font-size: 20px;
+    margin:
+        42px 0 26px;
 
-    line-height: 1.2;
+    color: #111111;
 
-    font-weight: 800;
+    font-size: clamp(18px,
+            2vw,
+            23px);
 
-    letter-spacing: -0.5px;
+    line-height: 1.3;
+
+    font-weight: 750;
+
+    letter-spacing: -0.7px;
 }
 
 
@@ -371,39 +470,36 @@
 ========================================================= */
 
 .hall-author {
-    position: absolute;
+    position: relative;
 
-    left: 24px;
-    right: 24px;
-    bottom: 23px;
+    z-index: 2;
+
+    margin-top: auto;
 
     display: flex;
-
     align-items: center;
 
     gap: 9px;
 
-    color: #777777;
-
-    font-size: 11px;
-
-    font-weight: 600;
+    min-width: 0;
 }
 
+
 .hall-avatar {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
+
+    flex: 0 0 32px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     border-radius: 50%;
 
-    background: #ffdc00;
+    background: #111111;
 
-    color: #111111;
+    color: #ffffff;
 
     font-size: 10px;
 
@@ -411,56 +507,228 @@
 }
 
 
+.hall-author>span {
+    min-width: 0;
+
+    color: #222222;
+
+    font-size: 11px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.hall-author small {
+    color: #999999;
+
+    font-size: 9px;
+
+    line-height: 1;
+
+    white-space: nowrap;
+}
+
+
 /* =========================================================
-   STATES
+   SHARE BUTTON
+========================================================= */
+
+.hall-share-button {
+    position: relative;
+
+    z-index: 3;
+
+    width: 100%;
+
+    min-height: 42px;
+
+    margin-top: 20px;
+
+    padding:
+        0 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border:
+        1px solid rgba(17, 17, 17, 0.12);
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.78);
+
+    color: #111111;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        background 0.22s ease,
+        border-color 0.22s ease,
+        transform 0.22s ease,
+        box-shadow 0.22s ease;
+}
+
+
+.hall-share-button svg {
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+
+    stroke-width: 1.8;
+}
+
+
+.hall-share-button:hover {
+    background: #ffdc00;
+
+    border-color: #ffdc00;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(255, 220, 0, 0.18);
+}
+
+
+.hall-share-button:active {
+    transform:
+        translateY(0);
+
+    box-shadow: none;
+}
+
+
+.hall-share-button:focus-visible {
+    outline:
+        2px solid #111111;
+
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   LOADING / ERROR / EMPTY STATES
 ========================================================= */
 
 .hall-state {
     min-height: 300px;
 
+    padding: 40px 20px;
+
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
 
     text-align: center;
+
+    border-radius: 24px;
+
+    background: #fafafa;
+
+    border:
+        1px solid rgba(17, 17, 17, 0.06);
 }
+
+
+.hall-loader {
+    width: 34px;
+    height: 34px;
+
+    margin-bottom: 16px;
+
+    border:
+        3px solid rgba(17, 17, 17, 0.08);
+
+    border-top-color: #ffdc00;
+
+    border-radius: 50%;
+
+    animation:
+        hallSpin 0.8s linear infinite;
+}
+
+
+@keyframes hallSpin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
 
 .hall-state-icon {
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 
-    font-size: 38px;
+    font-size: 34px;
 }
+
 
 .hall-state h3 {
     margin: 0;
 
-    font-family:
-        "Playfair Display",
-        Georgia,
-        serif;
+    color: #111111;
 
-    font-size: 25px;
+    font-size: 20px;
+
+    line-height: 1.2;
 
     font-weight: 800;
+
+    letter-spacing: -0.6px;
 }
 
+
 .hall-state p {
-    margin: 9px 0 0;
+    max-width: 400px;
+
+    margin:
+        10px 0 20px;
 
     color: #888888;
 
     font-size: 12px;
+
+    line-height: 1.6;
 }
 
+
 .hall-state button {
-    margin-top: 18px;
+    min-height: 42px;
 
-    height: 42px;
+    padding:
+        0 17px;
 
-    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
 
     border: 0;
 
@@ -470,34 +738,33 @@
 
     color: #ffffff;
 
+    font-family: inherit;
+
     font-size: 11px;
 
-    font-weight: 700;
+    font-weight: 800;
 
     cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
 }
 
-.hall-loader {
-    width: 28px;
-    height: 28px;
 
-    margin-bottom: 14px;
+.hall-state button:hover {
+    background: #ffdc00;
 
-    border:
-        3px solid #eeeeee;
+    color: #111111;
 
-    border-top-color: #ffdc00;
-
-    border-radius: 50%;
-
-    animation:
-        hallLoader 0.8s linear infinite;
+    transform:
+        translateY(-2px);
 }
 
-@keyframes hallLoader {
-    to {
-        transform: rotate(360deg);
-    }
+
+.hall-state button svg {
+    width: 15px;
+    height: 15px;
 }
 
 
@@ -505,283 +772,142 @@
    CTA
 ========================================================= */
 
-/* =========================================================
-   HALL CTA
-========================================================= */
-
 .hall-cta {
+    position: relative;
+
     width: 100%;
 
-    padding: 56px 0;
+    padding:
+        72px 40px;
 
-    background: #ffdc00;
+    background: #111111;
+
+    color: #ffffff;
+
+    overflow: hidden;
 }
 
+
+.hall-cta::before {
+    content: "";
+
+    position: absolute;
+
+    width: 330px;
+    height: 330px;
+
+    right: -100px;
+    top: -180px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 220, 0, 0.12);
+
+    pointer-events: none;
+}
+
+
 .hall-cta-inner {
-    width:
-        min(calc(100% - 80px),
-            1180px);
+    position: relative;
+
+    z-index: 2;
+
+    width: min(100%, 1180px);
 
     margin: 0 auto;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     gap: 40px;
 }
 
 
-/* =========================================================
-   CTA COPY
-========================================================= */
-
-.hall-cta-inner>div {
-    min-width: 0;
-}
-
 .hall-cta-inner>div>span {
     display: block;
 
-    margin-bottom: 8px;
+    margin-bottom: 9px;
 
-    color: rgba(17, 17, 17, 0.48);
+    color: rgba(255,
+            255,
+            255,
+            0.45);
 
     font-size: 9px;
 
     line-height: 1;
 
-    font-weight: 800;
+    font-weight: 900;
 
     letter-spacing: 1.5px;
 }
 
+
 .hall-cta-inner h2 {
     margin: 0;
 
-    color: #111111;
+    color: #ffffff;
 
-    font-family:
-        "Playfair Display",
-        Georgia,
-        serif;
-
-    font-size: 40px;
+    font-size: clamp(32px,
+            4vw,
+            50px);
 
     line-height: 1;
 
     font-weight: 800;
 
-    letter-spacing: -1.6px;
+    letter-spacing: -2px;
 }
 
 
-/* =========================================================
-   CTA BUTTON
-========================================================= */
-
 .hall-cta-button {
-    flex: 0 0 auto;
+    min-height: 48px;
 
-    width: 175px;
-
-    min-width: 175px;
-
-    height: 48px;
-
-    padding: 0 20px;
+    padding:
+        0 22px;
 
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
 
-    gap: 11px;
-
-    box-sizing: border-box;
-
-    border: 0;
+    gap: 10px;
 
     border-radius: 999px;
 
-    background: #111111;
+    background: #ffdc00;
 
-    color: #ffffff;
+    color: #111111;
+
+    font-size: 12px;
+
+    line-height: 1;
+
+    font-weight: 800;
 
     text-decoration: none;
 
-    font-family: inherit;
-
-    font-size: 12px;
-
-    line-height: 1;
-
-    font-weight: 700;
-
     white-space: nowrap;
-
-    cursor: pointer;
-
-    overflow: hidden;
 
     transition:
-        transform 0.3s cubic-bezier(0.22,
-            1,
-            0.36,
-            1),
-        box-shadow 0.3s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-
-/* =========================================================
-   BUTTON TEXT
-   IMPORTANT:
-   This overrides the generic CTA span styling.
-========================================================= */
-
-.hall-cta-button span {
-    display: inline-block;
-
-    width: auto;
-
-    margin: 0;
-
-    padding: 0;
-
-    color: #ffffff !important;
-
-    font-family: inherit;
-
-    font-size: 12px;
-
-    line-height: 1;
-
-    font-weight: 700;
-
-    letter-spacing: 0;
-
-    white-space: nowrap;
-
-    opacity: 1;
-
-    visibility: visible;
-
-    flex: 0 0 auto;
-}
-
-
-/* =========================================================
-   BUTTON ICON
-========================================================= */
-
-.hall-cta-button svg {
-    display: block;
-
-    width: 17px;
-
-    height: 17px;
-
-    flex: 0 0 17px;
-
-    color: #ffffff;
-
-    stroke: currentColor;
-}
-
-
-/* =========================================================
-   HOVER
-========================================================= */
 
 .hall-cta-button:hover {
-    transform: translateY(-3px);
+    transform:
+        translateY(-2px);
 
     box-shadow:
-        0 12px 25px rgba(0, 0, 0, 0.15);
-}
-
-.hall-cta-button:active {
-    transform: translateY(-1px);
+        0 12px 28px rgba(255, 220, 0, 0.18);
 }
 
 
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 900px) {
-
-    .hall-cta-inner {
-        width:
-            min(calc(100% - 50px),
-                760px);
-    }
-
-    .hall-cta-inner h2 {
-        font-size: 37px;
-    }
-
-    .hall-cta-button {
-        width: 170px;
-
-        min-width: 170px;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 600px) {
-
-    .hall-cta {
-        padding: 45px 0;
-    }
-
-    .hall-cta-inner {
-        width:
-            calc(100% - 32px);
-
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 23px;
-    }
-
-    .hall-cta-inner h2 {
-        font-size: 34px;
-    }
-
-    .hall-cta-button {
-        width: 100%;
-
-        min-width: 0;
-
-        height: 48px;
-    }
-
-    .hall-cta-button span {
-        display: inline-block;
-
-        color: #ffffff !important;
-    }
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .hall-cta-button {
-        transition: none;
-    }
+.hall-cta-button svg {
+    width: 16px;
+    height: 16px;
 }
 
 
@@ -789,28 +915,111 @@
    TABLET
 ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
 
-    .hall-feed-inner,
-    .hall-cta-inner {
-        width:
-            min(calc(100% - 50px),
-                760px);
+    .hall-hero {
+        padding:
+            70px 28px 75px;
     }
+
+
+    .hall-feed {
+        padding:
+            70px 28px 85px;
+    }
+
 
     .hall-grid {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
     }
 
-    .hall-card-2,
-    .hall-card-3 {
-        transform: none;
+
+    .hall-cta {
+        padding:
+            60px 28px;
     }
 
-    .hall-card:hover {
-        transform: translateY(-5px);
+}
+
+
+/* =========================================================
+   SMALL TABLET
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .hall-hero {
+        padding:
+            62px 22px 68px;
     }
+
+
+    .hall-hero h1 {
+        font-size: clamp(44px,
+                11vw,
+                68px);
+
+        letter-spacing: -3px;
+    }
+
+
+    .hall-hero p {
+        font-size: 14px;
+    }
+
+
+    .hall-feed {
+        padding:
+            60px 22px 75px;
+    }
+
+
+    .hall-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 14px;
+
+        margin-bottom: 30px;
+    }
+
+
+    .hall-heading p {
+        text-align: left;
+    }
+
+
+    .hall-grid {
+        grid-template-columns:
+            1fr;
+
+        gap: 16px;
+    }
+
+
+    .hall-card {
+        min-height: 290px;
+
+        padding: 23px;
+    }
+
+
+    .hall-cta {
+        padding:
+            55px 22px;
+    }
+
+
+    .hall-cta-inner {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 28px;
+    }
+
 }
 
 
@@ -821,13 +1030,33 @@
 @media (max-width: 600px) {
 
     .hall-hero {
-        padding: 60px 0 65px;
+        padding:
+            55px 18px 60px;
     }
 
-    .hall-hero-inner {
-        width:
-            calc(100% - 32px);
+
+    .hall-trophy {
+        width: 52px;
+        height: 52px;
+
+        margin-bottom: 17px;
+
+        border-radius: 16px;
     }
+
+
+    .hall-trophy svg {
+        width: 25px;
+        height: 25px;
+    }
+
+
+    .hall-eyebrow {
+        font-size: 9px;
+
+        letter-spacing: 1.3px;
+    }
+
 
     .hall-hero h1 {
         font-size: 47px;
@@ -835,84 +1064,216 @@
         letter-spacing: -2.5px;
     }
 
-    .hall-hero p {
-        font-size: 13px;
+
+    .hall-hero h1 span::after {
+        left: -5px;
+        right: -5px;
+
+        bottom: 3px;
+
+        height: 12px;
     }
+
+
+    .hall-hero p {
+        margin-top: 20px;
+
+        font-size: 13px;
+
+        line-height: 1.65;
+    }
+
 
     .hall-feed {
-        padding: 50px 0 60px;
+        padding:
+            50px 18px 65px;
     }
 
-    .hall-feed-inner,
-    .hall-cta-inner {
-        width:
-            calc(100% - 32px);
-    }
-
-    .hall-heading {
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: 12px;
-    }
 
     .hall-heading h2 {
-        font-size: 36px;
+        font-size: 32px;
+
+        letter-spacing: -1.5px;
     }
 
-    .hall-grid {
-        grid-template-columns: 1fr;
 
-        gap: 14px;
+    .hall-heading>div>span {
+        font-size: 9px;
     }
 
-    .hall-card,
-    .hall-card-2,
-    .hall-card-3 {
-        min-height: 250px;
 
-        transform: none;
+    .hall-heading p {
+        font-size: 11px;
     }
 
-    .hall-card:hover {
-        transform: translateY(-4px);
+
+    .hall-card {
+        min-height: 275px;
+
+        padding: 22px;
+
+        border-radius: 21px;
     }
+
+
+    .hall-quote-mark {
+        top: 51px;
+        right: 19px;
+
+        font-size: 75px;
+    }
+
+
+    .hall-quote {
+        margin-top: 40px;
+
+        font-size: 20px;
+
+        line-height: 1.28;
+    }
+
+
+    .hall-author {
+        gap: 8px;
+    }
+
+
+    .hall-avatar {
+        width: 30px;
+        height: 30px;
+
+        flex-basis: 30px;
+    }
+
+
+    .hall-author>span {
+        font-size: 10px;
+    }
+
+
+    .hall-author small {
+        font-size: 8px;
+    }
+
+
+    .hall-share-button {
+        min-height: 44px;
+
+        margin-top: 18px;
+
+        font-size: 11px;
+    }
+
+
+    .hall-state {
+        min-height: 260px;
+
+        padding:
+            30px 18px;
+    }
+
 
     .hall-cta {
-        padding: 45px 0;
+        padding:
+            50px 18px;
     }
 
-    .hall-cta-inner {
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 23px;
-    }
 
     .hall-cta-inner h2 {
-        font-size: 34px;
+        font-size: 36px;
+
+        letter-spacing: -1.5px;
     }
+
 
     .hall-cta-button {
         width: 100%;
+
+        min-height: 48px;
     }
+
 }
 
 
 /* =========================================================
-   REDUCED MOTION
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .hall-hero {
+        padding-top: 48px;
+    }
+
+
+    .hall-hero h1 {
+        font-size: 41px;
+
+        letter-spacing: -2.2px;
+    }
+
+
+    .hall-hero p {
+        font-size: 12px;
+    }
+
+
+    .hall-feed {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+
+    .hall-card {
+        padding: 20px;
+
+        min-height: 260px;
+    }
+
+
+    .hall-quote {
+        font-size: 18px;
+    }
+
+
+    .hall-share-button {
+        font-size: 10px;
+    }
+
+
+    .hall-cta {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+
+    .hall-cta-inner h2 {
+        font-size: 32px;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY / REDUCED MOTION
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
     .hall-card,
+    .hall-share-button,
+    .hall-state button,
     .hall-cta-button {
+
         transition: none;
+
     }
 
+
     .hall-loader {
+
         animation: none;
+
     }
+
 }

@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 
+import ConfessionShare from "../../components/ConfessionShare/ConfessionShare";
+
 import {
     HiArrowRight,
     HiOutlineTrophy,
     HiArrowPath,
+    HiOutlineShare,
 } from "react-icons/hi2";
 
 import "./HallOfShame.css";
@@ -23,6 +26,13 @@ const HallOfShame = () => {
 
     const [error, setError] =
         useState("");
+
+    // =========================================================
+    // SHARE STATE
+    // =========================================================
+
+    const [selectedConfession, setSelectedConfession] =
+        useState(null);
 
 
     /* =========================================================
@@ -113,7 +123,9 @@ const HallOfShame = () => {
     const getAuthorName = (confession) => {
 
         if (confession.isAnonymous) {
+
             return "Anonymous";
+
         }
 
         return (
@@ -129,9 +141,13 @@ const HallOfShame = () => {
         const name =
             getAuthorName(confession);
 
+
         if (name === "Anonymous") {
+
             return "?";
+
         }
+
 
         return (
             name
@@ -145,21 +161,28 @@ const HallOfShame = () => {
     const getDate = (confession) => {
 
         if (!confession.createdAt) {
+
             return "";
+
         }
+
 
         const date =
             new Date(
                 confession.createdAt
             );
 
+
         if (
             Number.isNaN(
                 date.getTime()
             )
         ) {
+
             return "";
+
         }
+
 
         return date.toLocaleDateString(
             undefined,
@@ -172,6 +195,36 @@ const HallOfShame = () => {
 
     };
 
+
+    /* =========================================================
+       OPEN SHARE
+    ========================================================= */
+
+    const handleShare = (confession) => {
+
+        setSelectedConfession(
+            confession
+        );
+
+    };
+
+
+    /* =========================================================
+       CLOSE SHARE
+    ========================================================= */
+
+    const handleCloseShare = () => {
+
+        setSelectedConfession(
+            null
+        );
+
+    };
+
+
+    /* =========================================================
+       RENDER
+    ========================================================= */
 
     return (
 
@@ -252,9 +305,12 @@ const HallOfShame = () => {
 
 
                         <p>
+
                             Zero judgment.
                             <br />
+
                             Maximum respect.
+
                         </p>
 
                     </div>
@@ -371,13 +427,13 @@ const HallOfShame = () => {
                                             }
                                             className={`
                                                 hall-card
-                                                hall-card-${(index % 3) + 1
-                                                }
+                                                hall-card-${(index % 3) + 1}
                                             `}
                                         >
 
-
-                                            {/* CARD TOP */}
+                                            {/* =================================
+                                                CARD TOP
+                                            ================================= */}
 
                                             <div className="hall-card-top">
 
@@ -399,7 +455,9 @@ const HallOfShame = () => {
                                             </div>
 
 
-                                            {/* QUOTE */}
+                                            {/* =================================
+                                                QUOTE
+                                            ================================= */}
 
                                             <div
                                                 className="hall-quote-mark"
@@ -416,7 +474,9 @@ const HallOfShame = () => {
                                             </p>
 
 
-                                            {/* AUTHOR */}
+                                            {/* =================================
+                                                AUTHOR
+                                            ================================= */}
 
                                             <div className="hall-author">
 
@@ -447,17 +507,44 @@ const HallOfShame = () => {
                                                 ) && (
 
                                                         <small>
+
                                                             •{" "}
+
                                                             {
                                                                 getDate(
                                                                     confession
                                                                 )
                                                             }
+
                                                         </small>
 
                                                     )}
 
                                             </div>
+
+
+                                            {/* =================================
+                                                SHARE
+                                            ================================= */}
+
+                                            <button
+                                                type="button"
+                                                className="hall-share-button"
+                                                onClick={() =>
+                                                    handleShare(
+                                                        confession
+                                                    )
+                                                }
+                                                aria-label={`Share confession from ${getAuthorName(confession)}`}
+                                            >
+
+                                                <HiOutlineShare />
+
+                                                <span>
+                                                    Share this confession
+                                                </span>
+
+                                            </button>
 
                                         </article>
 
@@ -510,6 +597,33 @@ const HallOfShame = () => {
                 </div>
 
             </section>
+
+
+            {/* =================================================
+                CONFESSION SHARE MODAL
+            ================================================= */}
+
+            {selectedConfession && (
+
+                <ConfessionShare
+                    confession={
+                        selectedConfession
+                    }
+
+                    index={
+                        confessions.findIndex(
+                            (confession) =>
+                                confession._id ===
+                                selectedConfession._id
+                        )
+                    }
+
+                    onClose={
+                        handleCloseShare
+                    }
+                />
+
+            )}
 
         </main>
 
