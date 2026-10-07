@@ -3,6 +3,7 @@ import cors from "cors";
 
 import confessionRoutes from "./routes/confessionRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import adminConfessionRoutes from "./routes/adminConfessionRoutes.js";
 import subscriberRoutes from "./routes/subscriberRoutes.js";
 
 const app = express();
@@ -54,7 +55,6 @@ app.use(
 app.get("/api/health", (req, res) => {
   res.status(200).json({
     success: true,
-
     message: "SnapConfused API is running.",
   });
 });
@@ -66,7 +66,6 @@ app.get("/api/health", (req, res) => {
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
-
     message: "Welcome to SnapConfused API.",
   });
 });
@@ -75,10 +74,16 @@ app.get("/", (req, res) => {
 // API ROUTES
 // =========================================================
 
+// Public confession system
 app.use("/api/confessions", confessionRoutes);
 
+// Admin authentication/account system
 app.use("/api/admin", adminRoutes);
 
+// Admin confession management system
+app.use("/api/admin/confessions", adminConfessionRoutes);
+
+// Subscribers
 app.use("/api/subscribers", subscriberRoutes);
 
 // =========================================================
@@ -88,7 +93,6 @@ app.use("/api/subscribers", subscriberRoutes);
 app.use((req, res) => {
   res.status(404).json({
     success: false,
-
     message: `Route not found: ${req.method} ${req.originalUrl}`,
   });
 });
@@ -104,14 +108,12 @@ app.use((error, req, res, next) => {
   if (error.message?.startsWith("CORS blocked origin:")) {
     return res.status(403).json({
       success: false,
-
       message: "Request blocked by CORS policy.",
     });
   }
 
   res.status(error.statusCode || 500).json({
     success: false,
-
     message: error.message || "Something went wrong.",
   });
 });

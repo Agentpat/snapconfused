@@ -1,0 +1,568 @@
+/* =========================================================
+   CONFESSION CARD
+========================================================= */
+
+.admin-confession {
+    display: grid;
+
+    grid-template-columns: 38px minmax(0, 1fr);
+
+    gap: 16px;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #e7eaee;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.025);
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.admin-confession-number {
+    width: 34px;
+
+    height: 34px;
+
+    display: grid;
+
+    place-items: center;
+
+    color: #8b95a3;
+
+    background: #f6f7f8;
+
+    border: 1px solid #eaedf0;
+
+    border-radius: 9px;
+
+    font-size: 10px;
+
+    font-weight: 750;
+
+    letter-spacing: 0.02em;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.admin-confession-body {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   TOP
+========================================================= */
+
+.admin-confession-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+    margin-bottom: 13px;
+}
+
+.admin-confession-badges {
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+
+/* =========================================================
+   STATUS BADGES
+========================================================= */
+
+.admin-status,
+.admin-featured,
+.admin-source {
+    min-height: 24px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 0 8px;
+
+    border: 1px solid transparent;
+
+    border-radius: 6px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    white-space: nowrap;
+}
+
+.admin-status svg,
+.admin-featured svg {
+    width: 12px;
+
+    height: 12px;
+}
+
+
+/* =========================================================
+   PUBLISHED
+========================================================= */
+
+.admin-status-published {
+    color: #15803d;
+
+    background: #f0fdf4;
+
+    border-color: #dcfce7;
+}
+
+
+/* =========================================================
+   SCHEDULED
+========================================================= */
+
+.admin-status-scheduled {
+    color: #a16207;
+
+    background: #fefce8;
+
+    border-color: #fef3c7;
+}
+
+
+/* =========================================================
+   UNPUBLISHED
+========================================================= */
+
+.admin-status-unpublished {
+    color: #667085;
+
+    background: #f5f6f8;
+
+    border-color: #e7e9ed;
+}
+
+
+/* =========================================================
+   FEATURED
+========================================================= */
+
+.admin-featured {
+    color: #8a6500;
+
+    background: #fffbeb;
+
+    border-color: #fef3c7;
+}
+
+
+/* =========================================================
+   SOURCE
+========================================================= */
+
+.admin-source {
+    padding-left: 7px;
+
+    padding-right: 7px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.07em;
+
+    text-transform: uppercase;
+}
+
+.admin-source-user {
+    color: #667085;
+
+    background: #f7f8fa;
+
+    border-color: #e9ebef;
+}
+
+.admin-source-admin {
+    color: #4f46e5;
+
+    background: #f5f3ff;
+
+    border-color: #e9d5ff;
+}
+
+
+/* =========================================================
+   CREATED DATE
+========================================================= */
+
+.admin-confession-date {
+    flex: 0 0 auto;
+
+    color: #9aa3af;
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   CONFESSION CONTENT
+========================================================= */
+
+.admin-confession-content {
+    max-width: 900px;
+
+    margin: 0 0 15px;
+
+    color: #252d3a;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    line-height: 1.65;
+
+    letter-spacing: -0.005em;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   META
+========================================================= */
+
+.admin-confession-meta {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 6px 20px;
+
+    margin-bottom: 17px;
+
+    color: #8a93a1;
+
+    font-size: 10px;
+
+    font-weight: 500;
+}
+
+.admin-confession-meta span {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 3px;
+}
+
+.admin-confession-meta strong {
+    color: #596273;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.admin-confession-actions {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    padding-top: 14px;
+
+    border-top: 1px solid #f0f1f3;
+}
+
+
+/* =========================================================
+   ACTION BUTTON
+========================================================= */
+
+.admin-action {
+    height: 31px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 0 10px;
+
+    color: #687282;
+
+    background: #ffffff;
+
+    border: 1px solid #e3e7eb;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        color 0.16s ease,
+        background 0.16s ease,
+        border-color 0.16s ease,
+        box-shadow 0.16s ease;
+}
+
+.admin-action svg {
+    width: 13px;
+
+    height: 13px;
+}
+
+
+/* =========================================================
+   GENERIC ACTION HOVER
+========================================================= */
+
+.admin-action:hover {
+    color: #111827;
+
+    background: #f8f9fa;
+
+    border-color: #d8dde3;
+}
+
+
+/* =========================================================
+   PUBLISH
+========================================================= */
+
+.admin-action-publish {
+    color: #ffffff;
+
+    background: #111827;
+
+    border-color: #111827;
+}
+
+.admin-action-publish:hover {
+    color: #ffffff;
+
+    background: #1f2937;
+
+    border-color: #1f2937;
+
+    box-shadow:
+        0 2px 7px rgba(15, 23, 42, 0.12);
+}
+
+
+/* =========================================================
+   SCHEDULE
+========================================================= */
+
+.admin-action-schedule:hover {
+    color: #92400e;
+
+    background: #fffbeb;
+
+    border-color: #fde68a;
+}
+
+
+/* =========================================================
+   FEATURE
+========================================================= */
+
+.admin-action-feature:hover {
+    color: #7c5a00;
+
+    background: #fffbeb;
+
+    border-color: #fde68a;
+}
+
+
+/* =========================================================
+   UNFEATURE
+========================================================= */
+
+.admin-action-unfeature {
+    color: #7c5a00;
+
+    background: #fffbeb;
+
+    border-color: #fef3c7;
+}
+
+.admin-action-unfeature:hover {
+    color: #92400e;
+
+    background: #fef3c7;
+
+    border-color: #fde68a;
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+.admin-action-delete {
+    margin-left: auto;
+
+    color: #9a6b6b;
+
+    border-color: #eee3e3;
+}
+
+.admin-action-delete:hover {
+    color: #dc2626;
+
+    background: #fff5f5;
+
+    border-color: #fecaca;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 760px) {
+    .admin-confession {
+        grid-template-columns: 32px minmax(0, 1fr);
+
+        gap: 13px;
+
+        padding: 17px;
+
+        border-radius: 12px;
+    }
+
+    .admin-confession-number {
+        width: 30px;
+
+        height: 30px;
+    }
+
+    .admin-confession-top {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 9px;
+    }
+
+    .admin-confession-date {
+        font-size: 9px;
+    }
+
+    .admin-confession-content {
+        font-size: 13px;
+
+        line-height: 1.6;
+    }
+
+    .admin-action-delete {
+        margin-left: 0;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+    .admin-confession {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+        padding: 15px;
+    }
+
+    .admin-confession-number {
+        width: 28px;
+
+        height: 28px;
+
+        border-radius: 8px;
+    }
+
+    .admin-confession-top {
+        margin-bottom: 11px;
+    }
+
+    .admin-confession-content {
+        margin-bottom: 13px;
+
+        font-size: 13px;
+
+        line-height: 1.58;
+    }
+
+    .admin-confession-meta {
+        gap: 6px 14px;
+
+        margin-bottom: 14px;
+    }
+
+    .admin-confession-actions {
+        gap: 5px;
+
+        padding-top: 12px;
+    }
+
+    .admin-action {
+        height: 30px;
+
+        padding: 0 9px;
+
+        font-size: 9px;
+    }
+
+    .admin-action svg {
+        width: 12px;
+
+        height: 12px;
+    }
+}

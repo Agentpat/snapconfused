@@ -296,6 +296,50 @@ const confessionData = [
   "I thought 'opened' meant they liked the message. I have been emotionally misled.",
 
   "I finally figured out how to use Snapchat and now my younger cousins have moved on to something else.",
+
+  // =====================================================
+  // REAL-LIFE CONFESSIONS
+  // =====================================================
+
+  "I was just minding my business inside danfo from Yaba to Ikeja when my phone suddenly dropped near the gutter. I bent down to pick am, and the driver sharpaly stopped the bus. Everybody started shouting, but the driver just said, 'Na your phone you dey find? I don carry am go front.' I followed am front, and guess what? He was playing my WhatsApp voice notes loud for the whole bus to hear. I wanted to die that day.",
+
+  "I was trying to impress my crush at the university hostel, so I invited my side chick to come chill. As we dey there, my crush waka enter the room to borrow charger. The look on her face when she see me with another girl? I swear, I wanted to disappear. Now she no even greet me for campus.",
+
+  "At my cousin's owambe, I was supposed to catch the bride's attention, but I ended up dancing with the groom's uncle who was drunk. The uncle started calling me 'my wife' loudly, and the whole estate was laughing. The bride saw everything. I'm still single but now famous for all the wrong reasons.",
+
+  "My boyfriend caught me cheating and broke up with me. The next morning, I went to his friend's house to talk, only to find myself on his bed with two of his friends and one of their sisters. I thought I was the one cheating, but now I'm confused who really is the bad person.",
+
+  "There is this married man who keeps telling his wife he is going away for prayer. I know the real reason because I have been part of his secret. Every time he says he is going to the mountain, I just wonder if the mountain even knows his name.",
+
+  "During NYSC, I was assigned to a camp where the camp commandant dey collect bribe from us to allow us go home early. I paid, but the guy still kept me for camp. Later, I hear say he dey use the money to buy new phone and dey party every weekend.",
+
+  "Our office printer dey print love letters wey one staff dey send to another staff. One day, the boss catch the letters and call everybody for meeting. The person wey dey print the letters was the boss's own PA. Drama no finish that day.",
+
+  "I was in the church choir, and one Sunday, the choir director caught me singing off-key. Instead of correcting me quietly, he shouted for the whole church. I wanted to cry, but the pastor just smiled like say na normal thing.",
+
+  "I went to one club in Lekki, and I saw my ex with another girl. I decided to play cool, but the girl was my best friend from secondary school. I left the club that night with more questions than answers.",
+
+  "During family meeting, my uncle suddenly announced say he dey marry my best friend's mother. Everybody was shocked, but the worst part was when my best friend started crying. I never knew say family wahala fit be like this.",
+
+  "I was dating one wealthy older man in Abuja, but I didn't know say he was seeing other women at the same time. One day, three of us ended up at the same hotel. The wahala wey follow no be small.",
+
+  "My husband dey always complain say I no dey loyal, but I have a secret relationship he knows nothing about. I dey always tell my husband say I dey church, but na somewhere else I dey go. I no know how long I go fit keep this secret.",
+
+  "I once missed my sister's wedding because I was stuck in Lagos traffic. The worst part? I was inside danfo wey broke down for over three hours. I reached the wedding just in time to see them cut the cake.",
+
+  "I paid one guy to help me during my university exam, but the guy waka enter the wrong exam hall. I ended up failing the course. Till today, I no fit tell my parents.",
+
+  "My best friend dey always borrow money and never pay back. One day, I catch am dey use my phone to chat with my boyfriend. I no know whether to be angry or just laugh.",
+
+  "I found out say the pastor's daughter was secretly dating a guy involved in illegal activities. The pastor dey preach about holiness every Sunday, but for house, na different story.",
+
+  "I was dating my boss's secretary, but one day, I caught her with another guy inside the office. I still dey work there, but I no fit look her face again.",
+
+  "At one estate party, I danced with one guy wey later turned out to be my landlord's son. The landlord no know say I dey owe rent, so the guy dey use the party to embarrass me.",
+
+  "I was pregnant for my boyfriend, but he no know. I went to the hospital alone, and now the baby dey with me. I dey pray say one day I go tell am.",
+
+  "I met one guy for nightclub wey dey pretend say he be rich man. After we start dating, I find out say he was actually a driver for a big company. I no know if I go laugh or cry.",
 ];
 
 export default confessionData;

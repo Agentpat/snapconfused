@@ -5,23 +5,16 @@ import {
   getConfessions,
   getApprovedConfessions,
   getFeaturedConfessions,
-  approveConfession,
-  featureConfession,
-  unfeatureConfession,
-  deleteConfession,
 } from "../controllers/confessionController.js";
-
-import adminAuth from "../middleware/adminAuth.js";
 
 const router = express.Router();
 
 // =========================================================
-// PUBLIC
+// PUBLIC CONFESSIONS
 // =========================================================
 
 // CREATE CONFESSION
 // POST /api/confessions
-
 router.post("/", createConfession);
 
 // GET APPROVED CONFESSIONS
@@ -29,7 +22,6 @@ router.post("/", createConfession);
 //
 // Used by:
 // - The Struggles page
-
 router.get("/approved", getApprovedConfessions);
 
 // GET FEATURED CONFESSIONS
@@ -38,39 +30,14 @@ router.get("/approved", getApprovedConfessions);
 // Used by:
 // - Homepage confession carousel
 // - Hall of Shame
-
 router.get("/featured", getFeaturedConfessions);
 
-// GET ALL CONFESSIONS
+// GET CONFESSIONS
 // GET /api/confessions
 //
-// Used by:
-// - Admin
-
+// Public confession listing endpoint.
+// Admin management is handled separately through:
+// /api/admin/confessions
 router.get("/", getConfessions);
-
-// =========================================================
-// ADMIN
-// =========================================================
-
-// APPROVE CONFESSION
-// PATCH /api/confessions/:id/approve
-
-router.patch("/:id/approve", adminAuth, approveConfession);
-
-// FEATURE CONFESSION
-// PATCH /api/confessions/:id/feature
-
-router.patch("/:id/feature", adminAuth, featureConfession);
-
-// UNFEATURE CONFESSION
-// PATCH /api/confessions/:id/unfeature
-
-router.patch("/:id/unfeature", adminAuth, unfeatureConfession);
-
-// DELETE CONFESSION
-// DELETE /api/confessions/:id
-
-router.delete("/:id", adminAuth, deleteConfession);
 
 export default router;

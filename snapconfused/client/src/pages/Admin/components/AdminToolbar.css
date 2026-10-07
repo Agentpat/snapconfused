@@ -1,0 +1,266 @@
+/* =========================================================
+   ADMIN TOOLBAR
+========================================================= */
+
+.admin-toolbar {
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   TOP ROW
+========================================================= */
+
+.admin-toolbar-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 28px;
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.admin-section-heading {
+    min-width: 0;
+}
+
+.admin-section-heading>div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.admin-eyebrow {
+    color: #8a93a1;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.admin-section-heading h1 {
+    margin: 0;
+
+    color: #111827;
+    font-size: 26px;
+    font-weight: 760;
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.admin-search {
+    width: min(360px, 100%);
+    height: 40px;
+    flex: 0 1 360px;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 0 12px;
+
+    background: #ffffff;
+    border: 1px solid #e4e8ed;
+    border-radius: 10px;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.025);
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.admin-search:focus-within {
+    border-color: #cbd2db;
+
+    box-shadow:
+        0 0 0 3px rgba(17, 24, 39, 0.045);
+}
+
+.admin-search svg {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+
+    color: #8b95a3;
+}
+
+.admin-search input {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+
+    padding: 0;
+
+    color: #111827;
+    background: transparent;
+    border: 0;
+    outline: 0;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.admin-search input::placeholder {
+    color: #9aa3af;
+}
+
+.admin-search input::-webkit-search-cancel-button {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.admin-filters {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    padding: 4px;
+
+    overflow-x: auto;
+
+    background: #f1f3f5;
+    border: 1px solid #e8ebef;
+    border-radius: 11px;
+
+    scrollbar-width: none;
+}
+
+.admin-filters::-webkit-scrollbar {
+    display: none;
+}
+
+.admin-filters button {
+    height: 32px;
+    flex: 0 0 auto;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 0 11px;
+
+    color: #687282;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 650;
+
+    white-space: nowrap;
+    cursor: pointer;
+
+    transition:
+        color 0.16s ease,
+        background 0.16s ease,
+        border-color 0.16s ease,
+        box-shadow 0.16s ease;
+}
+
+.admin-filters button:hover {
+    color: #202938;
+}
+
+.admin-filters button.active {
+    color: #111827;
+    background: #ffffff;
+    border-color: #e5e8ec;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.055);
+}
+
+.admin-filters button small {
+    min-width: 19px;
+    height: 18px;
+    padding: 0 5px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #7b8593;
+    background: #e9edf1;
+    border-radius: 5px;
+
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.admin-filters button.active small {
+    color: #ffffff;
+    background: #111827;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 820px) {
+    .admin-toolbar-top {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .admin-search {
+        width: 100%;
+        flex-basis: auto;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+    .admin-toolbar {
+        margin-bottom: 18px;
+    }
+
+    .admin-section-heading h1 {
+        font-size: 23px;
+    }
+
+    .admin-toolbar-top {
+        margin-bottom: 14px;
+    }
+
+    .admin-search {
+        height: 42px;
+    }
+
+    .admin-filters {
+        border-radius: 10px;
+    }
+
+    .admin-filters button {
+        height: 31px;
+        padding: 0 10px;
+        font-size: 10px;
+    }
+}

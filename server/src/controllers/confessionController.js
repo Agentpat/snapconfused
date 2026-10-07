@@ -3,6 +3,10 @@ import Confession from "../models/Confession.js";
 // =========================================================
 // CREATE CONFESSION
 // POST /api/confessions
+//
+// New submissions are automatically approved.
+// They remain unpublished until the content system
+// publishes them.
 // =========================================================
 
 export const createConfession = async (req, res, next) => {
@@ -16,7 +20,6 @@ export const createConfession = async (req, res, next) => {
     if (!content || !content.trim()) {
       return res.status(400).json({
         success: false,
-
         message: "Please tell us your Snapchat struggle.",
       });
     }
@@ -33,6 +36,14 @@ export const createConfession = async (req, res, next) => {
 
     // -----------------------------------------------------
     // CREATE CONFESSION
+    //
+    // No manual approval.
+    //
+    // status:
+    // approved
+    //
+    // publicationStatus:
+    // unpublished
     // -----------------------------------------------------
 
     const confession = await Confession.create({
@@ -41,6 +52,18 @@ export const createConfession = async (req, res, next) => {
       author: confessionAuthor,
 
       isAnonymous: anonymous,
+
+      status: "approved",
+
+      source: "user",
+
+      publicationStatus: "unpublished",
+
+      scheduledFor: null,
+
+      publishedAt: null,
+
+      moderatedAt: new Date(),
     });
 
     // -----------------------------------------------------
@@ -63,15 +86,18 @@ export const createConfession = async (req, res, next) => {
 // GET ALL CONFESSIONS
 // GET /api/confessions?page=1&limit=12
 //
-// Paginated endpoint.
+// IMPORTANT:
+// This remains a general listing endpoint.
 //
-// Returns:
-// - pending
-// - approved
-// - rejected
-// - featured
+// The ADMIN confession system now uses:
+// /api/admin/confessions
 //
-// Used by the confessions page and admin side.
+// The public UI should normally use:
+// /approved
+// or
+// /featured
+//
+// This endpoint is kept for compatibility.
 // =========================================================
 
 export const getConfessions = async (req, res, next) => {
@@ -101,10 +127,22 @@ export const getConfessions = async (req, res, next) => {
     const skip = (page - 1) * limit;
 
     // -----------------------------------------------------
+    // PUBLIC CONTENT ONLY
+    //
+    // Only published confessions should be exposed
+    // through this public endpoint.
+    // -----------------------------------------------------
+
+    const filter = {
+      status: "approved",
+      publicationStatus: "published",
+    };
+
+    // -----------------------------------------------------
     // TOTAL COUNT
     // -----------------------------------------------------
 
-    const total = await Confession.countDocuments();
+    const total = await Confession.countDocuments(filter);
 
     // -----------------------------------------------------
     // TOTAL PAGES
@@ -116,8 +154,9 @@ export const getConfessions = async (req, res, next) => {
     // CONFESSIONS
     // -----------------------------------------------------
 
-    const confessions = await Confession.find()
+    const confessions = await Confession.find(filter)
       .sort({
+        publishedAt: -1,
         createdAt: -1,
       })
       .skip(skip)
@@ -153,23 +192,27 @@ export const getConfessions = async (req, res, next) => {
 };
 
 // =========================================================
-// GET APPROVED CONFESSIONS
+// GET PUBLISHED CONFESSIONS
 // GET /api/confessions/approved
 //
-// Public endpoint.
+// Kept under the existing /approved route so the frontend
+// does not need to be changed immediately.
 //
-// Returns approved confessions whether or not
-// they have been featured.
+// "Approved" now means the confession passed the automatic
+// workflow, while publicationStatus determines visibility.
 //
-// Limited to 12 records.
+// Only published content is returned publicly.
 // =========================================================
 
 export const getApprovedConfessions = async (req, res, next) => {
   try {
     const confessions = await Confession.find({
       status: "approved",
+
+      publicationStatus: "published",
     })
       .sort({
+        publishedAt: -1,
         createdAt: -1,
       })
       .limit(12)
@@ -188,16 +231,11 @@ export const getApprovedConfessions = async (req, res, next) => {
 };
 
 // =========================================================
-// GET FEATURED CONFESSIONS
+// GET FEATURED / HALL OF SHAME
 // GET /api/confessions/featured
 //
-// Public endpoint.
-//
-// Only approved + featured confessions appear here.
-//
-// Used by:
-// - Homepage confession carousel
-// - Hall of Shame
+// Only published + approved + featured confessions
+// appear publicly.
 // =========================================================
 
 export const getFeaturedConfessions = async (req, res, next) => {
@@ -205,9 +243,12 @@ export const getFeaturedConfessions = async (req, res, next) => {
     const confessions = await Confession.find({
       status: "approved",
 
+      publicationStatus: "published",
+
       featured: true,
     })
       .sort({
+        publishedAt: -1,
         createdAt: -1,
       })
       .lean();
@@ -225,52 +266,13 @@ export const getFeaturedConfessions = async (req, res, next) => {
 };
 
 // =========================================================
-// APPROVE CONFESSION
-// PATCH /api/confessions/:id/approve
-// =========================================================
-
-export const approveConfession = async (req, res, next) => {
-  try {
-    const confession = await Confession.findByIdAndUpdate(
-      req.params.id,
-
-      {
-        status: "approved",
-      },
-
-      {
-        returnDocument: "after",
-
-        runValidators: true,
-      },
-    );
-
-    if (!confession) {
-      return res.status(404).json({
-        success: false,
-
-        message: "Confession not found.",
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-
-      message: "Confession approved.",
-
-      confession,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-// =========================================================
 // FEATURE CONFESSION
-// PATCH /api/confessions/:id/feature
 //
-// A confession MUST be approved before it can
-// become featured.
+// NOTE:
+// This function is retained for backwards compatibility.
+// Actual admin feature management now belongs to:
+//
+// /api/admin/confessions/:id/feature
 // =========================================================
 
 export const featureConfession = async (req, res, next) => {
@@ -284,10 +286,6 @@ export const featureConfession = async (req, res, next) => {
         message: "Confession not found.",
       });
     }
-
-    // -----------------------------------------------------
-    // ONLY APPROVED CONFESSIONS CAN BE FEATURED
-    // -----------------------------------------------------
 
     if (confession.status !== "approved") {
       return res.status(400).json({
@@ -315,7 +313,11 @@ export const featureConfession = async (req, res, next) => {
 
 // =========================================================
 // UNFEATURE CONFESSION
-// PATCH /api/confessions/:id/unfeature
+//
+// NOTE:
+// Actual admin feature management now belongs to:
+//
+// /api/admin/confessions/:id/unfeature
 // =========================================================
 
 export const unfeatureConfession = async (req, res, next) => {
@@ -348,7 +350,14 @@ export const unfeatureConfession = async (req, res, next) => {
 
 // =========================================================
 // DELETE CONFESSION
-// DELETE /api/confessions/:id
+//
+// NOTE:
+// Actual deletion is now handled by:
+//
+// /api/admin/confessions/:id
+//
+// This export is retained temporarily so existing imports
+// do not break.
 // =========================================================
 
 export const deleteConfession = async (req, res, next) => {

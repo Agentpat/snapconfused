@@ -1,62 +1,146 @@
-import { useEffect, useMemo, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import {
+    useCallback,
+    useEffect,
+    useMemo,
+    useState,
+} from "react";
 
 import {
-    HiArrowRight,
-    HiCheck,
-    HiMagnifyingGlass,
-    HiOutlineArrowRightOnRectangle,
-    HiOutlineSparkles,
-    HiOutlineTrash,
-    HiXMark,
-} from "react-icons/hi2";
+    Navigate,
+    useNavigate,
+} from "react-router-dom";
 
-import "./Admin.css";
+import AdminHeader from "./components/AdminHeader";
+import AdminStats from "./components/AdminStats";
+import AdminToolbar from "./components/AdminToolbar";
+import ConfessionList from "./components/ConfessionList";
+import CreateConfessionModal from "./components/CreateConfessionModal";
+import ScheduleConfessionModal from "./components/ScheduleConfessionModal";
+import ImportJsonModal from "./components/ImportJsonModal";
 
+import "./admin.css";
 
-const API_URL =
-    import.meta.env.VITE_API_URL;
-
-
+const API_URL = import.meta.env.VITE_API_URL;
 const TOKEN_KEY = "snapconfused_admin_token";
 
 const Admin = () => {
     const navigate = useNavigate();
 
+    const token = localStorage.getItem(TOKEN_KEY);
+
     const [confessions, setConfessions] = useState([]);
+
+    const [totals, setTotals] = useState({
+        all: 0,
+        published: 0,
+        scheduled: 0,
+        unpublished: 0,
+        featured: 0,
+    });
+
     const [loading, setLoading] = useState(true);
-    const [actionLoading, setActionLoading] = useState("");
     const [error, setError] = useState("");
 
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState("all");
 
-    const token = localStorage.getItem(TOKEN_KEY);
+    const [showCreateModal, setShowCreateModal] =
+        useState(false);
 
+    const [showScheduleModal, setShowScheduleModal] =
+        useState(false);
 
-    /* =========================================================
-       AUTH
-    ========================================================= */
+    const [showImportModal, setShowImportModal] =
+        useState(false);
 
-    const getAuthHeaders = () => {
-        const currentToken =
-            localStorage.getItem(TOKEN_KEY);
+    const [selectedConfession, setSelectedConfession] =
+        useState(null);
 
-        return {
+    const authHeaders = useMemo(
+        () => ({
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
-            Authorization: `Bearer ${currentToken}`,
-        };
-    };
+        }),
+        [token],
+    );
 
+    const fetchConfessions = useCallback(async () => {
+        if (!token) return;
 
-    const handleUnauthorized = () => {
-        localStorage.removeItem(TOKEN_KEY);
+        setLoading(true);
+        setError("");
 
-        navigate("/admin/login", {
-            replace: true,
-        });
-    };
+        try {
+            const response = await fetch(
+                `${API_URL}/admin/confessions`,
+                {
+                    headers: authHeaders,
+                },
+            );
 
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data?.message ||
+                    "Failed to load confessions.",
+                );
+            }
+
+            const confessionList =
+                data?.confessions || [];
+
+            setConfessions(confessionList);
+
+            setTotals({
+                all:
+                    data?.totals?.all ??
+                    data?.total ??
+                    confessionList.length,
+
+                published:
+                    data?.totals?.published ??
+                    confessionList.filter(
+                        (item) =>
+                            item.publicationStatus ===
+                            "published",
+                    ).length,
+
+                scheduled:
+                    data?.totals?.scheduled ??
+                    confessionList.filter(
+                        (item) =>
+                            item.publicationStatus ===
+                            "scheduled",
+                    ).length,
+
+                unpublished:
+                    data?.totals?.unpublished ??
+                    confessionList.filter(
+                        (item) =>
+                            item.publicationStatus ===
+                            "unpublished",
+                    ).length,
+
+                featured:
+                    data?.totals?.featured ??
+                    confessionList.filter(
+                        (item) => item.featured,
+                    ).length,
+            });
+        } catch (err) {
+            setError(
+                err?.message ||
+                "Something went wrong while loading confessions.",
+            );
+        } finally {
+            setLoading(false);
+        }
+    }, [authHeaders, token]);
+
+    useEffect(() => {
+        fetchConfessions();
+    }, [fetchConfessions]);
 
     const handleLogout = () => {
         localStorage.removeItem(TOKEN_KEY);
@@ -66,369 +150,302 @@ const Admin = () => {
         });
     };
 
-
-    /* =========================================================
-       FETCH CONFESSIONS
-    ========================================================= */
-
-    const fetchConfessions = async () => {
-        try {
-            setLoading(true);
-            setError("");
-
-            const response = await fetch(
-                `${API_URL}/confessions`
-            );
-
-            const data = await response.json();
-
-            if (response.status === 401) {
-                handleUnauthorized();
-                return;
-            }
-
-            if (!response.ok) {
-                throw new Error(
-                    data.message ||
-                    "Unable to load confessions."
-                );
-            }
-
-            setConfessions(
-                data.confessions || []
-            );
-        } catch (error) {
-            console.error(
-                "Failed to load confessions:",
-                error
-            );
-
-            setError(
-                error.message ||
-                "Unable to load confessions."
-            );
-        } finally {
-            setLoading(false);
-        }
-    };
-
-
-    useEffect(() => {
-        if (token) {
-            fetchConfessions();
-        }
-    }, [token]);
-
-
-    /* =========================================================
-       APPROVE
-    ========================================================= */
-
-    const approveConfession = async (id) => {
-        try {
-            setActionLoading(id);
-            setError("");
-
-            const response = await fetch(
-                `${API_URL}/confessions/${id}/approve`,
-                {
-                    method: "PATCH",
-                    headers: getAuthHeaders(),
-                }
-            );
-
-            const data = await response.json();
-
-            if (response.status === 401) {
-                handleUnauthorized();
-                return;
-            }
-
-            if (!response.ok) {
-                throw new Error(
-                    data.message ||
-                    "Unable to approve confession."
-                );
-            }
-
-            setConfessions((current) =>
-                current.map((confession) =>
-                    confession._id === id
-                        ? {
-                            ...confession,
-                            status: "approved",
-                        }
-                        : confession
-                )
-            );
-        } catch (error) {
-            console.error(
-                "Approval failed:",
-                error
-            );
-
-            setError(
-                error.message ||
-                "Unable to approve confession."
-            );
-        } finally {
-            setActionLoading("");
-        }
-    };
-
-
-    /* =========================================================
-       FEATURE
-    ========================================================= */
-
-    const featureConfession = async (id) => {
-        try {
-            setActionLoading(id);
-            setError("");
-
-            const response = await fetch(
-                `${API_URL}/confessions/${id}/feature`,
-                {
-                    method: "PATCH",
-                    headers: getAuthHeaders(),
-                }
-            );
-
-            const data = await response.json();
-
-            if (response.status === 401) {
-                handleUnauthorized();
-                return;
-            }
-
-            if (!response.ok) {
-                throw new Error(
-                    data.message ||
-                    "Unable to feature confession."
-                );
-            }
-
-            setConfessions((current) =>
-                current.map((confession) =>
-                    confession._id === id
-                        ? {
-                            ...confession,
-                            featured: true,
-                        }
-                        : confession
-                )
-            );
-        } catch (error) {
-            console.error(
-                "Feature failed:",
-                error
-            );
-
-            setError(
-                error.message ||
-                "Unable to feature confession."
-            );
-        } finally {
-            setActionLoading("");
-        }
-    };
-
-
-    /* =========================================================
-       UNFEATURE
-    ========================================================= */
-
-    const unfeatureConfession = async (id) => {
-        try {
-            setActionLoading(id);
-            setError("");
-
-            const response = await fetch(
-                `${API_URL}/confessions/${id}/unfeature`,
-                {
-                    method: "PATCH",
-                    headers: getAuthHeaders(),
-                }
-            );
-
-            const data = await response.json();
-
-            if (response.status === 401) {
-                handleUnauthorized();
-                return;
-            }
-
-            if (!response.ok) {
-                throw new Error(
-                    data.message ||
-                    "Unable to unfeature confession."
-                );
-            }
-
-            setConfessions((current) =>
-                current.map((confession) =>
-                    confession._id === id
-                        ? {
-                            ...confession,
-                            featured: false,
-                        }
-                        : confession
-                )
-            );
-        } catch (error) {
-            console.error(
-                "Unfeature failed:",
-                error
-            );
-
-            setError(
-                error.message ||
-                "Unable to remove featured status."
-            );
-        } finally {
-            setActionLoading("");
-        }
-    };
-
-
-    /* =========================================================
-       DELETE
-    ========================================================= */
-
-    const deleteConfession = async (id) => {
-        const confirmed = window.confirm(
-            "Delete this confession permanently?"
+    const handleCreate = async (form) => {
+        const response = await fetch(
+            `${API_URL}/admin/confessions`,
+            {
+                method: "POST",
+                headers: authHeaders,
+                body: JSON.stringify({
+                    content: form.content,
+                    author: form.isAnonymous
+                        ? "Anonymous"
+                        : form.author,
+                    isAnonymous: form.isAnonymous,
+                    publicationStatus:
+                        form.publicationMode,
+                    scheduledFor:
+                        form.publicationMode ===
+                            "scheduled"
+                            ? form.scheduledFor
+                            : null,
+                }),
+            },
         );
 
-        if (!confirmed) {
-            return;
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data?.message ||
+                "Failed to create confession.",
+            );
         }
 
-        try {
-            setActionLoading(id);
-            setError("");
+        setShowCreateModal(false);
 
+        await fetchConfessions();
+    };
+
+    const handlePublish = async (confession) => {
+        setError("");
+
+        try {
             const response = await fetch(
-                `${API_URL}/confessions/${id}`,
+                `${API_URL}/admin/confessions/${confession._id}/publish`,
+                {
+                    method: "PATCH",
+                    headers: authHeaders,
+                },
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data?.message ||
+                    "Failed to publish confession.",
+                );
+            }
+
+            await fetchConfessions();
+        } catch (err) {
+            setError(
+                err?.message ||
+                "Failed to publish confession.",
+            );
+        }
+    };
+
+    const openScheduleModal = (confession) => {
+        setSelectedConfession(confession);
+        setShowScheduleModal(true);
+    };
+
+    const closeScheduleModal = () => {
+        setSelectedConfession(null);
+        setShowScheduleModal(false);
+    };
+
+    const handleSchedule = async (scheduledFor) => {
+        if (!selectedConfession) return;
+
+        const response = await fetch(
+            `${API_URL}/admin/confessions/${selectedConfession._id}/schedule`,
+            {
+                method: "PATCH",
+                headers: authHeaders,
+                body: JSON.stringify({
+                    scheduledFor,
+                }),
+            },
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data?.message ||
+                "Failed to schedule confession.",
+            );
+        }
+
+        closeScheduleModal();
+
+        await fetchConfessions();
+    };
+
+    const handleFeature = async (confession) => {
+        setError("");
+
+        try {
+            const response = await fetch(
+                `${API_URL}/admin/confessions/${confession._id}/feature`,
+                {
+                    method: "PATCH",
+                    headers: authHeaders,
+                },
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data?.message ||
+                    "Failed to feature confession.",
+                );
+            }
+
+            await fetchConfessions();
+        } catch (err) {
+            setError(
+                err?.message ||
+                "Failed to feature confession.",
+            );
+        }
+    };
+
+    const handleUnfeature = async (confession) => {
+        setError("");
+
+        try {
+            const response = await fetch(
+                `${API_URL}/admin/confessions/${confession._id}/unfeature`,
+                {
+                    method: "PATCH",
+                    headers: authHeaders,
+                },
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data?.message ||
+                    "Failed to remove featured status.",
+                );
+            }
+
+            await fetchConfessions();
+        } catch (err) {
+            setError(
+                err?.message ||
+                "Failed to remove featured status.",
+            );
+        }
+    };
+
+    const handleDelete = async (confession) => {
+        const confirmed = window.confirm(
+            "Delete this confession permanently?",
+        );
+
+        if (!confirmed) return;
+
+        setError("");
+
+        try {
+            const response = await fetch(
+                `${API_URL}/admin/confessions/${confession._id}`,
                 {
                     method: "DELETE",
-                    headers: getAuthHeaders(),
-                }
+                    headers: authHeaders,
+                },
             );
 
             const data = await response.json();
 
-            if (response.status === 401) {
-                handleUnauthorized();
-                return;
-            }
-
             if (!response.ok) {
                 throw new Error(
-                    data.message ||
-                    "Unable to delete confession."
+                    data?.message ||
+                    "Failed to delete confession.",
                 );
             }
 
-            setConfessions((current) =>
-                current.filter(
-                    (confession) =>
-                        confession._id !== id
-                )
-            );
-        } catch (error) {
-            console.error(
-                "Delete failed:",
-                error
-            );
-
+            await fetchConfessions();
+        } catch (err) {
             setError(
-                error.message ||
-                "Unable to delete confession."
+                err?.message ||
+                "Failed to delete confession.",
             );
-        } finally {
-            setActionLoading("");
         }
     };
 
+    const handleImport = async ({
+        confessions: importedConfessions,
+        publicationStatus,
+        scheduledFor,
+    }) => {
+        const response = await fetch(
+            `${API_URL}/admin/confessions/bulk`,
+            {
+                method: "POST",
+                headers: authHeaders,
+                body: JSON.stringify({
+                    confessions: importedConfessions,
+                    publicationStatus,
+                    scheduledFor:
+                        publicationStatus ===
+                            "scheduled"
+                            ? scheduledFor
+                            : null,
+                }),
+            },
+        );
 
-    /* =========================================================
-       COUNTS
-    ========================================================= */
+        const data = await response.json();
 
-    const pendingCount =
-        confessions.filter(
-            (item) =>
-                item.status === "pending"
-        ).length;
+        if (!response.ok) {
+            throw new Error(
+                data?.message ||
+                "Failed to import confessions.",
+            );
+        }
 
-    const approvedCount =
-        confessions.filter(
-            (item) =>
-                item.status === "approved"
-        ).length;
+        setShowImportModal(false);
 
-    const featuredCount =
-        confessions.filter(
-            (item) =>
-                item.featured === true
-        ).length;
-
-
-    /* =========================================================
-       SEARCH + FILTER
-    ========================================================= */
+        await fetchConfessions();
+    };
 
     const filteredConfessions = useMemo(() => {
-        const normalizedSearch =
-            search.trim().toLowerCase();
+        const normalizedSearch = search
+            .trim()
+            .toLowerCase();
 
-        return confessions.filter(
-            (confession) => {
+        return confessions.filter((confession) => {
+            const content =
+                confession.content?.toLowerCase() ||
+                "";
 
-                const matchesFilter =
-                    filter === "all"
-                        ? true
-                        : filter === "pending"
-                            ? confession.status ===
-                            "pending"
-                            : filter === "approved"
-                                ? confession.status ===
-                                "approved"
-                                : filter === "featured"
-                                    ? confession.featured ===
-                                    true
-                                    : true;
+            const author =
+                confession.author?.toLowerCase() ||
+                "";
 
-                const matchesSearch =
-                    !normalizedSearch ||
-                    confession.content
-                        ?.toLowerCase()
-                        .includes(
-                            normalizedSearch
-                        ) ||
-                    confession.author
-                        ?.toLowerCase()
-                        .includes(
-                            normalizedSearch
-                        );
+            const matchesSearch =
+                !normalizedSearch ||
+                content.includes(normalizedSearch) ||
+                author.includes(normalizedSearch);
 
+            if (!matchesSearch) {
+                return false;
+            }
+
+            if (filter === "published") {
                 return (
-                    matchesFilter &&
-                    matchesSearch
+                    confession.publicationStatus ===
+                    "published"
                 );
             }
-        );
-    }, [
-        confessions,
-        filter,
-        search,
-    ]);
 
+            if (filter === "scheduled") {
+                return (
+                    confession.publicationStatus ===
+                    "scheduled"
+                );
+            }
 
-    /* =========================================================
-       PROTECT PAGE
-    ========================================================= */
+            if (filter === "unpublished") {
+                return (
+                    confession.publicationStatus ===
+                    "unpublished"
+                );
+            }
+
+            if (filter === "featured") {
+                return confession.featured === true;
+            }
+
+            if (filter === "user") {
+                return confession.source === "user";
+            }
+
+            if (filter === "admin") {
+                return confession.source === "admin";
+            }
+
+            return true;
+        });
+    }, [confessions, filter, search]);
 
     if (!token) {
         return (
@@ -439,636 +456,97 @@ const Admin = () => {
         );
     }
 
-
-    /* =========================================================
-       RENDER
-    ========================================================= */
-
     return (
-        <main className="admin-page">
+        <div className="admin-page">
+            <AdminHeader
+                onRefresh={fetchConfessions}
+                onCreate={() =>
+                    setShowCreateModal(true)
+                }
+                onImport={() =>
+                    setShowImportModal(true)
+                }
+                onLogout={handleLogout}
+                loading={loading}
+            />
 
-            {/* =================================================
-                HEADER
-            ================================================= */}
-
-            <header className="admin-header">
-
-                <div className="admin-header-inner">
-
-                    <a
-                        href="/"
-                        className="admin-brand"
-                    >
-
-                        <div className="admin-brand-icon">
-                            👻
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                SnapConfused
-                            </strong>
-
-                            <span>
-                                ADMIN
-                            </span>
-
-                        </div>
-
-                    </a>
-
-
-                    <button
-                        type="button"
-                        className="admin-logout"
-                        onClick={handleLogout}
-                    >
-
-                        <HiOutlineArrowRightOnRectangle />
-
-                        <span>
-                            Logout
-                        </span>
-
-                    </button>
-
-                </div>
-
-            </header>
-
-
-            {/* =================================================
-                MAIN
-            ================================================= */}
-
-            <section className="admin-main">
-
+            <main className="admin-main">
                 <div className="admin-main-inner">
+                    <AdminStats totals={totals} />
 
-                    {/* =================================================
-                        INTRO
-                    ================================================= */}
-
-                    <div className="admin-intro">
-
-                        <div>
-
-                            <span>
-                                CONFESSION CONTROL
-                            </span>
-
-                            <h1>
-                                What's happening
-                                <br />
-                                in the confusion?
-                            </h1>
-
-                        </div>
-
-
-                        <button
-                            type="button"
-                            className="admin-refresh"
-                            onClick={fetchConfessions}
-                            disabled={loading}
-                        >
-
-                            <span>
-                                {loading
-                                    ? "Refreshing..."
-                                    : "Refresh"}
-                            </span>
-
-                            <HiArrowRight />
-
-                        </button>
-
-                    </div>
-
-
-                    {/* =================================================
-                        ERROR
-                    ================================================= */}
+                    <AdminToolbar
+                        search={search}
+                        setSearch={setSearch}
+                        filter={filter}
+                        setFilter={setFilter}
+                        totals={totals}
+                    />
 
                     {error && (
-
                         <div className="admin-error">
+                            <span>{error}</span>
 
-                            <HiXMark />
-
-                            <span>
-                                {error}
-                            </span>
-
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setError("")
+                                }
+                                aria-label="Dismiss error"
+                            >
+                                ×
+                            </button>
                         </div>
-
                     )}
 
-
-                    {/* =================================================
-                        STATS
-                    ================================================= */}
-
-                    <div className="admin-stats">
-
-                        <div className="admin-stat">
-
-                            <span>
-                                PENDING
-                            </span>
-
-                            <strong>
-                                {pendingCount}
-                            </strong>
-
-                            <small>
-                                Need your attention
-                            </small>
-
-                        </div>
-
-
-                        <div className="admin-stat">
-
-                            <span>
-                                APPROVED
-                            </span>
-
-                            <strong>
-                                {approvedCount}
-                            </strong>
-
-                            <small>
-                                Live confessions
-                            </small>
-
-                        </div>
-
-
-                        <div className="admin-stat">
-
-                            <span>
-                                FEATURED
-                            </span>
-
-                            <strong>
-                                {featuredCount}
-                            </strong>
-
-                            <small>
-                                Hall of Shame
-                            </small>
-
-                        </div>
-
-                    </div>
-
-
-                    {/* =================================================
-                        TOOLBAR
-                    ================================================= */}
-
-                    <div className="admin-toolbar">
-
-                        <div className="admin-section-heading">
-
-                            <div>
-
-                                <span>
-                                    INBOX
-                                </span>
-
-                                <h2>
-                                    Confessions
-                                </h2>
-
-                            </div>
-
-                            <span>
-                                {
-                                    filteredConfessions.length
-                                }{" "}
-                                showing
-                            </span>
-
-                        </div>
-
-
-                        <div className="admin-tools">
-
-                            {/* SEARCH */}
-
-                            <div className="admin-search">
-
-                                <HiMagnifyingGlass />
-
-                                <input
-                                    type="text"
-                                    value={search}
-                                    onChange={(event) =>
-                                        setSearch(
-                                            event.target.value
-                                        )
-                                    }
-                                    placeholder="Search confessions..."
-                                />
-
-                                {search && (
-
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            setSearch("")
-                                        }
-                                        aria-label="Clear search"
-                                    >
-                                        <HiXMark />
-                                    </button>
-
-                                )}
-
-                            </div>
-
-
-                            {/* FILTERS */}
-
-                            <div className="admin-filters">
-
-                                <button
-                                    type="button"
-                                    className={
-                                        filter === "all"
-                                            ? "active"
-                                            : ""
-                                    }
-                                    onClick={() =>
-                                        setFilter("all")
-                                    }
-                                >
-                                    All
-                                </button>
-
-
-                                <button
-                                    type="button"
-                                    className={
-                                        filter === "pending"
-                                            ? "active"
-                                            : ""
-                                    }
-                                    onClick={() =>
-                                        setFilter("pending")
-                                    }
-                                >
-                                    Pending
-
-                                    <b>
-                                        {pendingCount}
-                                    </b>
-
-                                </button>
-
-
-                                <button
-                                    type="button"
-                                    className={
-                                        filter === "approved"
-                                            ? "active"
-                                            : ""
-                                    }
-                                    onClick={() =>
-                                        setFilter("approved")
-                                    }
-                                >
-                                    Approved
-                                </button>
-
-
-                                <button
-                                    type="button"
-                                    className={
-                                        filter === "featured"
-                                            ? "active"
-                                            : ""
-                                    }
-                                    onClick={() =>
-                                        setFilter("featured")
-                                    }
-                                >
-                                    Featured
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    {/* =================================================
-                        LOADING
-                    ================================================= */}
-
-                    {loading && (
-
-                        <div className="admin-loading">
-
-                            <div className="admin-loader" />
-
-                            <p>
-                                Gathering the evidence...
-                            </p>
-
-                        </div>
-
-                    )}
-
-
-                    {/* =================================================
-                        EMPTY
-                    ================================================= */}
-
-                    {!loading &&
-                        filteredConfessions.length ===
-                        0 && (
-
-                            <div className="admin-empty">
-
-                                <div>
-                                    👻
-                                </div>
-
-                                <h3>
-                                    Nothing here.
-                                </h3>
-
-                                <p>
-                                    Try another filter
-                                    or search term.
-                                </p>
-
-                            </div>
-
-                        )}
-
-
-                    {/* =================================================
-                        CONFESSION LIST
-                    ================================================= */}
-
-                    {!loading &&
-                        filteredConfessions.length >
-                        0 && (
-
-                            <div className="admin-list">
-
-                                {filteredConfessions.map(
-                                    (confession) => {
-
-                                        const isLoading =
-                                            actionLoading ===
-                                            confession._id;
-
-
-                                        return (
-
-                                            <article
-                                                key={
-                                                    confession._id
-                                                }
-                                                className="admin-confession"
-                                            >
-
-                                                {/* NUMBER */}
-
-                                                <div className="admin-confession-number">
-
-                                                    #
-                                                    {confession._id.slice(
-                                                        -4
-                                                    )}
-
-                                                </div>
-
-
-                                                {/* BODY */}
-
-                                                <div className="admin-confession-body">
-
-                                                    <div className="admin-confession-meta">
-
-                                                        <span
-                                                            className={`admin-status admin-status-${confession.status}`}
-                                                        >
-                                                            {
-                                                                confession.status
-                                                            }
-                                                        </span>
-
-
-                                                        {confession.featured && (
-
-                                                            <span className="admin-featured">
-
-                                                                <HiOutlineSparkles />
-
-                                                                Featured
-
-                                                            </span>
-
-                                                        )}
-
-                                                    </div>
-
-
-                                                    <p className="admin-confession-content">
-
-                                                        “
-                                                        {
-                                                            confession.content
-                                                        }
-                                                        ”
-
-                                                    </p>
-
-
-                                                    <div className="admin-confession-author">
-
-                                                        <div>
-
-                                                            {confession.isAnonymous
-                                                                ? "?"
-                                                                : (
-                                                                    confession.author
-                                                                        ?.charAt(0)
-                                                                        ?.toUpperCase() ||
-                                                                    "?"
-                                                                )}
-
-                                                        </div>
-
-
-                                                        <span>
-
-                                                            {confession.isAnonymous
-                                                                ? "Anonymous"
-                                                                : confession.author}
-
-                                                        </span>
-
-
-                                                        <small>
-
-                                                            {new Date(
-                                                                confession.createdAt
-                                                            ).toLocaleDateString()}
-
-                                                        </small>
-
-                                                    </div>
-
-                                                </div>
-
-
-                                                {/* ACTIONS */}
-
-                                                <div className="admin-confession-actions">
-
-                                                    {/* APPROVE */}
-
-                                                    {confession.status ===
-                                                        "pending" && (
-
-                                                            <button
-                                                                type="button"
-                                                                className="admin-approve"
-                                                                disabled={
-                                                                    isLoading
-                                                                }
-                                                                onClick={() =>
-                                                                    approveConfession(
-                                                                        confession._id
-                                                                    )
-                                                                }
-                                                            >
-
-                                                                <HiCheck />
-
-                                                                <span>
-                                                                    {isLoading
-                                                                        ? "Approving..."
-                                                                        : "Approve"}
-                                                                </span>
-
-                                                            </button>
-
-                                                        )}
-
-
-                                                    {/* FEATURE */}
-
-                                                    {confession.status ===
-                                                        "approved" &&
-                                                        !confession.featured && (
-
-                                                            <button
-                                                                type="button"
-                                                                className="admin-feature"
-                                                                disabled={
-                                                                    isLoading
-                                                                }
-                                                                onClick={() =>
-                                                                    featureConfession(
-                                                                        confession._id
-                                                                    )
-                                                                }
-                                                            >
-
-                                                                <HiOutlineSparkles />
-
-                                                                <span>
-                                                                    {isLoading
-                                                                        ? "Featuring..."
-                                                                        : "Feature"}
-                                                                </span>
-
-                                                            </button>
-
-                                                        )}
-
-
-                                                    {/* UNFEATURE */}
-
-                                                    {confession.featured && (
-
-                                                        <button
-                                                            type="button"
-                                                            className="admin-unfeature"
-                                                            disabled={
-                                                                isLoading
-                                                            }
-                                                            onClick={() =>
-                                                                unfeatureConfession(
-                                                                    confession._id
-                                                                )
-                                                            }
-                                                        >
-
-                                                            <HiOutlineSparkles />
-
-                                                            <span>
-                                                                {isLoading
-                                                                    ? "Removing..."
-                                                                    : "Unfeature"}
-                                                            </span>
-
-                                                        </button>
-
-                                                    )}
-
-
-                                                    {/* DELETE */}
-
-                                                    <button
-                                                        type="button"
-                                                        className="admin-delete"
-                                                        disabled={
-                                                            isLoading
-                                                        }
-                                                        onClick={() =>
-                                                            deleteConfession(
-                                                                confession._id
-                                                            )
-                                                        }
-                                                        aria-label="Delete confession"
-                                                    >
-
-                                                        <HiOutlineTrash />
-
-                                                        <span>
-                                                            Delete
-                                                        </span>
-
-                                                    </button>
-
-                                                </div>
-
-                                            </article>
-
-                                        );
-                                    }
-                                )}
-
-                            </div>
-
-                        )}
-
+                    <ConfessionList
+                        confessions={
+                            filteredConfessions
+                        }
+                        loading={loading}
+                        onPublish={handlePublish}
+                        onSchedule={
+                            openScheduleModal
+                        }
+                        onFeature={handleFeature}
+                        onUnfeature={
+                            handleUnfeature
+                        }
+                        onDelete={handleDelete}
+                    />
                 </div>
+            </main>
 
-            </section>
+            {showCreateModal && (
+                <CreateConfessionModal
+                    onClose={() =>
+                        setShowCreateModal(false)
+                    }
+                    onSubmit={handleCreate}
+                />
+            )}
 
-        </main>
+            {showScheduleModal &&
+                selectedConfession && (
+                    <ScheduleConfessionModal
+                        confession={
+                            selectedConfession
+                        }
+                        onClose={
+                            closeScheduleModal
+                        }
+                        onSubmit={handleSchedule}
+                    />
+                )}
+
+            {showImportModal && (
+                <ImportJsonModal
+                    onClose={() =>
+                        setShowImportModal(false)
+                    }
+                    onImport={handleImport}
+                />
+            )}
+        </div>
     );
 };
 

@@ -22,7 +22,6 @@ export const createAdmin = async (req, res, next) => {
     if (!name || !email || !password) {
       return res.status(400).json({
         success: false,
-
         message: "Name, email and password are required.",
       });
     }
@@ -38,7 +37,6 @@ export const createAdmin = async (req, res, next) => {
     if (!normalizedName) {
       return res.status(400).json({
         success: false,
-
         message: "Name cannot be empty.",
       });
     }
@@ -52,7 +50,6 @@ export const createAdmin = async (req, res, next) => {
     if (!emailRegex.test(normalizedEmail)) {
       return res.status(400).json({
         success: false,
-
         message: "Please enter a valid email address.",
       });
     }
@@ -64,7 +61,6 @@ export const createAdmin = async (req, res, next) => {
     if (password.length < 8) {
       return res.status(400).json({
         success: false,
-
         message: "Password must be at least 8 characters long.",
       });
     }
@@ -80,7 +76,6 @@ export const createAdmin = async (req, res, next) => {
     if (existingAdmin) {
       return res.status(409).json({
         success: false,
-
         message: "Admin already exists.",
       });
     }
@@ -97,9 +92,7 @@ export const createAdmin = async (req, res, next) => {
 
     const admin = await Admin.create({
       name: normalizedName,
-
       email: normalizedEmail,
-
       password: hashedPassword,
     });
 
@@ -109,16 +102,12 @@ export const createAdmin = async (req, res, next) => {
 
     return res.status(201).json({
       success: true,
-
       message: "Admin created successfully.",
 
       admin: {
         id: admin._id,
-
         name: admin.name,
-
         email: admin.email,
-
         role: admin.role,
       },
     });
@@ -143,7 +132,6 @@ export const loginAdmin = async (req, res, next) => {
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-
         message: "Email and password are required.",
       });
     }
@@ -165,7 +153,6 @@ export const loginAdmin = async (req, res, next) => {
     if (!admin) {
       return res.status(401).json({
         success: false,
-
         message: "Invalid credentials.",
       });
     }
@@ -179,7 +166,6 @@ export const loginAdmin = async (req, res, next) => {
     if (!passwordMatches) {
       return res.status(401).json({
         success: false,
-
         message: "Invalid credentials.",
       });
     }
@@ -199,14 +185,10 @@ export const loginAdmin = async (req, res, next) => {
     const token = jwt.sign(
       {
         id: admin._id.toString(),
-
         role: admin.role,
-
         email: admin.email,
       },
-
       process.env.JWT_SECRET,
-
       {
         expiresIn: "7d",
       },
@@ -218,18 +200,14 @@ export const loginAdmin = async (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-
       message: "Admin login successful.",
 
       token,
 
       admin: {
         id: admin._id,
-
         name: admin.name,
-
         email: admin.email,
-
         role: admin.role,
       },
     });
