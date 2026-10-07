@@ -18,7 +18,7 @@ import CreateConfessionModal from "./components/CreateConfessionModal";
 import ScheduleConfessionModal from "./components/ScheduleConfessionModal";
 import ImportJsonModal from "./components/ImportJsonModal";
 
-import "./admin.css";
+import "./Admin.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 const TOKEN_KEY = "snapconfused_admin_token";
